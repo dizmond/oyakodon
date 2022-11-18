@@ -10,7 +10,7 @@ def list_attributes(tpkm):
     #tbh I want tpkm to be a string
     pkm = pb.pokemon(tpkm)
     print("name: " + pkm.name)
-    #print("abilities: " + str(pkm.abilities[0][0]))
+    print("abilities: " + str(pkm.abilities[0].name))
     #todo figure out how this works!! ^
 
 
