@@ -6,6 +6,15 @@ import pokebase as pb
 #cache.API_CACHE
 
 #easy way to list all the stuff we want!!
+def hecto_to_lb(hec):
+    return int(round(hec / 4.5359237,0))
+
+def decimetres_to_american(decimetres):
+    total_num_inches = int(round(decimetres * 3.93700787402,0))
+    extra_inches = total_num_inches % 12
+    num_feet = int(round((total_num_inches - extra_inches) / 12))
+    return(str(num_feet)+"\'"+str(extra_inches)+"\"")
+
 def list_attributes(tpkm):
     #tbh I want tpkm to be a string
     pkm = pb.pokemon(tpkm)
@@ -22,15 +31,11 @@ def list_attributes(tpkm):
     for i in range(0,num_types,1):
         print(pkm.types[i].type.name)
     #past types??
+    #todo REIGONAL VARIANTS?????
+    #todo sprites???
+    print("\n")
 
-def hecto_to_lb(hec):
-    return int(round(hec / 4.5359237,0))
 
-def decimetres_to_american(decimetres):
-    total_num_inches = int(round(decimetres * 3.93700787402,0))
-    extra_inches = total_num_inches % 12
-    num_feet = int(round((total_num_inches - extra_inches) / 12))
-    return(str(num_feet)+"\'"+str(extra_inches)+"\"")
 
 
 
