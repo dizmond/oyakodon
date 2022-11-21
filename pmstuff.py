@@ -5,6 +5,16 @@ import pokebase as pb
 #from pokebase import cache
 #cache.API_CACHE
 
+#image stuff
+from PIL import Image
+import urllib.request
+PIL.ImageFile.
+
+bruh = 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/393.png'
+with urllib.request.urlopen(bruh) as url:
+    img = Image.open(url)
+    img.show() #prob prob child
+
 #easy way to list all the stuff we want!!
 def hecto_to_lb(hec):
     return int(round(hec / 4.5359237,0))
@@ -33,6 +43,12 @@ def list_attributes(tpkm):
     #past types??
     #todo REIGONAL VARIANTS?????
     #todo sprites???
+    zurl = pkm.sprites.front_default
+    #print("URL!!! " +zurl)
+    #with urllib.request.urlopen(zurl) as url:
+        #img = Image.open(url)
+        #img.show()
+
     print("\n")
 
 
