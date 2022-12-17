@@ -1,5 +1,9 @@
 {
+  "type": "module",
+  "engines": {
+    "node": ">=12"
+  },
   "dependencies": {
-    "pokeapi-js-wrapper": "^1.2.2"
+    "pokedex-promise-v2": "^4.0.0"
   }
 }
