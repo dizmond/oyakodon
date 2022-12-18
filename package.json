@@ -4,6 +4,26 @@
     "node": ">=12"
   },
   "dependencies": {
-    "pokedex-promise-v2": "^4.0.0"
-  }
+    "express": "^4.18.2",
+    "pokedex-promise-v2": "^4.0.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "scripts": {
+    "start": "node server.js"
+  },
+  "name": "oyakodon",
+  "description": "",
+  "version": "1.0.0",
+  "main": "server.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dizmond/oyakodon.git"
+  },
+  "author": "",
+  "license": "GPL-3.0-or-later",
+  "bugs": {
+    "url": "https://github.com/dizmond/oyakodon/issues"
+  },
+  "homepage": "https://github.com/dizmond/oyakodon#readme"
 }

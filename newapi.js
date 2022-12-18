@@ -60,3 +60,6 @@ const P = new Pokedex();
 //     console.log("YUH")
   
 //   })();
+
+//document.getElementById("testy").innerHTML = 6969;
+//document.getElementById("testy2").innerHTML = 420;
