@@ -15,6 +15,13 @@ const router = express.Router();
 //     res.send(err.message);
 //   });
 
+//app.get("/pkm_name")
+
+app.get("/bruh", (req, res) => {
+    res.json({ message: "Hello from server!" });
+    res.status(200).send("200 OK")
+  });
+
 
 app.get("/api", (req, res) => {
     res.json({ message: "Hello from server!" });
