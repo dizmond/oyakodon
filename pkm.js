@@ -9,6 +9,8 @@ import Pokedex from 'pokedex-promise-v2';
 //import Pokedex from 'C:\Users\Lam Ngo Jr\Documents\GitHub\oyakodon\node_modules\pokedex-promise-v2\types\index.js'
 const P = new Pokedex();
 
+
+
 // async function load() {
 //     let bruh = await import Pokedex from 'pokedex-promise-v2';
 //     const P = new Pokedex();
@@ -48,7 +50,12 @@ const P = new Pokedex();
     }
 })()
 
-
+const getName = () => {
+    return 'Jim';
+  };
+  
+//exports.getName = getName;
+export {getName};
 
 //CANT GET POKEDEX TO WORK BUT OTHERWISE SEEMS OKAY?????????
 

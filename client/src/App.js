@@ -1,6 +1,9 @@
 import logo from './logo.svg';
 import React from 'react'
 import './App.css';
+import {getName, ztest} from './testpkm'
+
+//const bruh = ztest()
 
 function App() {
   const [data, setData] = React.useState(null);
