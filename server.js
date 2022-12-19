@@ -1,5 +1,6 @@
 //arigato aniki
 import express from 'express'
+import { asynccall, zasynccall, xasynccall, pillow } from './pkm.js';
 
 const app = express();
 const port = process.env.PORT || 5000;
@@ -17,7 +18,20 @@ const router = express.Router();
 
 //app.get("/pkm_name")
 
-app.get("/bruh", (req, res) => {
+// React.useEffect(() => {
+//     fetch("/flavor")
+//       .then((res) => res.json())
+//       .then((zdata) => zsetData(zdata.message));
+//   }, []);
+
+app.get("/flavor", (req, res) => {
+    var ztest = pillow()
+    //ztest = zasynccall()
+    res.json({ message: pillow()});
+    res.status(200).send("304 OK")
+  });
+
+app.get("/gt", (req, res) => {
     res.json({ message: "Hello from server!" });
     res.status(200).send("200 OK")
   });

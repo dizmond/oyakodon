@@ -1,11 +1,65 @@
 import Pokedex from 'pokedex-promise-v2';
+import React from 'react'
 
 //import Pokedex from 'C:\Users\Lam Ngo Jr\Documents\GitHub\oyakodon\node_modules\pokedex-promise-v2\types\index.js'
-const P = new Pokedex();
+const p = new Pokedex();
 
-function ztest() {
-    const zpkm = P.getPokemonSpeciesByName("piplup")
-    return zpkm.flavor_text_entries.filter(pokeAPIName => pokeAPIName.language.name === 'en') 
+// const zpkm = m.getPokemonSpeciesByName("piplup")
+// //const zlog = (zpkm.flavor_text_entries.filter(pokeAPIName => pokeAPIName.language.name === 'en'))
+// const zlog = zpkm.flavor_text_entries
+// console.log(zlog)
+export async function asynccall() {
+    const zpkm = await p.getPokemonSpeciesByName("piplup")
+        //const frenchName = zpkm.names.filter(pokeAPIName => pokeAPIName.language.name === 'es')[0].name
+        //const bruh = zpkm.flavor_text_entries.filter(pokeAPIName => pokeAPIName.language.name === 'en') //WORKS
+        
+        const bruh = String(zpkm.flavor_text_entries.filter(pokeAPIName => pokeAPIName.language.name === 'en').filter(pokeAPIName => pokeAPIName.version.name === 'platinum')[0].flavor_text)
+        .then()
+        console.log(bruh)
+        return {bruh}
+}
+
+export async function zasynccall() {
+    const zpkm = await p.getPokemonSpeciesByName("piplup")
+        //const frenchName = zpkm.names.filter(pokeAPIName => pokeAPIName.language.name === 'es')[0].name
+        //const bruh = zpkm.flavor_text_entries.filter(pokeAPIName => pokeAPIName.language.name === 'en') //WORKS
+        
+        const bruh = zpkm.flavor_text_entries.filter(pokeAPIName => pokeAPIName.language.name === 'en').filter(pokeAPIName => pokeAPIName.version.name === 'platinum')[0].flavor_text
+        .then(response => response.json())
+        console.log(bruh)
+        return {bruh}
+}
+
+//response => response.json()
+///asynccall();
+// (async () => { // with Async/Await
+//     try {
+//         //const allz = await P.getVersionGroupsList
+//         const zpkm = await p.getPokemonSpeciesByName("piplup")
+//         //const frenchName = zpkm.names.filter(pokeAPIName => pokeAPIName.language.name === 'es')[0].name
+//         //const bruh = zpkm.flavor_text_entries.filter(pokeAPIName => pokeAPIName.language.name === 'en') //WORKS
+        
+//         const bruh = zpkm.flavor_text_entries.filter(pokeAPIName => pokeAPIName.language.name === 'en').filter(pokeAPIName => pokeAPIName.version.name === 'platinum')[0].flavor_text
+//         //console.log(bruh)
+//         console.log(bruh)
+//     } catch (error) {
+//         throw error
+//     }
+// })()
+
+
+
+
+
+
+
+export function ztest() {
+    console.log("ayyo")
+    const pm = new Pokedex();
+    const zpkm = pm.getPokemonSpeciesByName("piplup")
+    console.log(zpkm)
+    const zz = String(zpkm.flavor_text_entries.filter(pokeAPIName => pokeAPIName.language.name === 'en'))
+    return zz
 }
 
 export function ztestt() {
