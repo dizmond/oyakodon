@@ -1,9 +1,9 @@
 import logo from './logo.svg';
 import React from 'react'
 import './App.css';
-import {getName, ztest} from './testpkm'
+import {ztestt} from './testpkm'
 
-//const bruh = ztest()
+const bruh = ztestt()
 
 function App() {
   const [data, setData] = React.useState(null);
@@ -18,7 +18,7 @@ function App() {
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
-        <p>{data}</p>
+        <p>{ztestt()}</p>
       </header>
     </div>
   );

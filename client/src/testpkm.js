@@ -8,6 +8,10 @@ function ztest() {
     return zpkm.flavor_text_entries.filter(pokeAPIName => pokeAPIName.language.name === 'en') 
 }
 
+export function ztestt() {
+    return ("yeet");
+}
+    
 // (async () => { // with Async/Await
 //     try {
 //         //const allz = await P.getVersionGroupsList
@@ -29,4 +33,4 @@ const getName = () => {
   };
   
 //exports.getName = getName;
-export {getName, ztest};
+//export {getName, ztest};
