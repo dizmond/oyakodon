@@ -1,23 +1,24 @@
 import Pokedex from 'pokedex-promise-v2';
 import React from 'react'
 
-function majikes() {
+export function majikes() {
 
     const P = new Pokedex();
 
      P.getBerryByName('cheri')
 .then(function(response) {
-   const yuh = response;
-   console.log(yuh);
+   const yuh = response['natural_gift_power'];
+   //console.log(yuh);
    return yuh;
 })
 .catch((error) => {
   console.log('There was an ERROR: ', error);
 });
-
 };
 
-majikes();
+
+
+//majikes();
 // export async function asynccall() { //WORKS LOCALLY BUT NOT W SENDING
 //     const zz = new Pokedex();
 //     const zpkm = await zz.getPokemonSpeciesByName("piplup")

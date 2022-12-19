@@ -2,14 +2,14 @@ import logo from './logo.svg';
 import React from 'react';
 import './App.css';
 
-import {majikes, dothing, ayyo, prasun} from './testpkm.js';
+//import {majikes, dothing, ayyo, prasun} from './testpkm.js';
 
-const bruh = prasun();
-if (bruh==60) {
-  console.log("ayyo")
-} else {
-  console.log(bruh)
-}
+// const bruh = prasun();
+// if (bruh==60) {
+//   console.log("ayyo")
+// } else {
+//   console.log(bruh)
+// }
 
 function App() {
   const [data, setData] = React.useState(null);
@@ -17,18 +17,18 @@ function App() {
 
 //const bruh = majikes();
 
-  React.useEffect(() => {
-    fetch("/flavor")
-      .then((res) => res.json())
-      .then((zdata) => zsetData(zdata.message));
-   }, []);
-
-
   // React.useEffect(() => {
   //   fetch("/flavor")
   //     .then((res) => res.json())
   //     .then((zdata) => zsetData(zdata.message));
   //  }, []);
+
+
+  React.useEffect(() => {
+    fetch("/flavor")
+      .then((res) => res.json())
+      .then((zdata) => zsetData(zdata.message));
+   }, []);
 
 
   React.useEffect(() => {
@@ -41,7 +41,7 @@ function App() {
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
-        <p>{bruh}</p>
+        <p>{zdata}</p>
       </header>
     </div>
   );
