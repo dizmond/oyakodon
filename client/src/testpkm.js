@@ -1,90 +1,67 @@
-import Pokedex from 'pokedex-promise-v2';
-import React from 'react'
+//import Pokedex from 'pokedex-promise-v2';
+const dex = require("pokeapi-js-wrapper");
 
-//import Pokedex from 'C:\Users\Lam Ngo Jr\Documents\GitHub\oyakodon\node_modules\pokedex-promise-v2\types\index.js'
-const p = new Pokedex();
+(async () => {
+     const P = new dex.Pokedex();
+    // const golduck = await P.getPokemonByName("golduck");
+    // console.log(golduck);
+    P.getPokemonByName("eevee").then(function(response) {
+        console.log(response['weight'])
+      })
+  })();
 
-// const zpkm = m.getPokemonSpeciesByName("piplup")
-// //const zlog = (zpkm.flavor_text_entries.filter(pokeAPIName => pokeAPIName.language.name === 'en'))
-// const zlog = zpkm.flavor_text_entries
-// console.log(zlog)
-export async function asynccall() {
-    const zpkm = await p.getPokemonSpeciesByName("piplup")
-        //const frenchName = zpkm.names.filter(pokeAPIName => pokeAPIName.language.name === 'es')[0].name
-        //const bruh = zpkm.flavor_text_entries.filter(pokeAPIName => pokeAPIName.language.name === 'en') //WORKS
+  function brent() {
+    const P = new dex.Pokedex();
+    // const golduck = await P.getPokemonByName("golduck");
+    // console.log(golduck);
+    P.getPokemonByName("eevee").then(function(response) {
+        console.log(response['weight']);
         
-        const bruh = String(zpkm.flavor_text_entries.filter(pokeAPIName => pokeAPIName.language.name === 'en').filter(pokeAPIName => pokeAPIName.version.name === 'platinum')[0].flavor_text)
-        .then()
-        console.log(bruh)
-        return {bruh}
+  }
 }
 
-export async function zasynccall() {
-    const zpkm = await p.getPokemonSpeciesByName("piplup")
-        //const frenchName = zpkm.names.filter(pokeAPIName => pokeAPIName.language.name === 'es')[0].name
-        //const bruh = zpkm.flavor_text_entries.filter(pokeAPIName => pokeAPIName.language.name === 'en') //WORKS
-        
-        const bruh = zpkm.flavor_text_entries.filter(pokeAPIName => pokeAPIName.language.name === 'en').filter(pokeAPIName => pokeAPIName.version.name === 'platinum')[0].flavor_text
-        .then(response => response.json())
-        console.log(bruh)
-        return {bruh}
-}
-
-//response => response.json()
-///asynccall();
-// (async () => { // with Async/Await
-//     try {
-//         //const allz = await P.getVersionGroupsList
-//         const zpkm = await p.getPokemonSpeciesByName("piplup")
-//         //const frenchName = zpkm.names.filter(pokeAPIName => pokeAPIName.language.name === 'es')[0].name
-//         //const bruh = zpkm.flavor_text_entries.filter(pokeAPIName => pokeAPIName.language.name === 'en') //WORKS
-        
-//         const bruh = zpkm.flavor_text_entries.filter(pokeAPIName => pokeAPIName.language.name === 'en').filter(pokeAPIName => pokeAPIName.version.name === 'platinum')[0].flavor_text
-//         //console.log(bruh)
-//         console.log(bruh)
-//     } catch (error) {
-//         throw error
-//     }
+//const P = new Pokedex
 // })()
+// function majikes() {
+
+//     const P = new dex.Pokedex();
+
+//      P.getBerryByName('cheri')
+// .then(function(response) {
+//    const yuh = response;
+//    //console.log(yuh);
+//   return yuh;
+// })
+// .catch((error) => {
+//   console.log('There was an ERROR: ', error);
+// });
+
+// };
+
+// const yeet = majikes();
+// console.log(yeet);
+
+// export async function dothing() {
+//     let res = await majikes();
+//     return res;
+// };
+
+
+// export function ayyo(){
+//     return 69;
+// };
 
 
 
 
 
+// export function prasun() {
+//     return new Promise(function(resolve, reject) {
+//         const P = new Pokedex();
+//         P.getBerryByName('cheri')})
+//     .then(function(result) {
+//         const yuh = result['natural_gift_power'];
+//         return yuh
+//     })
+//   }
 
-
-export function ztest() {
-    console.log("ayyo")
-    const pm = new Pokedex();
-    const zpkm = pm.getPokemonSpeciesByName("piplup")
-    console.log(zpkm)
-    const zz = String(zpkm.flavor_text_entries.filter(pokeAPIName => pokeAPIName.language.name === 'en'))
-    return zz
-}
-
-export function ztestt() {
-    return ("yeet");
-}
-    
-// (async () => { // with Async/Await
-//     try {
-//         //const allz = await P.getVersionGroupsList
-//         const zpkm = await P.getPokemonSpeciesByName("piplup")
-//         //const frenchName = zpkm.names.filter(pokeAPIName => pokeAPIName.language.name === 'es')[0].name
-//         //const bruh = zpkm.flavor_text_entries.filter(pokeAPIName => pokeAPIName.language.name === 'en') //WORKS
-        
-//         const bruh = zpkm.flavor_text_entries.filter(pokeAPIName => pokeAPIName.language.name === 'en').filter(pokeAPIName => pokeAPIName.version.name === 'platinum')[0].flavor_text
-//         //console.log(bruh)
-//         console.log(bruh)
-//     } catch (error) {
-//         throw error
-//     }
-// })()
-
-
-const getName = () => {
-    return 'Jim';
-  };
-  
-//exports.getName = getName;
-//export {getName, ztest};

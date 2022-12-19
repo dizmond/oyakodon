@@ -1,15 +1,10 @@
 import Pokedex from 'pokedex-promise-v2';
 import React from 'react'
 
-//import Pokedex from 'C:\Users\Lam Ngo Jr\Documents\GitHub\oyakodon\node_modules\pokedex-promise-v2\types\index.js'
-const p = new Pokedex();
 
-// const zpkm = m.getPokemonSpeciesByName("piplup")
-// //const zlog = (zpkm.flavor_text_entries.filter(pokeAPIName => pokeAPIName.language.name === 'en'))
-// const zlog = zpkm.flavor_text_entries
-// console.log(zlog)
-export async function asynccall() {
-    const zpkm = await p.getPokemonSpeciesByName("piplup")
+export async function asynccall() { //WORKS LOCALLY BUT NOT W SENDING
+    const zz = new Pokedex();
+    const zpkm = await zz.getPokemonSpeciesByName("piplup")
         //const frenchName = zpkm.names.filter(pokeAPIName => pokeAPIName.language.name === 'es')[0].name
         //const bruh = zpkm.flavor_text_entries.filter(pokeAPIName => pokeAPIName.language.name === 'en') //WORKS
         
@@ -19,7 +14,8 @@ export async function asynccall() {
 }
 
 export async function zasynccall() {
-    const zpkm = await p.getPokemonSpeciesByName("piplup")
+    const zz = new Pokedex();
+    const zpkm = await zz.getPokemonSpeciesByName("piplup")
         //const frenchName = zpkm.names.filter(pokeAPIName => pokeAPIName.language.name === 'es')[0].name
         //const bruh = zpkm.flavor_text_entries.filter(pokeAPIName => pokeAPIName.language.name === 'en') //WORKS
         
@@ -29,12 +25,15 @@ export async function zasynccall() {
         return {bruh}
 }
 
-export async function xasynccall() {
-    const zpkm = await p.getPokemonSpeciesByName("piplup")
+export function xasynccall() {
+    const zz = new Pokedex();
+    const zpkm = zz.getPokemonSpeciesByName("piplup")
         //const frenchName = zpkm.names.filter(pokeAPIName => pokeAPIName.language.name === 'es')[0].name
         //const bruh = zpkm.flavor_text_entries.filter(pokeAPIName => pokeAPIName.language.name === 'en') //WORKS
         
-        return zpkm.flavor_text_entries.filter(pokeAPIName => pokeAPIName.language.name === 'en').filter(pokeAPIName => pokeAPIName.version.name === 'platinum')[0].flavor_text
+        bruh = zpkm.flavor_text_entries.filter(pokeAPIName => pokeAPIName.language.name === 'en').filter(pokeAPIName => pokeAPIName.version.name === 'platinum')[0].flavor_text
+        console.log(bruh)
+        return bruh
         
 }
 

@@ -27,9 +27,10 @@ const router = express.Router();
 app.get("/flavor", (req, res) => {
     var ztest = pillow()
     //ztest = zasynccall()
-    res.json({ message: pillow()});
-    res.status(200).send("304 OK")
+    res.json({ message: ztest});
+    res.status(200).send("200 OK")
   });
+
 
 app.get("/gt", (req, res) => {
     res.json({ message: "Hello from server!" });
