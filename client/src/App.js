@@ -21,7 +21,8 @@ function App() {
   }, []);
 
   React.useEffect(() => {
-    fetch("/piplup")
+    const pkmname = "pikachu"
+    fetch("/piplup/"+pkmname)
       .then((res) => res.json())
       .then((pip) => setPip(pip.message));
   }, []);

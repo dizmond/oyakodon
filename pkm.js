@@ -57,10 +57,10 @@ export async function cheriberri() {
   return promise
 }
 
-export async function piplupflavor() {
+export async function piplupflavor(name) {
   const P = new Pokedex();
 
-  const pipspecies = await P.getPokemonSpeciesByName("piplup")
+  const pipspecies = await P.getPokemonSpeciesByName(name)
   const bruh = pipspecies.flavor_text_entries.filter(pokeAPIName => pokeAPIName.language.name === 'en').filter(pokeAPIName => pokeAPIName.version.name === 'platinum')[0].flavor_text
   return bruh;
 }

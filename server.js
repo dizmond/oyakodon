@@ -43,11 +43,12 @@ app.get("/cheri", async (req, res) => {
 });
 
 
-app.get("/piplup", async (req, res) => {
+app.get("/piplup/:pkmname", async (req, res) => {
   try {
 
     res.header("Access-Control-Allow-Origin", "*");
-    const piplupft = await piplupflavor().then(function(val) {
+    const theName = req.params.pkmname;
+    const piplupft = await piplupflavor(theName).then(function(val) {
             console.log(val);
             return val;
         });
