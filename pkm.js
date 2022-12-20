@@ -48,6 +48,21 @@ export async function fmajikes() {
   
 }
 
+export async function gmajikes() {
+  const P = new Pokedex();
+
+  const promise = P.getBerryByName('cheri')
+  return promise
+}
+
+export async function pipmajikes() {
+  const P = new Pokedex();
+
+  const golduckSpecies = await P.getPokemonSpeciesByName("piplup")
+  const frenchName = golduckSpecies.names.filter(pokeAPIName => pokeAPIName.language.name === 'fr')[0].name
+  return frenchName;
+}
+
 //majikes();
 // export async function asynccall() { //WORKS LOCALLY BUT NOT W SENDING
 //     const zz = new Pokedex();

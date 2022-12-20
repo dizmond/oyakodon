@@ -10,7 +10,7 @@ import './App.css';
 
 function App() {
   const [data, setData] = React.useState(null); //null is the initial state here
-  // const [zdata, zsetData] = React.useState(null);
+   const [zdata, zsetData] = React.useState(null);
 
   //const bruh = majikes();
 
@@ -27,7 +27,13 @@ function App() {
       .then((data) => setData(data.message));
   }, []);
 
-  console.log(data);
+  React.useEffect(() => {
+    fetch("/pip")
+      .then((res) => res.json())
+      .then((zdata) => zsetData(zdata.message));
+  }, []);
+
+  console.log(zdata);
 
   // React.useEffect(() => {
   //   fetch("/api")
@@ -39,7 +45,7 @@ function App() {
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
-        <p>{data}</p>
+        <p>{zdata}</p>
       </header>
     </div>
   );

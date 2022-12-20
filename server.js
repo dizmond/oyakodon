@@ -1,6 +1,6 @@
 //arigato aniki
 import express from 'express'
-import { amajikes, emajikes, fmajikes } from './pkm.js';
+import { amajikes, emajikes, fmajikes, gmajikes, pipmajikes } from './pkm.js';
 import Pokedex from 'pokedex-promise-v2';
 
 const app = express();
@@ -33,9 +33,29 @@ app.get("/flavor", async (req, res) => {
   try {
 
     res.header("Access-Control-Allow-Origin", "*");
-    const ztest = await fmajikes().then(function(val) {
+    const ztest = await gmajikes().then(function(val) {
+            console.log(val['natural_gift_power']);
+            return val['natural_gift_power']
+        });
+    // console.log(ztest);
+    return res.json({ message: ztest });
+// promise.then(function(val) {
+//       console.log(val);
+//       return val
+//   });
+
+  } catch (err) {
+    res.status(400).json(err);
+  }
+});
+
+app.get("/pip", async (req, res) => {
+  try {
+
+    res.header("Access-Control-Allow-Origin", "*");
+    const ztest = await pipmajikes().then(function(val) {
             console.log(val);
-            return val
+            return val;
         });
     // console.log(ztest);
     return res.json({ message: ztest });
