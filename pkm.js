@@ -17,6 +17,36 @@ export function majikes() {
 };
 
 
+export async function amajikes() {
+  const P = new Pokedex();
+
+  await P.getBerryByName('cheri')
+  .then((response) => {
+    console.log(response['natural_gift_power']);
+    const yuh = response['natural_gift_power'] + 12;
+    console.log(yuh)
+  })
+
+};
+
+
+export async function emajikes() {
+
+  const promise = Promise.resolve(17468);
+ 
+  promise.then(function(val) {
+      console.log(val);
+      return val
+  });
+}
+
+export async function fmajikes() {
+
+  const promise = Promise.resolve(17468);
+  return promise;
+ 
+  
+}
 
 //majikes();
 // export async function asynccall() { //WORKS LOCALLY BUT NOT W SENDING

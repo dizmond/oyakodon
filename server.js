@@ -1,7 +1,8 @@
 //arigato aniki
 import express from 'express'
-//import { majikes } from './pkm.js';
+import { amajikes, emajikes, fmajikes } from './pkm.js';
 import Pokedex from 'pokedex-promise-v2';
+
 const app = express();
 const port = process.env.PORT || 5000;
 
@@ -30,10 +31,19 @@ async function majikes() {
 
 app.get("/flavor", async (req, res) => {
   try {
+
     res.header("Access-Control-Allow-Origin", "*");
-    // const ztest = await majikes();
+    const ztest = await fmajikes().then(function(val) {
+            console.log(val);
+            return val
+        });
     // console.log(ztest);
-    return res.json({ message: await majikes() });
+    return res.json({ message: ztest });
+// promise.then(function(val) {
+//       console.log(val);
+//       return val
+//   });
+
   } catch (err) {
     res.status(400).json(err);
   }
