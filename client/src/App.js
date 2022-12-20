@@ -9,43 +9,30 @@ import './App.css';
 //     .then(res => res.json());
 
 function App() {
-  const [data, setData] = React.useState(null); //null is the initial state here
-   const [zdata, zsetData] = React.useState(null);
-   const [ddata, dsetData] = React.useState(null);
+
+   const [cheri, setCheri] = React.useState(null);
+   const [pip, setPip] = React.useState(null);
 
 
   React.useEffect(() => {
-    fetch("/flavor")
+    fetch("/cheri")
       .then((res) => res.json())
-      .then((data) => setData(data.message));
+      .then((cheri) => setCheri(cheri.message));
   }, []);
 
   React.useEffect(() => {
-    fetch("/pip")
+    fetch("/piplup")
       .then((res) => res.json())
-      .then((zdata) => zsetData(zdata.message));
+      .then((pip) => setPip(pip.message));
   }, []);
 
-  // React.useEffect(() => {
-  //   fetch("/ztemp",5)
-  //     .then((res) => res.json())
-  //     .then((ddata) => dsetData(ddata.message));
-  // }, []);
-
-  //console.log(zdata);
-
-  // React.useEffect(() => {
-  //   fetch("/api")
-  //     .then((res) => res.json())
-  //     .then((data) => setData(data.message));
-  // }, []);
 
   return (
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
-        <p>{zdata}</p>
-        <p>{data}</p>
+        <p>{cheri}</p>
+        <p>{pip}</p>
       </header>
     </div>
   );

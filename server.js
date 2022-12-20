@@ -1,6 +1,6 @@
 //arigato aniki
 import express from 'express'
-import { gmajikes, pipmajikes } from './pkm.js';
+import { cheriberri, piplupflavor } from './pkm.js';
 import Pokedex from 'pokedex-promise-v2';
 
 const app = express();
@@ -24,15 +24,17 @@ async function majikes() {
 
 
 
-app.get("/flavor", async (req, res) => {
+app.get("/cheri", async (req, res) => {
   try {
 
     res.header("Access-Control-Allow-Origin", "*");
-    const ztest = await gmajikes().then(function(val) {
+
+
+    const berrynum = await cheriberri().then(function(val) {
             console.log(val['natural_gift_power']);
             return val['natural_gift_power']
         });
-    return res.json({ message: ztest });
+    return res.json({ message: berrynum });
 
 
   } catch (err) {
@@ -41,16 +43,16 @@ app.get("/flavor", async (req, res) => {
 });
 
 
-app.get("/pip", async (req, res) => {
+app.get("/piplup", async (req, res) => {
   try {
 
     res.header("Access-Control-Allow-Origin", "*");
-    const ztest = await pipmajikes().then(function(val) {
+    const piplupft = await piplupflavor().then(function(val) {
             console.log(val);
             return val;
         });
 
-    return res.json({ message: ztest });
+    return res.json({ message: piplupft });
 
 
   } catch (err) {
@@ -58,18 +60,6 @@ app.get("/pip", async (req, res) => {
   }
 });
 
-//  app.get("/ztemp", (req, res) => {
-//     // const ztest = majikes();
-//     // console.log(ztest);
-//     res.json({message: "yuh"});
-//   });
-
-
-// app.get("/flavor", (req, res) => {
-//     const ztest = majikes();
-//     console.log(ztest);
-//     res.json({message: ztest});
-//   });
 
 
 

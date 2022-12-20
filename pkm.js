@@ -37,18 +37,30 @@ export async function amajikes() {
  
 // }
 
-export async function gmajikes() {
+// async function majikes() {
+//   await P.getBerryByName('cheri')
+//     .then(function (response) {
+//       const yuh = response['natural_gift_power'];
+//       console.log(yuh);
+//       return yuh;
+//     })
+//     .catch((error) => {
+//       console.log('There was an ERROR: ', error);
+//     });
+// };
+
+
+export async function cheriberri() {
   const P = new Pokedex();
 
   const promise = P.getBerryByName('cheri')
   return promise
 }
 
-export async function pipmajikes() {
+export async function piplupflavor() {
   const P = new Pokedex();
 
   const pipspecies = await P.getPokemonSpeciesByName("piplup")
-  //const frenchName = pipspecies.names.filter(pokeAPIName => pokeAPIName.language.name === 'en')[0].name
   const bruh = pipspecies.flavor_text_entries.filter(pokeAPIName => pokeAPIName.language.name === 'en').filter(pokeAPIName => pokeAPIName.version.name === 'platinum')[0].flavor_text
   return bruh;
 }
