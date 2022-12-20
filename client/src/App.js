@@ -1,21 +1,18 @@
 import logo from './logo.svg';
 import React from 'react';
+import { useAsync } from 'react';
 import './App.css';
 
-//import {majikes, dothing, ayyo, prasun} from './testpkm.js';
-
-// const bruh = prasun();
-// if (bruh==60) {
-//   console.log("ayyo")
-// } else {
-//   console.log(bruh)
-// }
+// const loadNum = async () =>
+//   await fetch("/flavor")
+//     .then(res => (res.ok ? res : Promise.reject(res)))
+//     .then(res => res.json());
 
 function App() {
-  const [data, setData] = React.useState(null);
-  const [zdata, zsetData] = React.useState(null);
+  const [data, setData] = React.useState(null); //null is the initial state here
+  // const [zdata, zsetData] = React.useState(null);
 
-//const bruh = majikes();
+  //const bruh = majikes();
 
   // React.useEffect(() => {
   //   fetch("/flavor")
@@ -27,21 +24,22 @@ function App() {
   React.useEffect(() => {
     fetch("/flavor")
       .then((res) => res.json())
-      .then((zdata) => zsetData(zdata.message));
-   }, []);
-
-
-  React.useEffect(() => {
-    fetch("/api")
-      .then((res) => res.json())
       .then((data) => setData(data.message));
   }, []);
+
+  console.log(data);
+
+  // React.useEffect(() => {
+  //   fetch("/api")
+  //     .then((res) => res.json())
+  //     .then((data) => setData(data.message));
+  // }, []);
 
   return (
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
-        <p>{zdata}</p>
+        <p>{data}</p>
       </header>
     </div>
   );

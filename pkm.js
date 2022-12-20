@@ -8,7 +8,7 @@ export function majikes() {
      P.getBerryByName('cheri')
 .then(function(response) {
    const yuh = response['natural_gift_power'];
-   //console.log(yuh);
+   console.log(yuh);
    return yuh;
 })
 .catch((error) => {
