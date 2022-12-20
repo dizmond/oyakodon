@@ -45,7 +45,6 @@ export async function fmajikes() {
   const promise = Promise.resolve(17468);
   return promise;
  
-  
 }
 
 export async function gmajikes() {
@@ -59,7 +58,7 @@ export async function pipmajikes() {
   const P = new Pokedex();
 
   const golduckSpecies = await P.getPokemonSpeciesByName("piplup")
-  const frenchName = golduckSpecies.names.filter(pokeAPIName => pokeAPIName.language.name === 'fr')[0].name
+  const frenchName = golduckSpecies.names.filter(pokeAPIName => pokeAPIName.language.name === 'en')[0].name
   return frenchName;
 }
 

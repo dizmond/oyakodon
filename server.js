@@ -28,6 +28,10 @@ async function majikes() {
 //     res.status(err.status || 500);
 //     res.send(err.message);
 //   });
+//[1,4,6,8]
+//dict = {message: bruh, macbook: mcdonalds}
+//dict['message']
+
 
 app.get("/flavor", async (req, res) => {
   try {
@@ -57,12 +61,9 @@ app.get("/pip", async (req, res) => {
             console.log(val);
             return val;
         });
-    // console.log(ztest);
+
     return res.json({ message: ztest });
-// promise.then(function(val) {
-//       console.log(val);
-//       return val
-//   });
+
 
   } catch (err) {
     res.status(400).json(err);
