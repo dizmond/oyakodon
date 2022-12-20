@@ -30,22 +30,12 @@ export async function amajikes() {
 };
 
 
-export async function emajikes() {
+// export async function fmajikes() {
 
-  const promise = Promise.resolve(17468);
+//   const promise = Promise.resolve(17468);
+//   return promise;
  
-  promise.then(function(val) {
-      console.log(val);
-      return val
-  });
-}
-
-export async function fmajikes() {
-
-  const promise = Promise.resolve(17468);
-  return promise;
- 
-}
+// }
 
 export async function gmajikes() {
   const P = new Pokedex();
@@ -57,9 +47,10 @@ export async function gmajikes() {
 export async function pipmajikes() {
   const P = new Pokedex();
 
-  const golduckSpecies = await P.getPokemonSpeciesByName("piplup")
-  const frenchName = golduckSpecies.names.filter(pokeAPIName => pokeAPIName.language.name === 'en')[0].name
-  return frenchName;
+  const pipspecies = await P.getPokemonSpeciesByName("piplup")
+  //const frenchName = pipspecies.names.filter(pokeAPIName => pokeAPIName.language.name === 'en')[0].name
+  const bruh = pipspecies.flavor_text_entries.filter(pokeAPIName => pokeAPIName.language.name === 'en').filter(pokeAPIName => pokeAPIName.version.name === 'platinum')[0].flavor_text
+  return bruh;
 }
 
 //majikes();

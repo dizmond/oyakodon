@@ -1,6 +1,6 @@
 //arigato aniki
 import express from 'express'
-import { amajikes, emajikes, fmajikes, gmajikes, pipmajikes } from './pkm.js';
+import { gmajikes, pipmajikes } from './pkm.js';
 import Pokedex from 'pokedex-promise-v2';
 
 const app = express();
@@ -21,16 +21,7 @@ async function majikes() {
       console.log('There was an ERROR: ', error);
     });
 };
-//const index = require('./routes/index');
-//app.use('/', index);
 
-// app.use((err, req, res, next) => {
-//     res.status(err.status || 500);
-//     res.send(err.message);
-//   });
-//[1,4,6,8]
-//dict = {message: bruh, macbook: mcdonalds}
-//dict['message']
 
 
 app.get("/flavor", async (req, res) => {
@@ -41,17 +32,14 @@ app.get("/flavor", async (req, res) => {
             console.log(val['natural_gift_power']);
             return val['natural_gift_power']
         });
-    // console.log(ztest);
     return res.json({ message: ztest });
-// promise.then(function(val) {
-//       console.log(val);
-//       return val
-//   });
+
 
   } catch (err) {
     res.status(400).json(err);
   }
 });
+
 
 app.get("/pip", async (req, res) => {
   try {
@@ -69,6 +57,12 @@ app.get("/pip", async (req, res) => {
     res.status(400).json(err);
   }
 });
+
+//  app.get("/ztemp", (req, res) => {
+//     // const ztest = majikes();
+//     // console.log(ztest);
+//     res.json({message: "yuh"});
+//   });
 
 
 // app.get("/flavor", (req, res) => {
