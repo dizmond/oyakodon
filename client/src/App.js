@@ -36,6 +36,12 @@ function App() {
         <p>{cheri}</p>
         <p>{pip}</p>
         <Link url="https://piazza.com" display_name="Piazza"></Link>
+        <div>
+          <p> umi stuff here</p>
+        </div>
+        <div>
+          <p> lam stuff here</p>
+        </div>
       </header>
     </div>
   );
