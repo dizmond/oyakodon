@@ -4,12 +4,16 @@ import styled from 'styled-components';
 import Link from './components/link/Link';
 import './App.css';
 import SearchBar from './components/searchBar/SearchBar'
-// const loadNum = async () =>
-//   await fetch("/flavor")
-//     .then(res => (res.ok ? res : Promise.reject(res)))
-//     .then(res => res.json());
+
+import NumberList from './components/playlist/NumberList';
+
+
+
 
 function App() {
+
+  //PLACEHOLDER ARGUMENT FOR LIST OF SONGS
+  const numz = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]
 
   const [cheri, setCheri] = React.useState(null);
   const [pip, setPip] = React.useState(null);
@@ -22,7 +26,8 @@ function App() {
   }, []);
 
   React.useEffect(() => {
-    const pkmname = "pikachu"
+    const pkmname = "ponyta"
+    //TODO CHANGE THIS PKMNNAME TO ANOTHER SINNOH POKEMON
     fetch("/piplup/" + pkmname)
       .then((res) => res.json())
       .then((pip) => setPip(pip.message));
@@ -39,7 +44,7 @@ function App() {
           <SearchBar></SearchBar>
         </div>
         <div>
-          <p> lam stuff here</p>
+          <NumberList vals = {numz}></NumberList>
         </div>
       </header>
     </div>
