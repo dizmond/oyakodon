@@ -3,7 +3,7 @@ import React from 'react';
 import styled from 'styled-components';
 import Link from './components/link/Link';
 import './App.css';
-
+import SubmitButton from './components/searchBar/SubmitButton'
 // const loadNum = async () =>
 //   await fetch("/flavor")
 //     .then(res => (res.ok ? res : Promise.reject(res)))
@@ -37,7 +37,7 @@ function App() {
         <p>{pip}</p>
         <Link url="https://piazza.com" display_name="Piazza"></Link>
         <div>
-          <p> umi stuff here</p>
+          <SubmitButton></SubmitButton>
         </div>
         <div>
           <p> lam stuff here</p>
