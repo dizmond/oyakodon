@@ -3,7 +3,7 @@ import React from 'react';
 import styled from 'styled-components';
 import Link from './components/link/Link';
 import './App.css';
-import SubmitButton from './components/searchBar/SubmitButton'
+import SearchBar from './components/searchBar/SearchBar'
 // const loadNum = async () =>
 //   await fetch("/flavor")
 //     .then(res => (res.ok ? res : Promise.reject(res)))
@@ -35,9 +35,8 @@ function App() {
         <img src={logo} className="App-logo" alt="logo" />
         <p>{cheri}</p>
         <p>{pip}</p>
-        <Link url="https://piazza.com" display_name="Piazza"></Link>
         <div>
-          <SubmitButton></SubmitButton>
+          <SearchBar></SearchBar>
         </div>
         <div>
           <p> lam stuff here</p>
