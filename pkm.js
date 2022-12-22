@@ -27,7 +27,7 @@ export async function tempimagefunction(name) {
 
   const thespecies = await P.getPokemonByName(name)  //gets all data abt a pokemon from its name 
 
-  const bruh = thespecies.sprites['front_default'] //data is returned in a mixed dictionary, not sure how this interacts w multiple generations yet!
+  const bruh = thespecies.sprites['front_shiny'] //data is returned in a mixed dictionary, not sure how this interacts w multiple generations yet!
   return bruh;
 }
 

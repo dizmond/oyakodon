@@ -5,10 +5,9 @@ import Link from './components/link/Link';
 import './App.css';
 import SearchBar from './components/searchBar/SearchBar'
 
+
 import NumberList from './components/playlist/NumberList';
 import InputSearch from './components/playlist/inputSearch';
-import { testexport } from './components/playlist/ZSubmitButton';
-
 
 
 function App() {
@@ -28,7 +27,7 @@ function App() {
   }, []);
 
   React.useEffect(() => {
-    const pkmname = "luxray"
+    const pkmname = "umbreon"
     //TODO CHANGE THIS PKMNNAME TO ANOTHER  POKEMON
     fetch("/piplup/" + pkmname)
       .then((res) => res.json())
@@ -36,7 +35,7 @@ function App() {
   }, []);
 
   React.useEffect(() => {
-    const pkmname = "luxray"
+    const pkmname = "umbreon"
     //TODO CHANGE THIS PKMNNAME TO ANOTHER POKEMON U WANNA SEE
     fetch("/tempimage/" + pkmname)
       .then((res) => res.json())
@@ -45,13 +44,15 @@ function App() {
 
 
 
+
+
   //trying to read input
-  const [inputText, setinputText] = React.useState('ayeo');
+  const [inputText, setinputText] = React.useState('start');
 
-  let zhandleChange = (event) => {
-    event.preventDefault();
+  let zhandleChange = (e) => {
+    //event.preventDefault();
 
-    setinputText(event.target.value.toLowerCase())
+    setinputText(e.target.value.toLowerCase())
     console.log("gottem")
   }
 
@@ -69,10 +70,12 @@ function App() {
         <p>{cheri}</p>
         <div>
           <InputSearch
-          onChange={zhandleChange}
-          ></InputSearch>
+
+          onChange={(e) => zhandleChange(e)}
+          //onInput={() => confu()}
+          />
         </div>
-        <p>{testexport}</p>               
+        <p>{inputText}</p>               
         <p>{pip}</p>
         <div>
           <SearchBar></SearchBar>

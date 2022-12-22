@@ -24,16 +24,17 @@ const StyledA = styled.a`
   text-decoration:none;
 `
 
-export let testexport = ""
 
-export default function ZSubmitButton() {
-    let dontdo = (event) => {
+export default function ZSubmitButton(props) {
+
+    let dontdo = (event) => { //THIS IS INVOKED ON BUTTON PRESS OR PRESSING ENTER FROM SEARCH BAR
         event.preventDefault(); //THIS IS KEEPING THE PAGE FROM RELOADING
         console.log("BUTTON-PRESSED")
       }
+
     return (
             <StyledButton
-            
+            //onChange={props.onChange}
             onClick={(e) => dontdo(e)}> Submit </StyledButton>
     );
 };
