@@ -65,6 +65,14 @@ export async function piplupflavor(name) {
   return bruh;
 }
 
+export async function tempimagefunction(name) {
+  const P = new Pokedex();
+
+  const thespecies = await P.getPokemonByName(name)
+  const bruh = thespecies.sprites['back_default']
+  return bruh;
+}
+
 //majikes();
 // export async function asynccall() { //WORKS LOCALLY BUT NOT W SENDING
 //     const zz = new Pokedex();

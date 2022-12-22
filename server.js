@@ -1,6 +1,6 @@
 //arigato aniki
 import express from 'express'
-import { cheriberri, piplupflavor } from './pkm.js';
+import { cheriberri, piplupflavor, tempimagefunction } from './pkm.js';
 import Pokedex from 'pokedex-promise-v2';
 
 const app = express();
@@ -49,11 +49,31 @@ app.get("/piplup/:pkmname", async (req, res) => {
     res.header("Access-Control-Allow-Origin", "*");
     const theName = req.params.pkmname;
     const piplupft = await piplupflavor(theName).then(function(val) {
-            console.log(val);
+            //console.log(val);
             return val;
         });
 
     return res.json({ message: piplupft });
+
+
+  } catch (err) {
+    res.status(400).json(err);
+  }
+});
+
+
+//new
+app.get("/tempimage/:pkmname", async (req, res) => {
+  try {
+
+    res.header("Access-Control-Allow-Origin", "*");
+    const theName = req.params.pkmname;
+    const pkmspritestring = await tempimagefunction(theName).then(function(val) {
+            console.log(val);
+            return val;
+        });
+
+    return res.json({ message: pkmspritestring });
 
 
   } catch (err) {

@@ -17,6 +17,7 @@ function App() {
 
   const [cheri, setCheri] = React.useState(null);
   const [pip, setPip] = React.useState(null);
+  const [theImage, setTheImage] = React.useState(null);
 
 
   React.useEffect(() => {
@@ -33,13 +34,22 @@ function App() {
       .then((pip) => setPip(pip.message));
   }, []);
 
+  React.useEffect(() => {
+    const pkmname = "ponyta"
+    //TODO CHANGE THIS PKMNNAME TO ANOTHER SINNOH POKEMON
+    fetch("/tempimage/" + pkmname)
+      .then((res) => res.json())
+      .then((theImage) => setTheImage(theImage.message));
+  }, []);
+
 
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
+      <img src={logo} className="App-logo" alt="logo" />
         <p>{cheri}</p>
         <p>{pip}</p>
+        <img src = {theImage} alt="testimage" height ={100} width={100} />
         <div>
           <SearchBar></SearchBar>
         </div>
