@@ -48,24 +48,19 @@ function App() {
 
 
   //trying to read input
-  const [inputText, setinputText] = React.useState('start');
+  const [holderInputText, setholderInputText] = React.useState('notext');
+  const [inputText, setinputText] = React.useState('nosubmit');
 
-  let zhandleChange = (e) => {
-    //e.preventDefault();
-
-    setinputText(e.target.value.toLowerCase())
-    console.log("gottem")
+  let inputGrabber = (e) => {
+    setholderInputText(e.target.value) //actively stores the val of the input
+    console.log("inputGrabbed")
   }
 
-  let testchange = (e) => {
-    e.preventDefault();
-    //console.log(e.target.value.toLowerCase())
-
-    //setinputText(e.target.value.toLowerCase())
-    console.log("testchange")
+  let inputSubmitted = (e) => {
+    e.preventDefault(); //prevents reloading of the page!
+    setinputText(holderInputText) //sets the val of this (to be entered maybe?)
+    console.log("inputSubmitted")
   }
-
-
 
 
 
@@ -77,12 +72,9 @@ function App() {
         <div>
 
           <InputSearch
-          onChange={(e) => zhandleChange(e)}
-          //onClick={(e) => testchange(e)}
-          //onSubmit={(e) => testchange(e)}
-          onSubmit={(e) => testchange(e)}
+          onChange={(e) => inputGrabber(e)} //actively stores the val of the input
+          onSubmit={(e) => inputSubmitted(e)}  //prevents reloading and changes the real value 
           >
-
           </InputSearch>
       
         </div>

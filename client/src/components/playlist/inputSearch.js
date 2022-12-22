@@ -2,8 +2,6 @@ import React from 'react';
 import styled from 'styled-components';
 import ZSubmitButton from './ZSubmitButton';
 
-//import confu from '../App.js'
-
 const StyledForm = styled.form`
   display: flex;
   background-color: green;
@@ -16,25 +14,13 @@ const StyledInput = styled.input`
     width: 20rem;
   `
 
-// export function confu() {
-//     console.log("confu");
-// }
-//<StyledForm action="/" method="get">
 export default function InputSearch(props) {
 
-    let dontdo = (event) => {
-        event.preventDefault();
-        console.log("onchange")
-        //console.log(event.target.value)
-      }
-
-    //   let zdontdo = (event) => {
-    //     //event.preventDefault();
-    //     console.log("oninput")
-    //     testexport = "yuh"
+    // let dontdo = (event) => {
+    //     event.preventDefault();
+    //     console.log("onchange")
     //   }
 
-      //onInput={(e) => dontdo(e)}
  return (
     //<StyledForm action={props} method="get">
     <StyledForm
@@ -44,18 +30,10 @@ export default function InputSearch(props) {
             id="header-search"
             placeholder="howdy parder"
             name="name"
-            //onClick={(e) => inputcomponentchange(e)} 
             onChange={props.onChange}
-            //onSubmit={props.onSubmit}
-            //onClick={props.onClick}
-            //onClick={props.onClick}
             
         ></StyledInput>
         <ZSubmitButton></ZSubmitButton>
     </StyledForm>
 );
 }
-//<ZSubmitButton
-        //onSubmit={props.onSubmit}
-        //onClickCapture={props.onClickCapture}
-       // ></ZSubmitButton>

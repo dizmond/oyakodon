@@ -28,11 +28,11 @@ const StyledA = styled.a`
 
 export default function ZSubmitButton(props) {
 
-    let dontdo = (event) => { //THIS IS INVOKED ON BUTTON PRESS OR PRESSING ENTER FROM SEARCH BAR
-        event.preventDefault(); //THIS IS KEEPING THE PAGE FROM RELOADING
-        console.log("BUTTON-PRESSED");
-        return props.onClickCapture;
-      }
+    // let dontdo = (event) => { //THIS IS INVOKED ON BUTTON PRESS OR PRESSING ENTER FROM SEARCH BAR
+    //     event.preventDefault(); //THIS IS KEEPING THE PAGE FROM RELOADING
+    //     console.log("BUTTON-PRESSED");
+    //     return props.onClickCapture;
+    //   }
 
     return (
             <StyledButton
