@@ -7,23 +7,27 @@ const app = express();
 const port = process.env.PORT || 5000;
 
 
-const router = express.Router();
-const P = new Pokedex();
+const router = express.Router(); //prob navigates between pages?
 
-async function majikes() {
-  await P.getBerryByName('cheri')
-    .then(function (response) {
-      const yuh = response['natural_gift_power'];
-      console.log(yuh);
-      return yuh;
-    })
-    .catch((error) => {
-      console.log('There was an ERROR: ', error);
-    });
-};
+// const P = new Pokedex();
+
+//OLD STUFF
+// async function majikes() {
+//   await P.getBerryByName('cheri')
+//     .then(function (response) {
+//       const yuh = response['natural_gift_power'];
+//       console.log(yuh);
+//       return yuh;
+//     })
+//     .catch((error) => {
+//       console.log('There was an ERROR: ', error);
+//     });
+// };
 
 
-
+//gets berry data, mostly for debugging!
+//this is OUTDATED because we can filter the contents of the promise
+//from inside the function that returns the promise - pretty cool!
 app.get("/cheri", async (req, res) => {
   try {
 
@@ -31,7 +35,7 @@ app.get("/cheri", async (req, res) => {
 
 
     const berrynum = await cheriberri().then(function(val) {
-            console.log(val['natural_gift_power']);
+            //console.log(val['natural_gift_power']);
             return val['natural_gift_power']
         });
     return res.json({ message: berrynum });
@@ -42,7 +46,7 @@ app.get("/cheri", async (req, res) => {
   }
 });
 
-
+//gets flavor text, important for proof-of-concept and reference!
 app.get("/piplup/:pkmname", async (req, res) => {
   try {
 
@@ -62,13 +66,15 @@ app.get("/piplup/:pkmname", async (req, res) => {
 });
 
 
-//new
+//new stuff, gets sprite of a pokemon!
+//TODO make this the val of the entered pokemon
 app.get("/tempimage/:pkmname", async (req, res) => {
   try {
-
     res.header("Access-Control-Allow-Origin", "*");
-    const theName = req.params.pkmname;
-    const pkmspritestring = await tempimagefunction(theName).then(function(val) {
+
+    const theName = req.params.pkmname; //gets the name of the pokemon from client-side input 
+
+    const pkmspritestring = await tempimagefunction(theName).then(function(val) { //invokes the function in pkm.js
             console.log(val);
             return val;
         });
@@ -83,7 +89,7 @@ app.get("/tempimage/:pkmname", async (req, res) => {
 
 
 
-
+//important canary to make sure client is talking to the server at all
 app.get("/api", (req, res) => {
   //res.status(200).send("200 OK")
   res.json({ message: "Hello from server!" });
