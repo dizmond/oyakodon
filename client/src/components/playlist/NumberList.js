@@ -24,7 +24,7 @@ display: flex;
   max-height: 100%;
   overflow-y: auto;
 `
-//maxheight: 100% and overflow-y: auto make the modal scroll!!
+//maxheight: 100% and overflow-y: auto make the modal scroll!
 
 
 export default function NumberList(props) {
