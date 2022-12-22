@@ -8,77 +8,80 @@ import SearchBar from './components/searchBar/SearchBar'
 
 import NumberList from './components/playlist/NumberList';
 import InputSearch from './components/playlist/inputSearch';
-import ZSubmitButton from './components/playlist/ZSubmitButton';
+
+//these might be important later but also might be outdated by use-hooks??
+import { createRoot } from 'react-dom/client';
+import { render } from 'react-dom';
 
 
 function App() {
 
-  //PLACEHOLDER ARGUMENT FOR LIST OF SONGS
-  const numz = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]
 
-  const [cheri, setCheri] = React.useState(null);  //used for berry 
   const [pip, setPip] = React.useState(null); //used for flavor text
   const [theImage, setTheImage] = React.useState(null); //used to fetch image
 
+  //input stuff
+  const [holderInputText, setholderInputText] = React.useState('notext'); //a holder for the input - is written to on every keystroke!
+  const [inputText, setinputText] = React.useState('empoleon'); //inputText is the value passed in when the user submits 
+  //(by pressing enter or the submit button). It is the value called in our image and flavortext functions
+  //and initialized currently to 'empoleon' but change that pokemon when you push for fun!
 
-  React.useEffect(() => {
-    fetch("/cheri")
-      .then((res) => res.json())
-      .then((cheri) => setCheri(cheri.message));
-  }, []);
 
+  //FLAVOR TEXT
   React.useEffect(() => {
-    const pkmname = "umbreon"
-    //TODO CHANGE THIS PKMNNAME TO ANOTHER  POKEMON
-    fetch("/piplup/" + pkmname)
+    fetch("/flavor/" + inputText) //api call which returns a promise that we handle with the .then
       .then((res) => res.json())
       .then((pip) => setPip(pip.message));
-  }, []);
+  }, [inputText]); //the brackets are the CONDITIONAL, 
+  //meaning that whenever the value of inputText is changed, then this function is 
+  //re-rendered with the new value!
 
+
+  //THE IMAGE
   React.useEffect(() => {
-    const pkmname = "umbreon"
-    //TODO CHANGE THIS PKMNNAME TO ANOTHER POKEMON U WANNA SEE
-    fetch("/tempimage/" + pkmname)
+    fetch("/tempimage/" + inputText)  //api call which returns a promise that we handle with the .then
       .then((res) => res.json())
       .then((theImage) => setTheImage(theImage.message));
-  }, []);
+  }, [inputText]);//the brackets are the CONDITIONAL, 
+  //meaning that whenever the value of inputText is changed, then this function is 
+  //re-rendered with the new value!
 
+ 
 
-
-
-
-  //trying to read input
-  const [holderInputText, setholderInputText] = React.useState('notext');
-  const [inputText, setinputText] = React.useState('nosubmit');
-
+  //this changes the value of holderInputText to the value of the input whenever the user enters a new character
+  //we can't call it directly bc it has incomplete input
+  //but it was the only way I could find to store the input!!
   let inputGrabber = (e) => {
-    setholderInputText(e.target.value) //actively stores the val of the input
+    setholderInputText(e.target.value.toLowerCase()) //actively stores the val of the input
+    //lowercase is important here! 
     console.log("inputGrabbed")
   }
 
+
+  //changes the value of inputText (which is used for a lot right now!) when the user submits the data 
   let inputSubmitted = (e) => {
-    e.preventDefault(); //prevents reloading of the page!
+    e.preventDefault(); //prevents reloading of the page! Very important!!
     setinputText(holderInputText) //sets the val of this (to be entered maybe?)
     console.log("inputSubmitted")
+    //render????
   }
 
-
+//PLACEHOLDER ARGUMENT FOR LIST OF SONGS
+const numz = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]
 
   return (
     <div className="App">
       <header className="App-header">
-      <img src = {theImage} alt="testimage" height ={325} width={325} />
-        <p>{cheri}</p>
+      <img src = {theImage} height ={325} width={325} />
+        <p>Enter a pokemon!</p>
         <div>
-
           <InputSearch
           onChange={(e) => inputGrabber(e)} //actively stores the val of the input
           onSubmit={(e) => inputSubmitted(e)}  //prevents reloading and changes the real value 
           >
           </InputSearch>
-      
         </div>
-        <p>{inputText}</p>               
+    {/*   <p>{inputText}</p> */}
         <p>{pip}</p>
         <div>
           <SearchBar></SearchBar>

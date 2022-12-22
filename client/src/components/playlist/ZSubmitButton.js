@@ -8,11 +8,11 @@ const StyledButton = styled.button`
     background-color: white;
     border-radius: 10%;
     border-color: green;
-    width: 5rem;
-    height: 2.5rem;
+    width: 7rem;
+    height: 5rem;
     padding: 1rem;
     align-items: center;
-    font-size: 1rem;
+    font-size: 1.5rem;
     font-weight: 600;
     border-width: 5px;
     justify-content: center;
@@ -27,12 +27,6 @@ const StyledA = styled.a`
 
 
 export default function ZSubmitButton(props) {
-
-    // let dontdo = (event) => { //THIS IS INVOKED ON BUTTON PRESS OR PRESSING ENTER FROM SEARCH BAR
-    //     event.preventDefault(); //THIS IS KEEPING THE PAGE FROM RELOADING
-    //     console.log("BUTTON-PRESSED");
-    //     return props.onClickCapture;
-    //   }
 
     return (
             <StyledButton

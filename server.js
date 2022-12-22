@@ -1,7 +1,6 @@
 //arigato aniki
 import express from 'express'
-import { cheriberri, piplupflavor, tempimagefunction } from './pkm.js';
-import Pokedex from 'pokedex-promise-v2';
+import { cheriberri, flavor, tempimagefunction } from './pkm.js';
 
 const app = express();
 const port = process.env.PORT || 5000;
@@ -47,17 +46,17 @@ app.get("/cheri", async (req, res) => {
 });
 
 //gets flavor text, important for proof-of-concept and reference!
-app.get("/piplup/:pkmname", async (req, res) => {
+app.get("/flavor/:pkmname", async (req, res) => {
   try {
 
-    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Origin", "*"); //lowkey idk what this does lol
     const theName = req.params.pkmname;
-    const piplupft = await piplupflavor(theName).then(function(val) {
+    const flavtxt = await flavor(theName).then(function(val) {
             //console.log(val);
             return val;
         });
 
-    return res.json({ message: piplupft });
+    return res.json({ message: flavtxt });
 
 
   } catch (err) {
@@ -75,7 +74,7 @@ app.get("/tempimage/:pkmname", async (req, res) => {
     const theName = req.params.pkmname; //gets the name of the pokemon from client-side input 
 
     const pkmspritestring = await tempimagefunction(theName).then(function(val) { //invokes the function in pkm.js
-            console.log(val);
+            //console.log(val);
             return val;
         });
 

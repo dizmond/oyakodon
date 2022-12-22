@@ -11,18 +11,13 @@ const StyledInput = styled.input`
   display:flex;
   border-radius: 10px;
     border-color: green;
-    width: 20rem;
+    width: 35rem;
+    font-size: 2.25rem;
   `
 
 export default function InputSearch(props) {
 
-    // let dontdo = (event) => {
-    //     event.preventDefault();
-    //     console.log("onchange")
-    //   }
-
  return (
-    //<StyledForm action={props} method="get">
     <StyledForm
     onSubmit={props.onSubmit}>
         <StyledInput
