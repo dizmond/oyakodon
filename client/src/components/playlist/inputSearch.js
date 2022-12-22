@@ -22,9 +22,9 @@ const StyledInput = styled.input`
 //<StyledForm action="/" method="get">
 export default function InputSearch(props) {
 
-    let inputcomponentchange = (event) => {
-        //event.preventDefault();
-        //console.log("onchange")
+    let dontdo = (event) => {
+        event.preventDefault();
+        console.log("onchange")
         //console.log(event.target.value)
       }
 
@@ -37,17 +37,25 @@ export default function InputSearch(props) {
       //onInput={(e) => dontdo(e)}
  return (
     //<StyledForm action={props} method="get">
-    <StyledForm>
+    <StyledForm
+    onSubmit={props.onSubmit}>
         <StyledInput
             type="text"
             id="header-search"
             placeholder="howdy parder"
             name="name"
+            //onClick={(e) => inputcomponentchange(e)} 
             onChange={props.onChange}
-            //onInput={() => confu()}
+            //onSubmit={props.onSubmit}
+            //onClick={props.onClick}
+            //onClick={props.onClick}
             
-        />
+        ></StyledInput>
         <ZSubmitButton></ZSubmitButton>
     </StyledForm>
 );
 }
+//<ZSubmitButton
+        //onSubmit={props.onSubmit}
+        //onClickCapture={props.onClickCapture}
+       // ></ZSubmitButton>

@@ -8,6 +8,7 @@ import SearchBar from './components/searchBar/SearchBar'
 
 import NumberList from './components/playlist/NumberList';
 import InputSearch from './components/playlist/inputSearch';
+import ZSubmitButton from './components/playlist/ZSubmitButton';
 
 
 function App() {
@@ -50,17 +51,22 @@ function App() {
   const [inputText, setinputText] = React.useState('start');
 
   let zhandleChange = (e) => {
-    //event.preventDefault();
+    //e.preventDefault();
 
     setinputText(e.target.value.toLowerCase())
     console.log("gottem")
   }
 
-//   handleEntailmentRequest(e) {
-//     e.preventDefault();
+  let testchange = (e) => {
+    e.preventDefault();
+    //console.log(e.target.value.toLowerCase())
 
-//     console.log("handle request ");
-// }
+    //setinputText(e.target.value.toLowerCase())
+    console.log("testchange")
+  }
+
+
+
 
 
   return (
@@ -69,11 +75,16 @@ function App() {
       <img src = {theImage} alt="testimage" height ={325} width={325} />
         <p>{cheri}</p>
         <div>
-          <InputSearch
 
+          <InputSearch
           onChange={(e) => zhandleChange(e)}
-          //onInput={() => confu()}
-          />
+          //onClick={(e) => testchange(e)}
+          //onSubmit={(e) => testchange(e)}
+          onSubmit={(e) => testchange(e)}
+          >
+
+          </InputSearch>
+      
         </div>
         <p>{inputText}</p>               
         <p>{pip}</p>

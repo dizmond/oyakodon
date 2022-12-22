@@ -1,8 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
 
+
 const StyledButton = styled.button`
-  display: flex;
+    display: flex;
     color: green;
     background-color: white;
     border-radius: 10%;
@@ -29,12 +30,13 @@ export default function ZSubmitButton(props) {
 
     let dontdo = (event) => { //THIS IS INVOKED ON BUTTON PRESS OR PRESSING ENTER FROM SEARCH BAR
         event.preventDefault(); //THIS IS KEEPING THE PAGE FROM RELOADING
-        console.log("BUTTON-PRESSED")
+        console.log("BUTTON-PRESSED");
+        return props.onClickCapture;
       }
 
     return (
             <StyledButton
-            //onChange={props.onChange}
-            onClick={(e) => dontdo(e)}> Submit </StyledButton>
+            onClickCapture={props.onClickCapture}//WORKS BEST SO FAR BUBBLING 
+            >Submit </StyledButton>
     );
 };
