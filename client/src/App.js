@@ -27,15 +27,15 @@ function App() {
   }, []);
 
   React.useEffect(() => {
-    const pkmname = "ponyta"
-    //TODO CHANGE THIS PKMNNAME TO ANOTHER SINNOH POKEMON
+    const pkmname = "luxray"
+    //TODO CHANGE THIS PKMNNAME TO ANOTHER  POKEMON
     fetch("/piplup/" + pkmname)
       .then((res) => res.json())
       .then((pip) => setPip(pip.message));
   }, []);
 
   React.useEffect(() => {
-    const pkmname = "dialga"
+    const pkmname = "luxray"
     //TODO CHANGE THIS PKMNNAME TO ANOTHER POKEMON U WANNA SEE
     fetch("/tempimage/" + pkmname)
       .then((res) => res.json())
@@ -47,7 +47,7 @@ function App() {
     <div className="App">
       <header className="App-header">
       <img src = {theImage} alt="testimage" height ={325} width={325} />
-        <p>{cheri}</p>
+        <p>{cheri}</p>               
         <p>{pip}</p>
         <div>
           <SearchBar></SearchBar>
