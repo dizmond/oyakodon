@@ -8,10 +8,11 @@ import SearchBar from './components/searchBar/SearchBar'
 
 import NumberList from './components/playlist/NumberList';
 import InputSearch from './components/playlist/inputSearch';
+import OurImage from './components/imageformat/imageformat';
 
 //these might be important later but also might be outdated by use-hooks??
-import { createRoot } from 'react-dom/client';
-import { render } from 'react-dom';
+//import { createRoot } from 'react-dom/client';
+//import { render } from 'react-dom';
 
 
 function App() {
@@ -36,7 +37,6 @@ function App() {
   //meaning that whenever the value of inputText is changed, then this function is 
   //re-rendered with the new value!
 
-
   //THE IMAGE
   React.useEffect(() => {
     fetch("/tempimage/" + inputText)  //api call which returns a promise that we handle with the .then
@@ -53,6 +53,7 @@ function App() {
   //but it was the only way I could find to store the input!!
   let inputGrabber = (e) => {
     setholderInputText(e.target.value.toLowerCase()) //actively stores the val of the input
+    //console.log(holderInputText);
     //lowercase is important here! 
     console.log("inputGrabbed")
   }
@@ -73,6 +74,10 @@ const numz = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]
     <div className="App">
       <header className="App-header">
       <img src = {theImage} height ={325} width={325} />
+      
+     {/* <OurImage src = {theImage}></OurImage> */}
+ 
+
         <p>Enter a pokemon!</p>
         <div>
           <InputSearch
