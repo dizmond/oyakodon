@@ -8,7 +8,7 @@ import SubmitButton from './components/searchBar/SubmitButton'
 
 import NumberList from './components/playlist/NumberList';
 import InputSearch from './components/playlist/inputSearch';
-import OurImage from './components/imageformat/imageformat';
+import ImageCard from './components/imageformat/ImageCard';
 
 //these might be important later but also might be outdated by use-hooks??
 //import { createRoot } from 'react-dom/client';
@@ -52,11 +52,12 @@ function App() {
   //we can't call it directly bc it has incomplete input
   //but it was the only way I could find to store the input!!
   let inputGrabber = (e) => {
-    setholderInputText(e.target.value.toLowerCase()) //actively stores the val of the input
+    setholderInputText(e.target.value.toLowerCase()); //actively stores the val of the input
     //console.log(holderInputText);
     //lowercase is important here! 
-    console.log("inputGrabbed")
-  }
+    console.log(e.target.value.toLowerCase());
+    console.log("inputGrabbed");
+  };
 
 
   //changes the value of inputText (which is used for a lot right now!) when the user submits the data 
@@ -73,8 +74,7 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <img src={theImage} height={325} width={325} />
-
+        <ImageCard number={395} name={inputText} src={theImage} height={270} width={270} description={pip}></ImageCard>
         {/* <OurImage src = {theImage}></OurImage> */}
 
 
@@ -87,7 +87,7 @@ function App() {
           </InputSearch>
         </div>
         {/*   <p>{inputText}</p> */}
-        <p>{pip}</p>
+
         <div>
           <SubmitButton></SubmitButton>
         </div>

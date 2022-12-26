@@ -17,18 +17,18 @@ const StyledInput = styled.input`
 
 export default function InputSearch(props) {
 
- return (
+  return (
     <StyledForm
-    onSubmit={props.onSubmit}>
-        <StyledInput
-            type="text"
-            id="header-search"
-            placeholder="howdy parder"
-            name="name"
-            onChange={props.onChange}
-            
-        ></StyledInput>
-        <ZSubmitButton></ZSubmitButton>
+      onSubmit={props.onSubmit}>
+      <StyledInput
+        type="text"
+        id="header-search"
+        placeholder="howdy parder"
+        name="name"
+        onChange={props.onChange}
+
+      ></StyledInput>
+      <ZSubmitButton></ZSubmitButton>
     </StyledForm>
-);
+  );
 }
