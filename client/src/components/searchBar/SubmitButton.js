@@ -7,11 +7,11 @@ const StyledButton = styled.button`
     background-color: white;
     border-radius: 10%;
     border-color: pink;
-    width: 5rem;
-    height: 2.5rem;
+    width: 10rem;
+    height: 5rem;
     padding: 1rem;
     align-items: center;
-    font-size: 1rem;
+    font-size: 2rem;
     font-weight: 600;
     border-width: 5px;
     justify-content: center;
@@ -24,9 +24,9 @@ const StyledA = styled.a`
   text-decoration:none;
 `
 export default function SubmitButton() {
-    return (
-        <StyledA href='/playlist'>
-            <StyledButton> Submit </StyledButton>
-        </StyledA>
-    );
+  return (
+    <StyledA href='/playlist'>
+      <StyledButton> Lock In </StyledButton>
+    </StyledA>
+  );
 };

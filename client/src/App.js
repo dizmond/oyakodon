@@ -3,7 +3,7 @@ import React from 'react';
 import styled from 'styled-components';
 import Link from './components/link/Link';
 import './App.css';
-import SearchBar from './components/searchBar/SearchBar'
+import SubmitButton from './components/searchBar/SubmitButton'
 
 
 import NumberList from './components/playlist/NumberList';
@@ -89,7 +89,7 @@ function App() {
         {/*   <p>{inputText}</p> */}
         <p>{pip}</p>
         <div>
-          <SearchBar></SearchBar>
+          <SubmitButton></SubmitButton>
         </div>
         <div>
           <NumberList vals={numz}></NumberList>

@@ -12,7 +12,7 @@ const StyledButton = styled.button`
     height: 5rem;
     padding: 1rem;
     align-items: center;
-    font-size: 1.5rem;
+    font-size: 3rem;
     font-weight: 600;
     border-width: 5px;
     justify-content: center;
@@ -28,9 +28,9 @@ const StyledA = styled.a`
 
 export default function ZSubmitButton(props) {
 
-    return (
-            <StyledButton
-            onClickCapture={props.onClickCapture}//WORKS BEST SO FAR BUBBLING 
-            >Submit </StyledButton>
-    );
+  return (
+    <StyledButton
+      onClickCapture={props.onClickCapture}//WORKS BEST SO FAR BUBBLING 
+    >↵ </StyledButton>
+  );
 };
