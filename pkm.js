@@ -17,8 +17,8 @@ export async function cheriberri() {
 export async function flavor(name) {
   const P = new Pokedex();
 
-  const species = await P.getPokemonSpeciesByName(name)
-  const bruh = species.flavor_text_entries.filter(pokeAPIName => pokeAPIName.language.name === 'en')[1].flavor_text
+  const species = await P.getPokemonSpeciesByName(name);
+  const bruh = species.flavor_text_entries.filter(pokeAPIName => pokeAPIName.language.name === 'en')[1].flavor_text;
   return bruh;
 }
 

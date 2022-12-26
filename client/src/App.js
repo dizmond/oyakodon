@@ -1,7 +1,6 @@
-import logo from './logo.svg';
+// import logo from './logo.svg';
 import React from 'react';
 import styled from 'styled-components';
-import Link from './components/link/Link';
 import './App.css';
 import SubmitButton from './components/searchBar/SubmitButton'
 
@@ -63,17 +62,18 @@ function App() {
   //changes the value of inputText (which is used for a lot right now!) when the user submits the data 
   let inputSubmitted = (e) => {
     e.preventDefault(); //prevents reloading of the page! Very important!!
-    setinputText(holderInputText) //sets the val of this (to be entered maybe?)
-    console.log("inputSubmitted")
+    setinputText(holderInputText); //sets the val of this (to be entered maybe?)
+    console.log("inputSubmitted");
     //render????
-  }
+  };
 
   //PLACEHOLDER ARGUMENT FOR LIST OF SONGS
-  const numz = ['song1', 'song2', 'song3', 'song', 'song', 'song', 7, 8, 9, 10, 11, 12, 13, 14, 15]
+  const numz = ['song1', 'tune2', 'bop3', 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
 
   return (
     <div className="App">
       <header className="App-header">
+        <p></p>
         <ImageCard number={395} name={inputText} src={theImage} height={270} width={270} description={pip}></ImageCard>
         {/* <OurImage src = {theImage}></OurImage> */}
 
@@ -89,6 +89,7 @@ function App() {
         {/*   <p>{inputText}</p> */}
 
         <div>
+          <p></p>
           <SubmitButton></SubmitButton>
         </div>
         <div>

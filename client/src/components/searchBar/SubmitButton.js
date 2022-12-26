@@ -19,6 +19,7 @@ const StyledButton = styled.button`
     font-family: 'Roboto', sans-serif;
     letter-spacing: 1px;
     text-shadow: 1px 1px gray;
+    
   `
 const StyledA = styled.a`
   text-decoration:none;
