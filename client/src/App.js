@@ -46,7 +46,7 @@ function App() {
   //meaning that whenever the value of inputText is changed, then this function is 
   //re-rendered with the new value!
 
- 
+
 
   //this changes the value of holderInputText to the value of the input whenever the user enters a new character
   //we can't call it directly bc it has incomplete input
@@ -67,32 +67,32 @@ function App() {
     //render????
   }
 
-//PLACEHOLDER ARGUMENT FOR LIST OF SONGS
-const numz = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]
+  //PLACEHOLDER ARGUMENT FOR LIST OF SONGS
+  const numz = ['song1', 'song2', 'song3', 'song', 'song', 'song', 7, 8, 9, 10, 11, 12, 13, 14, 15]
 
   return (
     <div className="App">
       <header className="App-header">
-      <img src = {theImage} height ={325} width={325} />
-      
-     {/* <OurImage src = {theImage}></OurImage> */}
- 
+        <img src={theImage} height={325} width={325} />
+
+        {/* <OurImage src = {theImage}></OurImage> */}
+
 
         <p>Enter a pokemon!</p>
         <div>
           <InputSearch
-          onChange={(e) => inputGrabber(e)} //actively stores the val of the input
-          onSubmit={(e) => inputSubmitted(e)}  //prevents reloading and changes the real value 
+            onChange={(e) => inputGrabber(e)} //actively stores the val of the input
+            onSubmit={(e) => inputSubmitted(e)}  //prevents reloading and changes the real value 
           >
           </InputSearch>
         </div>
-    {/*   <p>{inputText}</p> */}
+        {/*   <p>{inputText}</p> */}
         <p>{pip}</p>
         <div>
           <SearchBar></SearchBar>
         </div>
         <div>
-          <NumberList vals = {numz}></NumberList>
+          <NumberList vals={numz}></NumberList>
         </div>
       </header>
     </div>

@@ -7,11 +7,10 @@ import ListItem from './ListItem';
 const StyledMenu = styled.menu`
 display: flex;
   color: black;
-  background-color: white;
+  background-color: #B2D3C2;
   border-radius: 1%;
   border-color: pink;
-  width: 150rem;
-  height: 10rem;
+  width: 50rem;
   padding: 1rem;
   align-items: left-center;
   font-size: 1.5rem;
@@ -28,22 +27,22 @@ display: flex;
 
 
 export default function NumberList(props) {
-    //props is like the input it should be in the form of an ARRAY
-    const vals = props.vals;
-    //we MUST specify an argument to this function like
-    //<NumberList vals = {thearray}></NumberedList>
+  //props is like the input it should be in the form of an ARRAY
+  const vals = props.vals;
+  //we MUST specify an argument to this function like
+  //<NumberList vals = {thearray}></NumberedList>
 
-    const listItems = vals.map((val) =>
-      //the map function seems to listify this
-      <ListItem key={val.toString()} value={val} />
-    );
+  const listItems = vals.map((val) =>
+    //the map function seems to listify this
+    <ListItem key={val.toString()} value={val} />
+  );
 
-    //StyledMenu is the css for this component
-    return (
-        <StyledMenu>
-      <ul>
+  //StyledMenu is the css for this component
+  return (
+    <StyledMenu>
+      <ol>
         {listItems}
-      </ul>
-      </StyledMenu>
-    );
-  }
+      </ol>
+    </StyledMenu>
+  );
+}
