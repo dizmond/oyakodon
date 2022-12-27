@@ -33,10 +33,10 @@ app.get("/cheri", async (req, res) => {
     res.header("Access-Control-Allow-Origin", "*");
 
 
-    const berrynum = await cheriberri().then(function(val) {
-            //console.log(val['natural_gift_power']);
-            return val['natural_gift_power']
-        });
+    const berrynum = await cheriberri().then(function (val) {
+      //console.log(val['natural_gift_power']);
+      return val['natural_gift_power']
+    });
     return res.json({ message: berrynum });
 
 
@@ -51,12 +51,11 @@ app.get("/flavor/:pkmname", async (req, res) => {
 
     res.header("Access-Control-Allow-Origin", "*"); //lowkey idk what this does lol
     const theName = req.params.pkmname;
-    const flavtxt = await flavor(theName).then(function(val) {
-            //console.log(val);
-            return val;
-        });
+    const [flavtxt, id] = await flavor(theName).then(function (val) {
+      return val;
+    });
 
-    return res.json({ message: flavtxt });
+    return res.json({ message: flavtxt, num: id });
 
 
   } catch (err) {
@@ -73,10 +72,10 @@ app.get("/tempimage/:pkmname", async (req, res) => {
 
     const theName = req.params.pkmname; //gets the name of the pokemon from client-side input 
 
-    const pkmspritestring = await tempimagefunction(theName).then(function(val) { //invokes the function in pkm.js
-            //console.log(val);
-            return val;
-        });
+    const pkmspritestring = await tempimagefunction(theName).then(function (val) { //invokes the function in pkm.js
+      //console.log(val);
+      return val;
+    });
 
     return res.json({ message: pkmspritestring });
 

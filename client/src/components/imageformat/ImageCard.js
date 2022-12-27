@@ -1,11 +1,17 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const StyledImage = styled.image`
+const StyledTitle = styled.menu`
+  display: flex;
+  justify-content: center;`
+
+const StyledCard = styled.image`
     display: flex;
     color:white;
     background-color: green;
     border-radius: 10px;
+    font-family: 'Press Start 2P', sans-serif;
+    font-size: 1rem;
   `
 const StyledDescription = styled.menu`
     display:flex;
@@ -13,8 +19,8 @@ const StyledDescription = styled.menu`
     height: 10rem;
     margin: auto;
     overflow-y: auto;
-    font-family: 'Roboto', sans-serif;
-    font-size: 1rem;
+    font-size: 0.8rem;
+
     
 
     `
@@ -22,15 +28,15 @@ export default function ImageCard(props) {
   // const src = props.src;
 
   return (
-    <StyledImage>
+    <StyledCard>
       <div>
-        <p>#{props.number} {props.name}</p>
+        <StyledTitle><p>#{props.number} {props.name}</p> </StyledTitle>
         <img src={props.src} height={props.height} width={props.width} />
       </div>
       <StyledDescription>
         <p>{props.description}</p>
       </StyledDescription>
-    </StyledImage >
+    </StyledCard >
     // <OurImage>
     //   <img src={src} height={325} width={325} />
 

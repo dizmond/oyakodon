@@ -18,8 +18,9 @@ export async function flavor(name) {
   const P = new Pokedex();
 
   const species = await P.getPokemonSpeciesByName(name);
-  const bruh = species.flavor_text_entries.filter(pokeAPIName => pokeAPIName.language.name === 'en')[1].flavor_text;
-  return bruh;
+  const description = species.flavor_text_entries.filter(pokeAPIName => pokeAPIName.language.name === 'en')[1].flavor_text;
+  const id = species.id;
+  return [description, id];
 }
 
 export async function tempimagefunction(name) {

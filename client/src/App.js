@@ -16,8 +16,8 @@ import ImageCard from './components/imageformat/ImageCard';
 
 function App() {
 
-
-  const [pip, setPip] = React.useState(null); //used for flavor text
+  const [id, setId] = React.useState(395);
+  const [text, setText] = React.useState(null); //used for flavor text
   const [theImage, setTheImage] = React.useState(null); //used to fetch image
 
   //input stuff
@@ -31,7 +31,10 @@ function App() {
   React.useEffect(() => {
     fetch("/flavor/" + inputText) //api call which returns a promise that we handle with the .then
       .then((res) => res.json())
-      .then((pip) => setPip(pip.message));
+      .then((pokemon) => {
+        setText(pokemon.message);
+        setId(pokemon.num);
+      });
   }, [inputText]); //the brackets are the CONDITIONAL, 
   //meaning that whenever the value of inputText is changed, then this function is 
   //re-rendered with the new value!
@@ -74,7 +77,7 @@ function App() {
     <div className="App">
       <header className="App-header">
         <p></p>
-        <ImageCard number={395} name={inputText} src={theImage} height={270} width={270} description={pip}></ImageCard>
+        <ImageCard number={id} name={inputText} src={theImage} height={270} width={270} description={text}></ImageCard>
         {/* <OurImage src = {theImage}></OurImage> */}
 
 
