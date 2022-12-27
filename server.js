@@ -23,7 +23,6 @@ const router = express.Router(); //prob navigates between pages?
 //     });
 // };
 
-
 //gets berry data, mostly for debugging!
 //this is OUTDATED because we can filter the contents of the promise
 //from inside the function that returns the promise - pretty cool!
@@ -51,11 +50,11 @@ app.get("/flavor/:pkmname", async (req, res) => {
 
     res.header("Access-Control-Allow-Origin", "*"); //lowkey idk what this does lol
     const theName = req.params.pkmname;
-    const [flavtxt, id] = await flavor(theName).then(function (val) {
+    const [flavtxt, id, species] = await flavor(theName).then(function (val) {
       return val;
     });
 
-    return res.json({ message: flavtxt, num: id });
+    return res.json({ message: flavtxt, num: id, name: species });
 
 
   } catch (err) {

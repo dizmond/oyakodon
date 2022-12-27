@@ -3,11 +3,10 @@ import React from 'react';
 import styled from 'styled-components';
 import './App.css';
 import SubmitButton from './components/searchBar/SubmitButton'
-
-
 import NumberList from './components/playlist/NumberList';
 import InputSearch from './components/playlist/inputSearch';
 import ImageCard from './components/imageformat/ImageCard';
+import { validInput } from './RegEx'
 
 //these might be important later but also might be outdated by use-hooks??
 //import { createRoot } from 'react-dom/client';
@@ -25,7 +24,14 @@ function App() {
   const [inputText, setinputText] = React.useState('empoleon'); //inputText is the value passed in when the user submits 
   //(by pressing enter or the submit button). It is the value called in our image and flavortext functions
   //and initialized currently to 'empoleon' but change that pokemon when you push for fun!
-
+  const [inputErr, setInputErr] = React.useState(false);
+  const [pokeName, setPokeName] = React.useState('empoleon');
+  const validate = () => {
+    if (!validInput.test(inputText)) {
+      setInputErr(true);
+    }
+    return inputErr;
+  };
 
   //FLAVOR TEXT
   React.useEffect(() => {
@@ -34,6 +40,8 @@ function App() {
       .then((pokemon) => {
         setText(pokemon.message);
         setId(pokemon.num);
+        setPokeName(pokemon.name);
+
       });
   }, [inputText]); //the brackets are the CONDITIONAL, 
   //meaning that whenever the value of inputText is changed, then this function is 
@@ -77,7 +85,7 @@ function App() {
     <div className="App">
       <header className="App-header">
         <p></p>
-        <ImageCard number={id} name={inputText} src={theImage} height={270} width={270} description={text}></ImageCard>
+        <ImageCard number={id} name={pokeName} src={theImage} height={270} width={270} description={text}></ImageCard>
         {/* <OurImage src = {theImage}></OurImage> */}
 
 
@@ -94,6 +102,7 @@ function App() {
         <div>
           <p></p>
           <SubmitButton></SubmitButton>
+          {validate && <p>Your email is invalid</p>}
         </div>
         <div>
           <NumberList vals={numz}></NumberList>

@@ -14,13 +14,15 @@ export async function cheriberri() {
   return promise
 }
 
-export async function flavor(name) {
+export async function flavor(input) {
   const P = new Pokedex();
 
-  const species = await P.getPokemonSpeciesByName(name);
+  const species = await P.getPokemonSpeciesByName(input);
   const description = species.flavor_text_entries.filter(pokeAPIName => pokeAPIName.language.name === 'en')[1].flavor_text;
   const id = species.id;
-  return [description, id];
+  let pokeName = species.name;
+  pokeName = pokeName.charAt(0).toUpperCase() + pokeName.slice(1);
+  return [description, id, pokeName];
 }
 
 export async function tempimagefunction(name) {
