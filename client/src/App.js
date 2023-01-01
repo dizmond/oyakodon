@@ -11,8 +11,8 @@ import { validInput } from './RegEx'
 //these might be important later but also might be outdated by use-hooks??
 //import { createRoot } from 'react-dom/client';
 //import { render } from 'react-dom';
-const CLIENT_ID = '';
-const CLIENT_SECRET = '';
+const CLIENT_ID = process.env.ID;
+const CLIENT_SECRET = process.env.SECRET;
 
 function App() {
 
