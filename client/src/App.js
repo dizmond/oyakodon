@@ -11,7 +11,8 @@ import { validInput } from './RegEx'
 //these might be important later but also might be outdated by use-hooks??
 //import { createRoot } from 'react-dom/client';
 //import { render } from 'react-dom';
-
+const CLIENT_ID = '';
+const CLIENT_SECRET = '';
 
 function App() {
 
@@ -32,7 +33,19 @@ function App() {
     }
     return inputErr;
   };
-
+  React.useEffect(() => {
+    //API Access Token
+    var authParameters = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded'
+      },
+      body: 'grant_type=client_credentials&client_id=' + CLIENT_ID + '&client_secret=' + CLIENT_SECRET
+    }
+    fetch('https://accounts.spotify.com/api/token', authParameters)
+      .then(result => result.json())
+      .then(data => console.log(data))
+  }, []);
   //FLAVOR TEXT
   React.useEffect(() => {
     fetch("/flavor/" + inputText) //api call which returns a promise that we handle with the .then
