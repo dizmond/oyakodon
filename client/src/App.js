@@ -23,7 +23,7 @@ function App() {
 //spotify stuff
 const [token, setToken] = React.useState("");
 const [searchKey, setSearchKey] = React.useState("");
-const [artists, setArtists] = React.useState([]);
+const [tracks, setSongs] = React.useState([]);
 
   const [id, setId] = React.useState(395);
   const [text, setText] = React.useState(null); //used for flavor text
@@ -64,31 +64,34 @@ const [artists, setArtists] = React.useState([]);
     setToken("");
     window.localStorage.removeItem("token");
   }
-  //spotify api
-  const searchArtists = async (e) => {
-    e.preventDefault();
-    const {data} = await axios.get("https://api.spotify.com/v1/search", {
-      headers: {
-        Authorization: `Bearer ${token}`
-      },
-      params: {
-        q: searchKey,
-        type: "artist"
-      }
-    })
-
-    console.log(data);
-    setArtists(data.artists.items);
-  }
+  
+ 
 
   //spotify artists
-  const renderArtists = () => {
-    return artists.map(artist => (
-        <div key={artist.id}>
-            {artist.images.length ? <img width={"100%"} src={artist.images[0].url} alt=""/> : <div>No Image</div>}
-            {artist.name}
+  const renderSongs = () => {
+    return tracks.map(song => (
+        <div key={song.id}>
+            {song.name}         
         </div>
     ))
+
+}
+
+//spotify api
+const searchSongs = async (e) => {
+  e.preventDefault();
+  const {data} = await axios.get("https://api.spotify.com/v1/search", {
+    headers: {
+      Authorization: `Bearer ${token}`
+    },
+    params: {
+      q: searchKey,
+      type: "track"
+    }
+  })
+
+  console.log(data);
+  setSongs(data.tracks.items);
 }
 
   //FLAVOR TEXT
@@ -136,7 +139,7 @@ const [artists, setArtists] = React.useState([]);
     //render????
   };
 
-  //PLACEHOLDER ARGUMENT FOR LIST OF SONGS
+  //PLACEHOLDER ARGUMENT FOR LIST OF tracks
   const numz = ['song1', 'tune2', 'bop3', 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
 
   return (
@@ -151,7 +154,7 @@ const [artists, setArtists] = React.useState([]);
         : <button onClick={logout}>Logout</button>}
 
         {token ?
-             <form onSubmit={searchArtists}>
+             <form onSubmit={searchSongs}>
               <input type = 'text' onChange={e => setSearchKey(e.target.value)}/>
               <button type = {"submit"}>Search</button>
              </form>
@@ -159,7 +162,7 @@ const [artists, setArtists] = React.useState([]);
              : <h2>Please login</h2>
          }
 
-         {renderArtists()}
+         {renderSongs()}
 
 
         <p>Enter a pokemon!</p>
