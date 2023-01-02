@@ -55,7 +55,10 @@ function App() {
     }
 
     setToken(token);
-    spotifyApi.setAccessToken(token);
+    spotifyApi.setAccessToken(token); //check token is set with test
+    spotifyApi.getMe().then((user) => {
+      console.log(user);
+    });
     console.log("THE TOKEN : " + token);
   }, []);
 
@@ -93,8 +96,8 @@ function App() {
     setSongs(data.tracks.items);
   }
   /*
- -----------------------------------------------------------------------------------------------------
- Umi's Spotify Code Below
+  -----------------------------------------------------------------------------------------------------
+  Umi's Spotify Code Below
   */
   const getNowPlaying = async () => {
     await spotifyApi.getMyCurrentPlaybackState().then((response) => {
