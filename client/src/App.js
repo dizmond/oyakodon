@@ -6,15 +6,24 @@ import SubmitButton from './components/searchBar/SubmitButton'
 import NumberList from './components/playlist/NumberList';
 import InputSearch from './components/playlist/inputSearch';
 import ImageCard from './components/imageformat/ImageCard';
-import { validInput } from './RegEx'
+import { validInput } from './RegEx';
+import axios from 'axios';
 
-//these might be important later but also might be outdated by use-hooks??
-//import { createRoot } from 'react-dom/client';
-//import { render } from 'react-dom';
-const CLIENT_ID = process.env.ID;
-const CLIENT_SECRET = process.env.SECRET;
+
+const CLIENT_ID = '71a6034a2d9040ebb2d4c06d40043aff';
+const REDIRECT_URI = "http://localhost:3000";
+const AUTH_ENDPOINT = "https://accounts.spotify.com/authorize";
+const RESPONSE_TYPE = "token";
+
+
 
 function App() {
+
+
+//spotify stuff
+const [token, setToken] = React.useState("");
+const [searchKey, setSearchKey] = React.useState("");
+const [artists, setArtists] = React.useState([]);
 
   const [id, setId] = React.useState(395);
   const [text, setText] = React.useState(null); //used for flavor text
@@ -27,25 +36,61 @@ function App() {
   //and initialized currently to 'empoleon' but change that pokemon when you push for fun!
   const [inputErr, setInputErr] = React.useState(false);
   const [pokeName, setPokeName] = React.useState('empoleon');
-  const validate = () => {
+
+  const validate = () => {  //idk what this is but prob search bar!
     if (!validInput.test(inputText)) {
       setInputErr(true);
     }
     return inputErr;
   };
-  React.useEffect(() => {
-    //API Access Token
-    var authParameters = {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded'
-      },
-      body: 'grant_type=client_credentials&client_id=' + CLIENT_ID + '&client_secret=' + CLIENT_SECRET
+
+  React.useEffect(() =>  {  //GETTING THE USER'S TOKEN AND LOGIN
+    const hash = window.location.hash;
+    let token = window.localStorage.getItem("token");
+
+    if (!token && hash) {
+      token = hash.substring(1).split("&").find(elem => elem.startsWith("access_token")).split("=")[1]
+
+      window.location.hash = "";
+      window.localStorage.setItem("token",token)
     }
-    fetch('https://accounts.spotify.com/api/token', authParameters)
-      .then(result => result.json())
-      .then(data => console.log(data))
-  }, []);
+
+    setToken(token)
+    console.log("THE TOKEN : " + token)
+  }, [])
+
+  //spotify
+  const logout = () => {
+    setToken("");
+    window.localStorage.removeItem("token");
+  }
+  //spotify api
+  const searchArtists = async (e) => {
+    e.preventDefault();
+    const {data} = await axios.get("https://api.spotify.com/v1/search", {
+      headers: {
+        Authorization: `Bearer ${token}`
+      },
+      params: {
+        q: searchKey,
+        type: "artist"
+      }
+    })
+
+    console.log(data);
+    setArtists(data.artists.items);
+  }
+
+  //spotify artists
+  const renderArtists = () => {
+    return artists.map(artist => (
+        <div key={artist.id}>
+            {artist.images.length ? <img width={"100%"} src={artist.images[0].url} alt=""/> : <div>No Image</div>}
+            {artist.name}
+        </div>
+    ))
+}
+
   //FLAVOR TEXT
   React.useEffect(() => {
     fetch("/flavor/" + inputText) //api call which returns a promise that we handle with the .then
@@ -100,6 +145,21 @@ function App() {
         <p></p>
         <ImageCard number={id} name={pokeName} src={theImage} height={270} width={270} description={text}></ImageCard>
         {/* <OurImage src = {theImage}></OurImage> */}
+
+        {!token ?
+        <a href={`${AUTH_ENDPOINT}?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=${RESPONSE_TYPE}`}>Login to Spotify</a>
+        : <button onClick={logout}>Logout</button>}
+
+        {token ?
+             <form onSubmit={searchArtists}>
+              <input type = 'text' onChange={e => setSearchKey(e.target.value)}/>
+              <button type = {"submit"}>Search</button>
+             </form>
+
+             : <h2>Please login</h2>
+         }
+
+         {renderArtists()}
 
 
         <p>Enter a pokemon!</p>
