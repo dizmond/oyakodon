@@ -1,6 +1,5 @@
 // import logo from './logo.svg';
 import React from 'react';
-import styled from 'styled-components';
 import './App.css';
 import SubmitButton from './components/searchBar/SubmitButton'
 import NumberList from './components/playlist/NumberList';
@@ -8,8 +7,9 @@ import InputSearch from './components/playlist/inputSearch';
 import ImageCard from './components/imageformat/ImageCard';
 import { validInput } from './RegEx';
 import axios from 'axios';
+import SpotifyWebApi from "spotify-web-api-js";
 
-
+const spotifyApi = new SpotifyWebApi();
 const CLIENT_ID = '71a6034a2d9040ebb2d4c06d40043aff';
 const REDIRECT_URI = "http://localhost:3000";
 const AUTH_ENDPOINT = "https://accounts.spotify.com/authorize";
@@ -18,12 +18,10 @@ const RESPONSE_TYPE = "token";
 
 
 function App() {
-
-
-//spotify stuff
-const [token, setToken] = React.useState("");
-const [searchKey, setSearchKey] = React.useState("");
-const [tracks, setSongs] = React.useState([]);
+  //spotify stuff
+  const [token, setToken] = React.useState("");
+  const [searchKey, setSearchKey] = React.useState("");
+  const [tracks, setSongs] = React.useState([]);
 
   const [id, setId] = React.useState(395);
   const [text, setText] = React.useState(null); //used for flavor text
@@ -36,6 +34,7 @@ const [tracks, setSongs] = React.useState([]);
   //and initialized currently to 'empoleon' but change that pokemon when you push for fun!
   const [inputErr, setInputErr] = React.useState(false);
   const [pokeName, setPokeName] = React.useState('empoleon');
+  const [nowPlaying, setNowPlaying] = React.useState(false);
 
   const validate = () => {  //idk what this is but prob search bar!
     if (!validInput.test(inputText)) {
@@ -44,7 +43,7 @@ const [tracks, setSongs] = React.useState([]);
     return inputErr;
   };
 
-  React.useEffect(() =>  {  //GETTING THE USER'S TOKEN AND LOGIN
+  React.useEffect(() => {  //GETTING THE USER'S TOKEN AND LOGIN
     const hash = window.location.hash;
     let token = window.localStorage.getItem("token");
 
@@ -52,48 +51,63 @@ const [tracks, setSongs] = React.useState([]);
       token = hash.substring(1).split("&").find(elem => elem.startsWith("access_token")).split("=")[1]
 
       window.location.hash = "";
-      window.localStorage.setItem("token",token)
+      window.localStorage.setItem("token", token)
     }
 
-    setToken(token)
-    console.log("THE TOKEN : " + token)
-  }, [])
+    setToken(token);
+    spotifyApi.setAccessToken(token);
+    console.log("THE TOKEN : " + token);
+  }, []);
 
   //spotify
   const logout = () => {
     setToken("");
     window.localStorage.removeItem("token");
   }
-  
- 
+
+
 
   //spotify artists
   const renderSongs = () => {
     return tracks.map(song => (
-        <div key={song.id}>
-            {song.name}         
-        </div>
+      <div key={song.id}>
+        {song.name}
+      </div>
     ))
 
-}
+  }
 
-//spotify api
-const searchSongs = async (e) => {
-  e.preventDefault();
-  const {data} = await axios.get("https://api.spotify.com/v1/search", {
-    headers: {
-      Authorization: `Bearer ${token}`
-    },
-    params: {
-      q: searchKey,
-      type: "track"
-    }
-  })
+  const searchSongs = async (e) => {
+    e.preventDefault();
+    const { data } = await axios.get("https://api.spotify.com/v1/search", {
+      headers: {
+        Authorization: `Bearer ${token}`
+      },
+      params: {
+        q: searchKey,
+        type: "track"
+      }
+    })
 
-  console.log(data);
-  setSongs(data.tracks.items);
-}
+    console.log(data);
+    setSongs(data.tracks.items);
+  }
+  /*
+ -----------------------------------------------------------------------------------------------------
+ Umi's Spotify Code Below
+  */
+  const getNowPlaying = async () => {
+    await spotifyApi.getMyCurrentPlaybackState().then((response) => {
+      console.log(response);
+      setNowPlaying({
+        name: response.item.name,
+        albumArt: response.item.album.images[0].url
+      })
+    })
+  }
 
+  /*-------------------------------------------------------------------------------------------------
+  */
   //FLAVOR TEXT
   React.useEffect(() => {
     fetch("/flavor/" + inputText) //api call which returns a promise that we handle with the .then
@@ -150,19 +164,25 @@ const searchSongs = async (e) => {
         {/* <OurImage src = {theImage}></OurImage> */}
 
         {!token ?
-        <a href={`${AUTH_ENDPOINT}?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=${RESPONSE_TYPE}`}>Login to Spotify</a>
-        : <button onClick={logout}>Logout</button>}
+          <>
+            <h2>Please login</h2>
+            <a href={`${AUTH_ENDPOINT}?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=${RESPONSE_TYPE}`}>Login to Spotify</a>
+          </>
+          : <>
+            <button onClick={logout}>Logout</button>
+            <form onSubmit={searchSongs}>
+              <input type='text' onChange={e => setSearchKey(e.target.value)} />
+              <button type={"submit"}>Search</button>
+            </form>
+            <div>
+              Now Playing: {nowPlaying.name}
+            </div>
+            <button onClick={getNowPlaying}>Check Now Playing</button>
+          </>
+        }
 
-        {token ?
-             <form onSubmit={searchSongs}>
-              <input type = 'text' onChange={e => setSearchKey(e.target.value)}/>
-              <button type = {"submit"}>Search</button>
-             </form>
 
-             : <h2>Please login</h2>
-         }
-
-         {renderSongs()}
+        {renderSongs()}
 
 
         <p>Enter a pokemon!</p>
@@ -184,7 +204,7 @@ const searchSongs = async (e) => {
           <NumberList vals={numz}></NumberList>
         </div>
       </header>
-    </div>
+    </div >
   );
 }
 

@@ -31,7 +31,7 @@ export default function ImageCard(props) {
     <StyledCard>
       <div>
         <StyledTitle><p>#{props.number} {props.name}</p> </StyledTitle>
-        <img src={props.src} height={props.height} width={props.width} />
+        <img src={props.src} height={props.height} width={props.width} alt="pokemon" />
       </div>
       <StyledDescription>
         <p>{props.description}</p>
