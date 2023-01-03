@@ -41,18 +41,15 @@ function App() {
 
 
   return !token ? (<>
-    <Login />
-    {/* <a href={`${AUTH_ENDPOINT}?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&scope=${scopes.join("%20")}&response_type=token&show_dialog=true`}>Login to Spotify</a> */}
+    <div className="App">
+      <Login />
+    </div>
 
   </>) :
     (
       <div className="App">
-        <header>
-        </header >
-        <body>
-          <button onClick={logout}>Logout</button>
-          <Home></Home>
-        </body>
+        <button onClick={logout}>Logout</button>
+        <Home></Home>
       </div >
     );
 }
