@@ -5,7 +5,7 @@ const StyledTitle = styled.menu`
   display: flex;
   justify-content: center;`
 
-const StyledCard = styled.image`
+const StyledCard = styled.div`
     display: flex;
     color:white;
     background-color: green;
