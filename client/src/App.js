@@ -5,9 +5,11 @@ import SubmitButton from './components/searchBar/SubmitButton'
 import NumberList from './components/playlist/NumberList';
 import InputSearch from './components/playlist/inputSearch';
 import ImageCard from './components/imageformat/ImageCard';
-import { validInput } from './RegEx';
 import axios from 'axios';
 import SpotifyWebApi from "spotify-web-api-js";
+import Login from "./screens/auth/login";
+// import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+// import { setClientToken } from '../../spotify';
 
 const spotifyApi = new SpotifyWebApi();
 const CLIENT_ID = '71a6034a2d9040ebb2d4c06d40043aff';
@@ -32,16 +34,9 @@ function App() {
   const [inputText, setinputText] = React.useState('empoleon'); //inputText is the value passed in when the user submits 
   //(by pressing enter or the submit button). It is the value called in our image and flavortext functions
   //and initialized currently to 'empoleon' but change that pokemon when you push for fun!
-  const [inputErr, setInputErr] = React.useState(false);
+
   const [pokeName, setPokeName] = React.useState('empoleon');
   const [nowPlaying, setNowPlaying] = React.useState(false);
-
-  const validate = () => {  //idk what this is but prob search bar!
-    if (!validInput.test(inputText)) {
-      setInputErr(true);
-    }
-    return inputErr;
-  };
 
   React.useEffect(() => {  //GETTING THE USER'S TOKEN AND LOGIN
     const hash = window.location.hash;
@@ -55,6 +50,7 @@ function App() {
     }
 
     setToken(token);
+    //setClientToken(token); //importing this function from spotify.js *RaghavShubham
     spotifyApi.setAccessToken(token); //check token is set with test
     spotifyApi.getMe().then((user) => {
       console.log(user);
@@ -159,56 +155,48 @@ function App() {
   //PLACEHOLDER ARGUMENT FOR LIST OF tracks
   const numz = ['song1', 'tune2', 'bop3', 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
 
-  return (
-    <div className="App">
-      <header className="App-header">
-        <p></p>
-        <ImageCard number={id} name={pokeName} src={theImage} height={270} width={270} description={text}></ImageCard>
-        {/* <OurImage src = {theImage}></OurImage> */}
+  return !token ? (<>
+    <h2>Please Login</h2>
+    <Login />
+  </>) :
+    (
+      <div className="App">
+        <header className="App-header">
+          <p></p >
+          <ImageCard number={id} name={pokeName} src={theImage} height={270} width={270} description={text}></ImageCard>
 
-        {!token ?
-          <>
-            <h2>Please login</h2>
-            <a href={`${AUTH_ENDPOINT}?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=${RESPONSE_TYPE}`}>Login to Spotify</a>
-          </>
-          : <>
-            <button onClick={logout}>Logout</button>
-            <form onSubmit={searchSongs}>
-              <input type='text' onChange={e => setSearchKey(e.target.value)} />
-              <button type={"submit"}>Search</button>
-            </form>
-            <div>
-              Now Playing: {nowPlaying.name}
-            </div>
-            <button onClick={getNowPlaying}>Check Now Playing</button>
-          </>
-        }
+          <button onClick={logout}>Logout</button>
+          <form onSubmit={searchSongs}>
+            <input type='text' onChange={e => setSearchKey(e.target.value)} />
+            <button type={"submit"}>Search</button>
+          </form>
+          <div>
+            Now Playing: {nowPlaying.name}
+          </div>
+          <button onClick={getNowPlaying}>Check Now Playing</button>
 
+          {renderSongs()}
 
-        {renderSongs()}
+          < p > Enter a pokemon!</p>
+          <div>
+            <InputSearch
+              onChange={(e) => inputGrabber(e)} //actively stores the val of the input
+              onSubmit={(e) => inputSubmitted(e)}  //prevents reloading and changes the real value 
+            >
+            </InputSearch>
+          </div>
+          {/*   <p>{inputText}</p> */}
 
-
-        <p>Enter a pokemon!</p>
-        <div>
-          <InputSearch
-            onChange={(e) => inputGrabber(e)} //actively stores the val of the input
-            onSubmit={(e) => inputSubmitted(e)}  //prevents reloading and changes the real value 
-          >
-          </InputSearch>
-        </div>
-        {/*   <p>{inputText}</p> */}
-
-        <div>
-          <p></p>
-          <SubmitButton></SubmitButton>
-          {validate && <p>Your email is invalid</p>}
-        </div>
-        <div>
-          <NumberList vals={numz}></NumberList>
-        </div>
-      </header>
-    </div >
-  );
+          <div>
+            <p></p>
+            <SubmitButton></SubmitButton>
+          </div>
+          <div>
+            <NumberList vals={numz}></NumberList>
+          </div>
+        </header >
+      </div >
+    );
 }
 
 export default App;
