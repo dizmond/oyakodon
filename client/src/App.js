@@ -157,8 +157,9 @@ function App() {
   const numz = ['song1', 'tune2', 'bop3', 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
 
   return !token ? (<>
-    <h2>Please Login</h2>
     <Login />
+    {/* <a href={`${AUTH_ENDPOINT}?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&scope=${scopes.join("%20")}&response_type=token&show_dialog=true`}>Login to Spotify</a> */}
+
   </>) :
     (
       <div className="App">
