@@ -18,7 +18,7 @@ function App() {
       <Routes>
     
         <Route path='/' element={<Home/>}>
-          <Route path = './screens/playlist/playlist' element={<Playlist/>} />
+          <Route path = '/playlist' element={<Playlist/>} />
 
         </Route>
       </Routes>

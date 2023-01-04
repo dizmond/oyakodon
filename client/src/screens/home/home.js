@@ -181,7 +181,7 @@ export default function Home() {
                     <p></p>
                     <SubmitButton></SubmitButton>
                   </div>
-                  <Link to='./screens/playlist/playlist'>tempPlaylist!!!</Link>
+                  <Link to='/playlist'>tempPlaylist!!!</Link>
                   <Outlet/>
 
                 </header >
