@@ -1,10 +1,8 @@
 import React from 'react';
 import './App.css';
 import Home from './screens/home/home';
-// import axios from 'axios';
-import SpotifyWebApi from "spotify-web-api-js";
 import Login from "./screens/auth/login";
-import { BrowserRouter, Outlet, Link, Route, Routes, Switch } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Playlist from './screens/playlist/playlist';
 
 
@@ -16,18 +14,18 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-    
-        <Route path='/' element={<Home/>}>
-          <Route path = '/playlist' element={<Playlist/>} />
+
+        <Route path='/' element={<Home />}>
+          <Route path='/playlist' element={<Playlist />} />
 
         </Route>
       </Routes>
     </BrowserRouter>
 
-//end of return
-    );
-    
-  
+    //end of return
+  );
+
+
 }
 
 export default App;

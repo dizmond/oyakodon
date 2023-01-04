@@ -26,11 +26,11 @@ const StyledA = styled.a`
 `
 
 
-export default function ZSubmitButton(props) {
+export default function SubmitButton(props) {
 
-  return (
-    <StyledButton
-      onClickCapture={props.onClickCapture}//WORKS BEST SO FAR BUBBLING 
-    >↵ </StyledButton>
-  );
+    return (
+        <StyledButton
+            onClickCapture={props.onClickCapture}//WORKS BEST SO FAR BUBBLING 
+        >↵ </StyledButton>
+    );
 };

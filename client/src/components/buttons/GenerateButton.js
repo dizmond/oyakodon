@@ -24,7 +24,7 @@ const StyledButton = styled.button`
 const StyledA = styled.a`
   text-decoration:none;
 `
-export default function SubmitButton() {
+export default function GenerateButton() {
   return (
     <StyledA href='/playlist'>
       <StyledButton> Generate Playlist </StyledButton>
