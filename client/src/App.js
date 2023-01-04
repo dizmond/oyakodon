@@ -4,54 +4,30 @@ import Home from './screens/home/home';
 // import axios from 'axios';
 import SpotifyWebApi from "spotify-web-api-js";
 import Login from "./screens/auth/login";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-// import { setClientToken } from '../../spotify';
+import { BrowserRouter, Outlet, Link, Route, Routes, Switch } from "react-router-dom";
+import Playlist from './screens/playlist/playlist';
 
-const spotifyApi = new SpotifyWebApi();
 
 function App() {
-  //spotify stuff
-  const [token, setToken] = React.useState("");
+  //the idea is that App ONLY routes stuff
+  //rn I'm just trying to nest stuff into the <Home/> component and make that 
+  //the default route
+  //NOT SURE but I think routes are relative to App.js, NOT the path relative to the sub component calling that path
+  return (
+    <BrowserRouter>
+      <Routes>
+    
+        <Route path='/' element={<Home/>}>
+          <Route path = './screens/playlist/playlist' element={<Playlist/>} />
 
-  React.useEffect(() => {  //GETTING THE USER'S TOKEN AND LOGIN
-    const hash = window.location.hash;
-    let token = window.localStorage.getItem("token");
+        </Route>
+      </Routes>
+    </BrowserRouter>
 
-    if (!token && hash) {
-      token = hash.substring(1).split("&").find(elem => elem.startsWith("access_token")).split("=")[1]
-
-      window.location.hash = "";
-      window.localStorage.setItem("token", token)
-    }
-
-    setToken(token);
-    //setClientToken(token); //importing this function from spotify.js *RaghavShubham
-    spotifyApi.setAccessToken(token); //check token is set with test
-    spotifyApi.getMe().then((user) => {
-      console.log(user);
-    });
-    console.log("THE TOKEN : " + token);
-  }, []);
-
-  //spotify
-  const logout = () => {
-    setToken("");
-    window.localStorage.removeItem("token");
-  }
-
-
-  return !token ? (<>
-    <div className="App">
-      <Login />
-    </div>
-
-  </>) :
-    (
-      <div className="App">
-        <button onClick={logout}>Logout</button>
-        <Home></Home>
-      </div >
+//end of return
     );
+    
+  
 }
 
 export default App;
