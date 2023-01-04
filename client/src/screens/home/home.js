@@ -7,6 +7,8 @@ import SpotifyWebApi from "spotify-web-api-js";
 import Login from '../auth/login';
 import NumberList from '../../components/playlist/NumberList';
 import { BrowserRouter, Link, Route, Routes, Switch, Outlet } from "react-router-dom";
+import Spotify from 'react-spotify-embed' //PROB OUTDATED
+import SpotifyPlayer from 'react-spotify-web-playback';
 
 export default function Home() {
 
@@ -178,10 +180,30 @@ export default function Home() {
                   {/*   <p>{inputText}</p> */}
         
                   <div>
+                  
+            
+
+<SpotifyPlayer
+  token={token}
+  uris={['spotify:artist:6HQYnRM4OzToCYPpVBInuU']}
+  styles={{
+    activeColor: '#fff',
+    bgColor: '#333',
+    color: '#fff',
+    loaderColor: '#fff',
+    sliderColor: '#1cb954',
+    trackArtistColor: '#ccc',
+    trackNameColor: '#fff',
+  }}
+/>
+
+
+    <Spotify wide link="https://open.spotify.com/track/5ihDGnhQgMA0F0tk9fNLlA?si=4472348a63dd4f83" />
+                  
                     <p></p>
                     <SubmitButton></SubmitButton>
                   </div>
-                  <Link to='/playlist'>tempPlaylist!!!</Link>
+                  
                   <Outlet/>
 
                 </header >
