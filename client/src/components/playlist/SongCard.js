@@ -74,7 +74,7 @@ export default function SongCard() {
                                 <TableCell
                                     key={column.id}
                                     align={column.align}
-                                    style={{ minWidth: column.minWidth, borderBottom: "2px solid black", backgroundColor: "#111111", color: "white" }}
+                                    style={{ minWidth: column.minWidth, borderBottom: "2px solid black", backgroundColor: "#111111", color: "#e1e1e1" }}
                                 >
                                     {column.label}
                                 </TableCell>
@@ -89,7 +89,7 @@ export default function SongCard() {
                                         {columns.map((column) => {
                                             const value = row[column.id];
                                             return (
-                                                <TableCell key={column.id} align={column.align} sx={{ borderBottom: "1px solid black", backgroundColor: "#222222", color: "white" }}>
+                                                <TableCell key={column.id} align={column.align} sx={{ borderBottom: "1px solid black", backgroundColor: "#222222", color: "#e1e1e1" }}>
                                                     {column.format && typeof value === 'number'
                                                         ? column.format(value)
                                                         : value}
