@@ -8,7 +8,7 @@ const StyledTitle = styled.menu`
 const StyledCard = styled.div`
     display: flex;
     color:white;
-    background-color: green;
+    background-color: #333333;
     border-radius: 10px;
     font-family: 'Press Start 2P', sans-serif;
     font-size: 1rem;

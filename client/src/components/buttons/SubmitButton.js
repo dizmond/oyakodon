@@ -4,10 +4,10 @@ import styled from 'styled-components';
 
 const StyledButton = styled.button`
     display: flex;
-    color: green;
+    color: #444444;
     background-color: white;
     border-radius: 10%;
-    border-color: green;
+    border-color: #444444;
     width: 7rem;
     height: 5rem;
     padding: 1rem;
@@ -28,9 +28,9 @@ const StyledA = styled.a`
 
 export default function SubmitButton(props) {
 
-    return (
-        <StyledButton
-            onClickCapture={props.onClickCapture}//WORKS BEST SO FAR BUBBLING 
-        >↵ </StyledButton>
-    );
+  return (
+    <StyledButton
+      onClickCapture={props.onClickCapture}//WORKS BEST SO FAR BUBBLING 
+    >↵ </StyledButton>
+  );
 };
