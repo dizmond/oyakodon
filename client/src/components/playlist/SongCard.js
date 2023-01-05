@@ -9,13 +9,13 @@ import TableRow from '@mui/material/TableRow';
 
 const columns = [
     { id: 'number', label: '#', minWidth: 0 },
-    { id: 'art', label: 'TITLE', minWidth: 10 },
-    { id: 'title', label: '', minWidth: 100 },
+    { id: 'art', label: 'TITLE', minWidth: 0 },
+    { id: 'title', align: 'left', label: '', minWidth: 140 },
     {
         id: 'albumName',
         label: 'ALBUM',
-        minWidth: 120,
-        align: 'right',
+        minWidth: 50,
+        align: 'left',
         format: (value) => value.toLocaleString('en-US'),
     },
     {
