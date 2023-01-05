@@ -8,8 +8,8 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 
 const columns = [
-    { id: 'number', label: '#', minWidth: 0 },
-    { id: 'art', label: 'TITLE', minWidth: 0 },
+    { id: 'number', label: '#', maxWidth: 0 },
+    { id: 'art', label: 'TITLE', maxWidth: 0 },
     { id: 'title', align: 'left', label: '', minWidth: 140 },
     {
         id: 'albumName',
@@ -67,7 +67,7 @@ export default function SongCard(props) {
                                 <TableCell
                                     key={column.id}
                                     align={column.align}
-                                    style={{ minWidth: column.minWidth, borderBottom: "2px solid black", backgroundColor: "#111111", color: "#e1e1e1" }}
+                                    style={{ minWidth: column.minWidth, maxWidth: column.maxWidth, borderBottom: "2px solid black", backgroundColor: "#111111", color: "#e1e1e1" }}
                                 >
                                     {column.label}
                                 </TableCell>
@@ -78,11 +78,21 @@ export default function SongCard(props) {
                         {rows
                             .map((row) => {
                                 return (
-                                    <TableRow hover role="checkbox" tabIndex={-1} key={row.code}>
+                                    <TableRow hover sx={{
+                                        backgroundColor: "#222222", "&:hover": {
+                                            backgroundColor: "#333333 !important"
+                                        }
+                                    }} tabIndex={-1} key={row.code}>
                                         {columns.map((column) => {
                                             const value = row[column.id];
                                             return (
-                                                <TableCell key={column.id} align={column.align} sx={{ borderBottom: "1px solid black", backgroundColor: "#222222", color: "#e1e1e1" }}>
+                                                <TableCell key={column.id} align={column.align} sx={{
+                                                    borderBottom: "1px solid black", color: "#e1e1e1",
+                                                    // ":hover": {
+                                                    //     backgroundColor: 'blue !important',
+                                                    //     cursor: 'pointer'
+                                                    // }
+                                                }}>
                                                     {column.format && typeof value === 'number'
                                                         ? column.format(value)
                                                         : value}
