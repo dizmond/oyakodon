@@ -200,7 +200,7 @@ export default function Home() {
 
               <p></p>
               <GenerateButton></GenerateButton>
-              <SongCard></SongCard>
+              <p></p>
             </div>
 
             <Outlet />
