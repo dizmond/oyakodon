@@ -10,11 +10,11 @@ import TableRow from '@mui/material/TableRow';
 const columns = [
     { id: 'number', label: '#', minWidth: 0 },
     { id: 'art', label: 'TITLE', minWidth: 10 },
-    { id: 'title', label: '', minWidth: 120 },
+    { id: 'title', label: '', minWidth: 100 },
     {
         id: 'albumName',
         label: 'ALBUM',
-        minWidth: 100,
+        minWidth: 120,
         align: 'right',
         format: (value) => value.toLocaleString('en-US'),
     },
@@ -38,11 +38,11 @@ function createData(
     number,
     art,
     title,
-    album,
+    albumName,
     time
 ) {
     const heart = '♡';
-    return { number, art, title, album, heart, time };
+    return { number, art, title, albumName, heart, time };
 }
 
 export default function SongCard(props) {
@@ -52,9 +52,9 @@ export default function SongCard(props) {
     for (let i = 0; i < songTitleList.length; i++) {
         let songNum = i + 1;
         let titleName = songTitleList[i];
-        let albumName = 'albumName' + songNum;
+        let album = 'albumName' + songNum;
         let timeNum = '3:28';
-        rows[i] = createData(songNum, 'art', titleName, albumName, timeNum);
+        rows[i] = createData(songNum, 'art', titleName, album, timeNum);
     };
 
     return (
