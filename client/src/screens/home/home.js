@@ -5,11 +5,10 @@ import React from 'react';
 import axios from 'axios';
 import SpotifyWebApi from "spotify-web-api-js";
 import Login from '../auth/login';
-import NumberList from '../../components/playlist/NumberList';
 import { BrowserRouter, Link, Route, Routes, Switch, Outlet } from "react-router-dom";
 import Spotify from 'react-spotify-embed' //PROB OUTDATED
 import SpotifyPlayer from 'react-spotify-web-playback';
-
+import SongCard from '../../components/playlist/SongCard';
 export default function Home() {
 
   const spotifyApi = new SpotifyWebApi();
@@ -201,6 +200,7 @@ export default function Home() {
 
               <p></p>
               <GenerateButton></GenerateButton>
+              <SongCard></SongCard>
             </div>
 
             <Outlet />

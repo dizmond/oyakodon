@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-
+import SongCard from './SongCard';
 import ListItem from './ListItem';
 
 
