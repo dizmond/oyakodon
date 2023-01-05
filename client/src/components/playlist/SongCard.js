@@ -6,7 +6,6 @@ import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
-import ListItem from './ListItem';
 
 const columns = [
     { id: 'number', label: '#', minWidth: 0 },
@@ -48,14 +47,11 @@ function createData(
 
 export default function SongCard(props) {
     const rows = [];
-    const title = props.title;
-    const listItems = title.map((val) =>
-        //the map function seems to listify this
-        <ListItem key={val.toString()} value={val} />
-    );
-    for (let i = 0; i < listItems.length; i++) {
+    const songTitleList = props.title;
+
+    for (let i = 0; i < songTitleList.length; i++) {
         let songNum = i + 1;
-        let titleName = listItems[i].key;
+        let titleName = songTitleList[i];
         let albumName = 'albumName' + songNum;
         let timeNum = '3:28';
         rows[i] = createData(songNum, 'art', titleName, albumName, timeNum);
