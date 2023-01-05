@@ -6,6 +6,7 @@ import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
+import ListItem from './ListItem';
 
 const columns = [
     { id: 'number', label: '#', minWidth: 0 },
@@ -37,33 +38,29 @@ const columns = [
 function createData(
     number,
     art,
-    albumName,
+    title,
+    album,
     time
 ) {
     const heart = '♡';
-    const title = 'title';
-    return { number, art, title, albumName, heart, time };
+    return { number, art, title, album, heart, time };
 }
 
-const rows = [
-    createData(1, 'IN', 1324171354, 328),
-    createData(2, 'CN', 1403500365, 959),
-    createData(3, 'IT', 60483973, 301),
-    createData(4, 'US', 327167434, 983),
-    createData(5, 'CA', 37602103, 998),
-    createData(6, 'AU', 25475400, 769),
-    createData(7, 'DE', 83019200, 357),
-    createData(8, 'IE', 4857000, 702),
-    createData(9, 'MX', 126577691, 197),
-    createData(10, 'JP', 126317000, 377),
-    createData(11, 'FR', 67022000, 640),
-    createData(12, 'GB', 67545757, 242),
-    createData(13, 'RU', 146793744, 170),
-    createData(14, 'NG', 200962417, 923),
-    createData(15, 'BR', 210147125, 851),
-];
+export default function SongCard(props) {
+    const rows = [];
+    const title = props.title;
+    const listItems = title.map((val) =>
+        //the map function seems to listify this
+        <ListItem key={val.toString()} value={val} />
+    );
+    for (let i = 0; i < listItems.length; i++) {
+        let songNum = i + 1;
+        let titleName = listItems[i].key;
+        let albumName = 'albumName' + songNum;
+        let timeNum = '3:28';
+        rows[i] = createData(songNum, 'art', titleName, albumName, timeNum);
+    };
 
-export default function SongCard() {
     return (
         <Paper sx={{ width: '100%', overflow: 'hidden' }}>
             <TableContainer sx={{ maxHeight: 440 }}>
