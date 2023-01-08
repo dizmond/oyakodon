@@ -36,6 +36,8 @@ export default function Home() {
 
   const numz = ['song1', 'tune2', 'bop3', 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
 
+  const [searchedSong, setSearchedSong] = React.useState("")
+
   //controller keywords for player:
 
 
@@ -75,29 +77,65 @@ export default function Home() {
     })
   }
 
+  //pauses the spotify player
   const playerPause = async () => {
     await spotifyApi.pause().then((response) => {
       console.log(response);
     })
   }
-
+  //resumes the spotify player
   const playerPlay = async () => {
     await spotifyApi.play().then((response) => {
       console.log(response);
     })
   }
 
+  //this is a work in progress, I'd like to pass an argument to this but IDK HOW
+  //Right now, it adds the songs 'Moonlight' to the user's spotify queue
+  //TODO allow this to accept a PARAMETER
   const playParticular = async () => {
     await spotifyApi.queue("spotify:track:4iV5W9uYEdYUVa79Axb7Rh").then((response) => {
       console.log(response);
     })
   }
 
+  //this adds 'moonlight' to the spotify queue then skips to it (TODO what if they already have a queue??) then plays it
   const zPlay = async () => {
     await spotifyApi.queue("spotify:track:4iV5W9uYEdYUVa79Axb7Rh").then((response) => {
       console.log(response);
     })
     await spotifyApi.skipToNext().then((response) => {
+      console.log(response);
+    })
+    await spotifyApi.play().then((response) => {
+      console.log(response);
+    })
+  }
+
+  //playground
+  //search for stuff
+  //https://developer.spotify.com/documentation/web-api/reference/#/operations/search
+  //"remaster%20track:Doxy%20artist:Miles%20Davis"
+  //"swimming%20track:Ladders%20artist:Mac%20Miller"
+
+  //this yields the ID of a given QUERY 
+  //This plays "Ladders" by Mac Miller
+  const playground = async () => {
+    await spotifyApi.searchTracks("%20track:The%20Race%20artist:Tay-k").then((response) => {
+      console.log(response);
+      console.log(response['tracks']['items'][0]['uri']);
+      setSearchedSong(response['tracks']['items'][0]['uri'])
+    })
+  }
+
+  const playSearched = async () => {
+    await spotifyApi.queue(searchedSong).then((response) => {
+      console.log(response);
+    })
+    await spotifyApi.skipToNext().then((response) => {
+      console.log(response);
+    })
+    await spotifyApi.play().then((response) => {
       console.log(response);
     })
   }
@@ -199,6 +237,8 @@ export default function Home() {
             <button onClick={playerPlay}>Play</button>
             <button onClick={playParticular}>Moonlight</button>
             <button onClick={zPlay}>ZPLAY</button>
+            <button onClick={playground}>playground</button>
+            <button onClick={playSearched}>PLAYSEARCHED</button>
 
 
             < p > Enter a pokemon!</p>
