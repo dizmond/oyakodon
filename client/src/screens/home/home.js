@@ -29,6 +29,7 @@ export default function Home() {
 
   const [pokeName, setPokeName] = React.useState('empoleon');
   const [nowPlaying, setNowPlaying] = React.useState(false);
+  const [toPlay, setToPlay] = React.useState('');
 
   //token
   const [token, setToken] = React.useState("");
@@ -69,6 +70,24 @@ export default function Home() {
         name: response.item.name,
         albumArt: response.item.album.images[0].url
       })
+    })
+  }
+
+  const playerPause = async () => {
+    await spotifyApi.pause().then((response) => {
+      console.log(response);
+    })
+  }
+
+  const playerPlay = async () => {
+    await spotifyApi.play().then((response) => {
+      console.log(response);
+    })
+  }
+
+  const playParticular = async () => {
+    await spotifyApi.queue("spotify:track:4iV5W9uYEdYUVa79Axb7Rh").then((response) => {
+      console.log(response);
     })
   }
 
@@ -165,6 +184,9 @@ export default function Home() {
               Now Playing: {nowPlaying.name}
             </div>
             <button onClick={getNowPlaying}>Check Now Playing</button>
+            <button onClick={playerPause}>Pause</button>
+            <button onClick={playerPlay}>Play</button>
+            <button onClick={playParticular}>Moonlight</button>
 
 
             < p > Enter a pokemon!</p>
