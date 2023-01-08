@@ -36,6 +36,8 @@ export default function Home() {
 
   const numz = ['song1', 'tune2', 'bop3', 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
 
+  //controller keywords for player:
+
 
   // //spotify
   // const logout = () => {
@@ -87,6 +89,15 @@ export default function Home() {
 
   const playParticular = async () => {
     await spotifyApi.queue("spotify:track:4iV5W9uYEdYUVa79Axb7Rh").then((response) => {
+      console.log(response);
+    })
+  }
+
+  const zPlay = async () => {
+    await spotifyApi.queue("spotify:track:4iV5W9uYEdYUVa79Axb7Rh").then((response) => {
+      console.log(response);
+    })
+    await spotifyApi.skipToNext().then((response) => {
       console.log(response);
     })
   }
@@ -187,6 +198,7 @@ export default function Home() {
             <button onClick={playerPause}>Pause</button>
             <button onClick={playerPlay}>Play</button>
             <button onClick={playParticular}>Moonlight</button>
+            <button onClick={zPlay}>ZPLAY</button>
 
 
             < p > Enter a pokemon!</p>
