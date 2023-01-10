@@ -50,11 +50,14 @@ app.get("/flavor/:pkmname", async (req, res) => {
 
     res.header("Access-Control-Allow-Origin", "*"); //lowkey idk what this does lol
     const theName = req.params.pkmname;
-    const [flavtxt, id, species] = await flavor(theName).then(function (val) {
+    const [flavtxt, id, species, types, color] = await flavor(theName).then(function (val) {
+      //console.log("color:" + color);
+      //console.log("type: " + type);
       return val;
     });
 
-    return res.json({ message: flavtxt, num: id, name: species });
+    //console.log(res.json({ message: flavtxt, num: id, name: species, type: type, color: color }))
+    return res.json({ message: flavtxt, num: id, name: species, types: types, color: color });
 
 
   } catch (err) {

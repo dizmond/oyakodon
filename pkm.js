@@ -22,8 +22,12 @@ export async function flavor(input) {
   const id = species.id;
   let pokeName = species.name;
   pokeName = pokeName.charAt(0).toUpperCase() + pokeName.slice(1);
-  return [description, id, pokeName];
+  const types = species.PokemonType 
+  const color = species.color
+  return [description, id, pokeName, types, color];
 }
+
+
 
 export async function tempimagefunction(name) {
   const P = new Pokedex();

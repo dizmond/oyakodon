@@ -30,6 +30,8 @@ export default function Home() {
   const [pokeName, setPokeName] = React.useState('empoleon');
   const [nowPlaying, setNowPlaying] = React.useState(false);
   const [toPlay, setToPlay] = React.useState('');
+  //pkm color 
+  //pkm type
 
   //token
   const [token, setToken] = React.useState("");
@@ -39,6 +41,9 @@ export default function Home() {
   const [searchedSong, setSearchedSong] = React.useState("")
 
   const [finalList, setFinalList] = React.useState(['1','2','3','4','5'])
+
+  const [Pkmtype, setPkmtype] = React.useState("")
+  const [pkmColor, setPkmColor] = React.useState("")
 
   //controller keywords for player:
 
@@ -119,11 +124,12 @@ export default function Home() {
   //https://developer.spotify.com/documentation/web-api/reference/#/operations/search
   //"remaster%20track:Doxy%20artist:Miles%20Davis"
   //"swimming%20track:Ladders%20artist:Mac%20Miller"
+  //"%20track:The%20Race%20artist:Tay-k"
 
   //this yields the ID of a given QUERY 
   //This plays "Ladders" by Mac Miller
   const playground = async () => {
-    await spotifyApi.searchTracks("%20track:The%20Race%20artist:Tay-k").then((response) => {
+    await spotifyApi.searchTracks("swimming%20track:Self%20Care%20artist:Mac%20Miller").then((response) => {
       console.log(response);
       console.log(response['tracks']['items'][0]['uri']);
       setSearchedSong(response['tracks']['items'][0]['uri'])
@@ -167,6 +173,16 @@ export default function Home() {
         setText(pokemon.message);
         setId(pokemon.num);
         setPokeName(pokemon.name);
+
+        console.log("FLAVV");
+        console.log(pokemon.types);
+        console.log(pokemon.color['name']);
+        setPkmColor(pokemon.color['name'])
+
+        //setPkmColor(pokemon.color);
+        //setPkmtype(pokemon.type);
+        //console.log(pkmColor);
+        //console.log(Pkmtype);
 
       });
   }, [inputText]); //the brackets are the CONDITIONAL, 
