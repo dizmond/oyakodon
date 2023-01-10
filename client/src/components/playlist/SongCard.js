@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useState } from 'react';
 import Paper from '@mui/material/Paper';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -20,7 +20,7 @@ const columns = [
     },
     {
         id: 'heart',
-        label: '♡',
+        label: '♥',
         minWidth: 10,
         align: 'right',
         format: (value) => value.toLocaleString('en-US'),
@@ -41,11 +41,15 @@ function createData(
     albumName,
     time
 ) {
-    const heart = '♡';
+    const heart = '♡'; //♥♡
     return { number, art, title, albumName, heart, time };
 }
 
 export default function SongCard(props) {
+    const [active, setActive] = useState(false);
+    const handleClick = () => {
+        setActive(!active);
+    };
     const rows = [];
     const songTitleList = props.title;
 
@@ -78,27 +82,38 @@ export default function SongCard(props) {
                         {rows
                             .map((row) => {
                                 return (
-                                    <TableRow hover sx={{
+                                    <TableRow sx={{
                                         backgroundColor: "#222222", "&:hover": {
                                             backgroundColor: "#333333 !important"
                                         }
-                                    }} tabIndex={-1} key={row.code}>
-                                        {columns.map((column) => {
-                                            const value = row[column.id];
-                                            return (
-                                                <TableCell key={column.id} align={column.align} sx={{
-                                                    borderBottom: "1px solid black", color: "#e1e1e1",
-                                                    // ":hover": {
-                                                    //     backgroundColor: 'blue !important',
-                                                    //     cursor: 'pointer'
-                                                    // }
-                                                }}>
-                                                    {column.format && typeof value === 'number'
-                                                        ? column.format(value)
-                                                        : value}
-                                                </TableCell>
-                                            );
-                                        })}
+                                    }} tabIndex={-1} key={row.code}
+                                        onMouseEnter={() =>
+                                            // rows[row.number - 1] = createData('blah', 'art', 'blah', 'blah', '3:28')
+                                            handleClick()
+                                        }
+                                        onMouseLeave={() =>
+                                            // console.log(rows[row.number - 1])
+                                            console.log(active)
+                                        }
+                                    >
+                                        {
+                                            columns.map((column) => {
+                                                const value = row[column.id];
+                                                return (
+                                                    <TableCell key={column.id} align={column.align} sx={{
+                                                        borderBottom: "1px solid black", color: active ? "green" : "#e1e1e1",
+                                                        // ":hover": {
+                                                        //     backgroundColor: 'blue !important',
+                                                        //     cursor: 'pointer'
+                                                        // }
+                                                    }}>
+                                                        {column.format && typeof value === 'number'
+                                                            ? column.format(value)
+                                                            : value}
+                                                    </TableCell>
+                                                );
+                                            })
+                                        }
                                     </TableRow>
                                 );
                             })}
