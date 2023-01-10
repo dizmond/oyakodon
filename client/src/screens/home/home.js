@@ -38,6 +38,8 @@ export default function Home() {
 
   const [searchedSong, setSearchedSong] = React.useState("")
 
+  const [finalList, setFinalList] = React.useState(['1','2','3','4','5'])
+
   //controller keywords for player:
 
 
@@ -140,6 +142,21 @@ export default function Home() {
     })
   }
 
+  const createConsoleList = async () => {
+    //await spotifyApi.getTracks() //WITH THE TRACK ID
+    await spotifyApi.searchTracks("%genre:Pop").then((response) => {
+      console.log("CCL:");
+      console.log(response);
+      for (let i = 0; i < 4; i++) {
+        //setFinalList(finalList.concat(response['tracks']['items'][i]['uri']))
+        console.log(response['tracks']['items'][i]['uri'])
+      }
+      //end for loop
+      console.log("theList");
+      console.log(finalList);
+    })
+  }
+
   /*-------------------------------------------------------------------------------------------------
   */
   //FLAVOR TEXT
@@ -219,7 +236,8 @@ export default function Home() {
   return (
     !token ? (<>
       <Login />
-      {/* <a href={`${AUTH_ENDPOINT}?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&scope=${scopes.join("%20")}&response_type=token&show_dialog=true`}>Login to Spotify</a> */}
+      {/* <a href={`${AUTH_ENDPOINT}?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&scope=${scopes.join("%20")}&response_type=token&show_dialog=true`}>Login to Spotify</a>
+      TODO We should pretty up this page! */}
 
     </>) :
       (
@@ -233,6 +251,7 @@ export default function Home() {
               Now Playing: {nowPlaying.name}
             </div>
             <button onClick={getNowPlaying}>Check Now Playing</button>
+            <button onClick={createConsoleList}>Create Console List</button>
             <button onClick={playerPause}>Pause</button>
             <button onClick={playerPlay}>Play</button>
             <button onClick={playParticular}>Moonlight</button>
