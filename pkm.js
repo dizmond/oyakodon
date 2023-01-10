@@ -22,8 +22,8 @@ export async function flavor(input) {
   const id = species.id;
   let pokeName = species.name;
   pokeName = pokeName.charAt(0).toUpperCase() + pokeName.slice(1);
-  const types = species.PokemonType 
-  const color = species.color
+  const types = species.types; 
+  const color = species.color;
   return [description, id, pokeName, types, color];
 }
 

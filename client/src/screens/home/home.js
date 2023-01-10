@@ -43,7 +43,8 @@ export default function Home() {
   const [finalList, setFinalList] = React.useState(['1','2','3','4','5'])
 
   const [Pkmtype, setPkmtype] = React.useState("")
-  const [pkmColor, setPkmColor] = React.useState("")
+  const [pkmColor, setPkmColor] = React.useState("blue")
+  const [backgroundColor, setBackgroundColor] = React.useState("")
 
   //controller keywords for player:
 
@@ -175,9 +176,11 @@ export default function Home() {
         setPokeName(pokemon.name);
 
         console.log("FLAVV");
-        console.log(pokemon.types);
-        console.log(pokemon.color['name']);
+        console.log(pokeName)
+        //console.log(pokemon.types);  //TODO THIS ISN'T WORKING
+        //console.log(pokemon.color['name']);
         setPkmColor(pokemon.color['name'])
+        console.log(pkmColor)
 
         //setPkmColor(pokemon.color);
         //setPkmtype(pokemon.type);
@@ -188,6 +191,13 @@ export default function Home() {
   }, [inputText]); //the brackets are the CONDITIONAL, 
   //meaning that whenever the value of inputText is changed, then this function is 
   //re-rendered with the new value!
+
+  React.useEffect(() => {
+    //JOLLYRANCHER
+    setBackgroundColor("SHOULD CONTRAST: " + pkmColor);
+    //console.log("BACKGROUND")
+    console.log(backgroundColor);
+  }, [pkmColor])
 
   //THE IMAGE
   React.useEffect(() => {
