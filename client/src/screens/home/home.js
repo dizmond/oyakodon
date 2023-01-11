@@ -183,21 +183,52 @@ export default function Home() {
   //re-rendered with the new value!
 
   React.useEffect(() => {
-    //console.log("FLAVV");
-    //console.log(pokeName)
-    //console.log(text)
-    //console.log(pkmColor)
+
     //this extra step is necessary to avoid race condition or something i don't understand
-    setbgcolor(pkmColor);
+    // ALL POSSIBLE COLORS: red, blue, yellow, green, black, brown, purple, gray, white and pink 
+    //red #922E2E
+    switch (pkmColor) {
+      case "red":
+        setbgcolor("#922E2E");
+        break;
+      case "blue":
+        setbgcolor("#174C87")
+        break;
+      case "yellow":
+        setbgcolor("#CEE851")
+        break;
+      case "green":
+       setbgcolor("#2B8330")
+        break;
+      case "black":
+       setbgcolor("#202220")
+        break;
+      case "brown":
+       setbgcolor("#4C2803")
+        break;
+      case "purple":
+       setbgcolor("#35034C")
+        break;
+      case "gray":
+       setbgcolor("#49464A")
+        break;  
+      case "white":
+       setbgcolor("#DCD7DC")
+        break;
+      case "pink":
+       setbgcolor("#DA63BD")
+        break;  
+    }
+    //setbgcolor(pkmColor);
   }, [pkmColor])
 
-  React.useEffect(() => {
-    console.log("BACKGROUND");
-    console.log(bgcolor);
-    //JOLLYRANCHER
-    //CHANGE THE ACTUAL BACKGROUND COLOR HERE
-    document.body.style.backgroundColor = bgcolor;
-  }, [bgcolor])
+  // React.useEffect(() => {
+  //   console.log("BACKGROUND");
+  //   console.log(bgcolor);
+  //   //JOLLYRANCHER
+  //   //CHANGE THE ACTUAL BACKGROUND COLOR HERE
+  //   document.body.style.backgroundColor = bgcolor;
+  // }, [bgcolor])
 
   //THE IMAGE
   React.useEffect(() => {
