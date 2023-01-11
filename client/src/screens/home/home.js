@@ -187,6 +187,7 @@ export default function Home() {
     //this extra step is necessary to avoid race condition or something i don't understand
     // ALL POSSIBLE COLORS: red, blue, yellow, green, black, brown, purple, gray, white and pink 
     //red #922E2E
+    //Cranberry Sprite
     switch (pkmColor) {
       case "red":
         setbgcolor("#922E2E");
@@ -222,13 +223,6 @@ export default function Home() {
     //setbgcolor(pkmColor);
   }, [pkmColor])
 
-  // React.useEffect(() => {
-  //   console.log("BACKGROUND");
-  //   console.log(bgcolor);
-  //   //JOLLYRANCHER
-  //   //CHANGE THE ACTUAL BACKGROUND COLOR HERE
-  //   document.body.style.backgroundColor = bgcolor;
-  // }, [bgcolor])
 
   //THE IMAGE
   React.useEffect(() => {
