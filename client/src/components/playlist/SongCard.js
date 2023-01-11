@@ -47,7 +47,7 @@ function createData(
 
 export default function SongCard(props) {
     const [active, setActive] = useState(false);
-    const handleClick = () => {
+    const handleHover = () => {
         setActive(!active);
     };
     const rows = [];
@@ -89,7 +89,7 @@ export default function SongCard(props) {
                                     }} tabIndex={-1} key={row.code}
                                         onMouseEnter={() =>
                                             // rows[row.number - 1] = createData('blah', 'art', 'blah', 'blah', '3:28')
-                                            handleClick()
+                                            handleHover()
                                         }
                                         onMouseLeave={() =>
                                             // console.log(rows[row.number - 1])
