@@ -174,18 +174,8 @@ export default function Home() {
         setText(pokemon.message);
         setId(pokemon.num);
         setPokeName(pokemon.name);
-
-        console.log("FLAVV");
-        console.log(pokeName)
-        //console.log(pokemon.types);  //TODO THIS ISN'T WORKING
-        //console.log(pokemon.color['name']);
         setPkmColor(pokemon.color['name'])
-        console.log(pkmColor)
-
-        //setPkmColor(pokemon.color);
-        //setPkmtype(pokemon.type);
-        //console.log(pkmColor);
-        //console.log(Pkmtype);
+        setPkmtype(pokemon.type);
 
       });
   }, [inputText]); //the brackets are the CONDITIONAL, 
@@ -193,11 +183,20 @@ export default function Home() {
   //re-rendered with the new value!
 
   React.useEffect(() => {
-    //JOLLYRANCHER
-    setBackgroundColor("SHOULD CONTRAST: " + pkmColor);
-    //console.log("BACKGROUND")
-    console.log(backgroundColor);
+    //console.log("FLAVV");
+    //console.log(pokeName)
+    //console.log(text)
+    //console.log(pkmColor)
+    //this extra step is necessary to avoid race condition or something i don't understand
+    setBackgroundColor(pkmColor);
   }, [pkmColor])
+
+  React.useEffect(() => {
+    console.log("BACKGROUND");
+    console.log(backgroundColor);
+    //JOLLYRANCHER
+    //CHANGE THE ACTUAL BACKGROUND COLOR HERE
+  }, [backgroundColor])
 
   //THE IMAGE
   React.useEffect(() => {
