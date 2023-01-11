@@ -90,11 +90,11 @@ export default function SongBody(props) {
                                     const value = data[column.id];
                                     return (
                                         <TableCell key={column.id} align={column.align} sx={{
-                                            borderBottom: "1px solid black", color: active ? "green" : "#e1e1e1",
+                                            borderBottom: "1px solid black", color: "#e1e1e1",
                                             minWidth: column.minWidth, maxWidth: column.maxWidth, width: column.width
                                         }}>
-                                            {column.format && typeof value === 'number'
-                                                ? column.format(value)
+                                            {active & column.id === "number"
+                                                ? '▶️'
                                                 : value}
                                         </TableCell>
                                     );
