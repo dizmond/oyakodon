@@ -9,12 +9,12 @@ import TableRow from '@mui/material/TableRow';
 
 const columns = [
     { id: 'number', label: '#', maxWidth: 0 },
-    { id: 'art', label: 'TITLE', maxWidth: 0 },
-    { id: 'title', align: 'left', label: '', minWidth: 140 },
+    { id: 'art', label: 'TITLE', maxWidth: 100 },
+    { id: 'title', align: 'left', label: '', minWidth: 160 },
     {
         id: 'albumName',
         label: 'ALBUM',
-        minWidth: 50,
+        minWidth: 110,
         align: 'left',
         format: (value) => value.toLocaleString('en-US'),
     },
@@ -22,7 +22,7 @@ const columns = [
         id: 'heart',
         label: '♥',
         minWidth: 10,
-        align: 'right',
+        align: 'center',
         format: (value) => value.toLocaleString('en-US'),
     },
     {

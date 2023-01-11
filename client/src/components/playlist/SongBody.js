@@ -8,27 +8,27 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 
 const columns = [
-    { id: 'number', label: '#', maxWidth: 0 },
-    { id: 'art', label: 'TITLE', maxWidth: 0 },
-    { id: 'title', align: 'left', label: '', minWidth: 140 },
+    { id: 'number', label: '#', width: 20 },
+    { id: 'art', label: 'TITLE', width: 0 },
+    { id: 'title', align: 'left', label: '', width: 280 },
     {
         id: 'albumName',
         label: 'ALBUM',
-        minWidth: 50,
+        width: 180,
         align: 'left',
-        format: (value) => value.toLocaleString('en-US'),
+
     },
     {
         id: 'heart',
         label: '♥',
-        minWidth: 10,
+        width: 10,
         align: 'right',
-        format: (value) => value.toLocaleString('en-US'),
+
     },
     {
         id: 'time',
         label: '🕑',
-        minWidth: 20,
+        width: 50,
         align: 'right',
 
     },
@@ -91,7 +91,7 @@ export default function SongBody(props) {
                                     return (
                                         <TableCell key={column.id} align={column.align} sx={{
                                             borderBottom: "1px solid black", color: active ? "green" : "#e1e1e1",
-                                            minWidth: column.minWidth, maxWidth: column.maxWidth
+                                            minWidth: column.minWidth, maxWidth: column.maxWidth, width: column.width
                                         }}>
                                             {column.format && typeof value === 'number'
                                                 ? column.format(value)
