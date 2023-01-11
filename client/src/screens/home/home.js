@@ -23,11 +23,11 @@ export default function Home() {
 
   //input stuff
   const [holderInputText, setholderInputText] = React.useState('notext'); //a holder for the input - is written to on every keystroke!
-  const [inputText, setinputText] = React.useState('empoleon'); //inputText is the value passed in when the user submits 
+  const [inputText, setinputText] = React.useState('gengar'); //inputText is the value passed in when the user submits 
   //(by pressing enter or the submit button). It is the value called in our image and flavortext functions
   //and initialized currently to 'empoleon' but change that pokemon when you push for fun!
 
-  const [pokeName, setPokeName] = React.useState('empoleon');
+  const [pokeName, setPokeName] = React.useState('gengar');
   const [nowPlaying, setNowPlaying] = React.useState(false);
   const [toPlay, setToPlay] = React.useState('');
   //pkm color 
@@ -43,8 +43,8 @@ export default function Home() {
   const [finalList, setFinalList] = React.useState(['1','2','3','4','5'])
 
   const [Pkmtype, setPkmtype] = React.useState("")
-  const [pkmColor, setPkmColor] = React.useState("blue")
-  const [backgroundColor, setBackgroundColor] = React.useState("")
+  const [pkmColor, setPkmColor] = React.useState("purple")
+  const [bgcolor, setbgcolor] = React.useState("purple")
 
   //controller keywords for player:
 
@@ -188,15 +188,16 @@ export default function Home() {
     //console.log(text)
     //console.log(pkmColor)
     //this extra step is necessary to avoid race condition or something i don't understand
-    setBackgroundColor(pkmColor);
+    setbgcolor(pkmColor);
   }, [pkmColor])
 
   React.useEffect(() => {
     console.log("BACKGROUND");
-    console.log(backgroundColor);
+    console.log(bgcolor);
     //JOLLYRANCHER
     //CHANGE THE ACTUAL BACKGROUND COLOR HERE
-  }, [backgroundColor])
+    document.body.style.backgroundColor = bgcolor;
+  }, [bgcolor])
 
   //THE IMAGE
   React.useEffect(() => {
@@ -266,7 +267,23 @@ export default function Home() {
 
     </>) :
       (
-        <div className="App">
+        <div className="App" style={{backgroundColor: `${bgcolor}`}} >
+
+
+       {/*   <div
+      style={{
+        backgroundColor: 'green !important',
+      }}
+    />
+    */}
+
+    
+          {/*<div className="App" style={{background-color:  change ? ${bgColor}: "#90C0C0"}}>
+</div>
+
+style="background-color: black !important"
+      */}
+        
           <header className="App-header">
             <button onClick={logout}>Logout</button>
             <p></p >
