@@ -10,52 +10,53 @@ import Spotify from 'react-spotify-embed' //PROB OUTDATED
 import SpotifyPlayer from 'react-spotify-web-playback';
 import SongCard from '../../components/playlist/SongCard';
 export default function Home() {
-
+ 
   const spotifyApi = new SpotifyWebApi();
   //spotify stuff
   // const [token, setToken] = React.useState("");
   const [searchKey, setSearchKey] = React.useState("");
   const [tracks, setSongs] = React.useState([]);
-
+ 
   const [id, setId] = React.useState(395);
   const [text, setText] = React.useState(null); //used for flavor text
   const [theImage, setTheImage] = React.useState(null); //used to fetch image
-
+ 
   //input stuff
   const [holderInputText, setholderInputText] = React.useState('notext'); //a holder for the input - is written to on every keystroke!
-  const [inputText, setinputText] = React.useState('gengar'); //inputText is the value passed in when the user submits 
+  const [inputText, setinputText] = React.useState('gengar'); //inputText is the value passed in when the user submits
   //(by pressing enter or the submit button). It is the value called in our image and flavortext functions
   //and initialized currently to 'empoleon' but change that pokemon when you push for fun!
-
+ 
   const [pokeName, setPokeName] = React.useState('gengar');
   const [nowPlaying, setNowPlaying] = React.useState(false);
   const [toPlay, setToPlay] = React.useState('');
-  //pkm color 
+  //pkm color
   //pkm type
-
+ 
   //token
   const [token, setToken] = React.useState("");
-
+ 
   const numz = ['song1', 'tune2', 'bop3', 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
-
+ 
   const [searchedSong, setSearchedSong] = React.useState("")
-
+ 
   const [finalList, setFinalList] = React.useState(['1','2','3','4','5'])
-
+ 
   const [Pkmtype, setPkmtype] = React.useState("")
   const [pkmColor, setPkmColor] = React.useState("purple")
   const [bgcolor, setbgcolor] = React.useState("purple")
-
+  const [typeHolder, setTypeHolder] = React.useState(1);
+ 
   //controller keywords for player:
-
-
+ 
+ 
   // //spotify
   // const logout = () => {
   //     setToken("");
   //     window.localStorage.removeItem("token");
   // }
-
-
+ 
+ 
   // const searchSongs = async (e) => {
   //     e.preventDefault();
   //     const { data } = await axios.get("https://api.spotify.com/v1/search", {
@@ -67,7 +68,7 @@ export default function Home() {
   //             type: "track"
   //         }
   //     })
-
+ 
   //     console.log(data);
   //     setSongs(data.tracks.items);
   // }
@@ -84,7 +85,7 @@ export default function Home() {
       })
     })
   }
-
+ 
   //pauses the spotify player
   const playerPause = async () => {
     await spotifyApi.pause().then((response) => {
@@ -97,7 +98,7 @@ export default function Home() {
       console.log(response);
     })
   }
-
+ 
   //this is a work in progress, I'd like to pass an argument to this but IDK HOW
   //Right now, it adds the songs 'Moonlight' to the user's spotify queue
   //TODO allow this to accept a PARAMETER
@@ -106,7 +107,7 @@ export default function Home() {
       console.log(response);
     })
   }
-
+ 
   //this adds 'moonlight' to the spotify queue then skips to it (TODO what if they already have a queue??) then plays it
   const zPlay = async () => {
     await spotifyApi.queue("spotify:track:4iV5W9uYEdYUVa79Axb7Rh").then((response) => {
@@ -119,15 +120,15 @@ export default function Home() {
       console.log(response);
     })
   }
-
+ 
   //playground
   //search for stuff
   //https://developer.spotify.com/documentation/web-api/reference/#/operations/search
   //"remaster%20track:Doxy%20artist:Miles%20Davis"
   //"swimming%20track:Ladders%20artist:Mac%20Miller"
   //"%20track:The%20Race%20artist:Tay-k"
-
-  //this yields the ID of a given QUERY 
+ 
+  //this yields the ID of a given QUERY
   //This plays "Ladders" by Mac Miller
   const playground = async () => {
     await spotifyApi.searchTracks("swimming%20track:Self%20Care%20artist:Mac%20Miller").then((response) => {
@@ -136,7 +137,7 @@ export default function Home() {
       setSearchedSong(response['tracks']['items'][0]['uri'])
     })
   }
-
+ 
   const playSearched = async () => {
     await spotifyApi.queue(searchedSong).then((response) => {
       console.log(response);
@@ -148,7 +149,7 @@ export default function Home() {
       console.log(response);
     })
   }
-
+ 
   const createConsoleList = async () => {
     //await spotifyApi.getTracks() //WITH THE TRACK ID
     await spotifyApi.searchTracks("%genre:Pop").then((response) => {
@@ -163,7 +164,7 @@ export default function Home() {
       console.log(finalList);
     })
   }
-
+ 
   /*-------------------------------------------------------------------------------------------------
   */
   //FLAVOR TEXT
@@ -175,19 +176,40 @@ export default function Home() {
         setId(pokemon.num);
         setPokeName(pokemon.name);
         setPkmColor(pokemon.color['name'])
-        setPkmtype(pokemon.type);
-
+        setPkmtype(pokemon.types);
+ 
       });
-  }, [inputText]); //the brackets are the CONDITIONAL, 
-  //meaning that whenever the value of inputText is changed, then this function is 
+  }, [inputText]); //the brackets are the CONDITIONAL,
+  //meaning that whenever the value of inputText is changed, then this function is
   //re-rendered with the new value!
-
+ 
+  //THIS IS INVOKED WHEN THE POKEMON IS CHANGED
+  //THIS IS A SEPARATE API THAN THE POKEDEX ITS DUMB I STG MAN
   React.useEffect(() => {
-
+    fetch("https://pokeapi.co/api/v2/pokemon/"+id+"/")
+    .then((res) => res.json())
+    .then((data) => {
+      const types = data['types']
+ 
+      if (types.length == 1) {  //single-typed pokemon
+        setTypeHolder(types[0]['type']['name'])
+        console.log(types[0]['type']['name'])
+      } else {  //dual-typed pokemon
+        setTypeHolder(types[0]['type']['name']+","+types[1]['type']['name'])
+        console.log(types[0]['type']['name']+","+types[1]['type']['name'])
+      }
+    });
+ 
+  }, [id])
+ 
+  React.useEffect(() => {
+ 
     //this extra step is necessary to avoid race condition or something i don't understand
-    // ALL POSSIBLE COLORS: red, blue, yellow, green, black, brown, purple, gray, white and pink 
+    // ALL POSSIBLE COLORS: red, blue, yellow, green, black, brown, purple, gray, white and pink
     //red #922E2E
     //Cranberry Sprite
+    //console.log("type");
+    //console.log(typeHolder);
     switch (pkmColor) {
       case "red":
         setbgcolor("#922E2E");
@@ -222,50 +244,50 @@ export default function Home() {
     }
     //setbgcolor(pkmColor);
   }, [pkmColor])
-
-
+ 
+ 
   //THE IMAGE
   React.useEffect(() => {
     fetch("/tempimage/" + inputText)  //api call which returns a promise that we handle with the .then
       .then((res) => res.json())
       .then((theImage) => setTheImage(theImage.message));
-  }, [inputText]);//the brackets are the CONDITIONAL, 
-  //meaning that whenever the value of inputText is changed, then this function is 
+  }, [inputText]);//the brackets are the CONDITIONAL,
+  //meaning that whenever the value of inputText is changed, then this function is
   //re-rendered with the new value!
-
-
-
+ 
+ 
+ 
   //this changes the value of holderInputText to the value of the input whenever the user enters a new character
   //we can't call it directly bc it has incomplete input
   //but it was the only way I could find to store the input!!
   let inputGrabber = (e) => {
     setholderInputText(e.target.value.toLowerCase()); //actively stores the val of the input
     //console.log(holderInputText);
-    //lowercase is important here! 
+    //lowercase is important here!
     console.log(e.target.value.toLowerCase());
     console.log("inputGrabbed");
   };
-
-
-  //changes the value of inputText (which is used for a lot right now!) when the user submits the data 
+ 
+ 
+  //changes the value of inputText (which is used for a lot right now!) when the user submits the data
   let inputSubmitted = (e) => {
     e.preventDefault(); //prevents reloading of the page! Very important!!
     setinputText(holderInputText); //sets the val of this (to be entered maybe?)
     console.log("inputSubmitted");
     //render????
   };
-
+ 
   React.useEffect(() => {  //GETTING THE USER'S TOKEN AND LOGIN
     const hash = window.location.hash;
     let token = window.localStorage.getItem("token");
-
+ 
     if (!token && hash) {
       token = hash.substring(1).split("&").find(elem => elem.startsWith("access_token")).split("=")[1]
-
+ 
       window.location.hash = "";
       window.localStorage.setItem("token", token)
     }
-
+ 
     setToken(token);
     //setClientToken(token); //importing this function from spotify.js *RaghavShubham
     spotifyApi.setAccessToken(token); //check token is set with test
@@ -274,46 +296,46 @@ export default function Home() {
     });
     console.log("THE TOKEN : " + token);
   }, []);
-
+ 
   //spotify
   const logout = () => {
     setToken("");
     window.localStorage.removeItem("token");
   }
-
-
-
-
+ 
+ 
+ 
+ 
   return (
     !token ? (<>
       <Login />
       {/* <a href={`${AUTH_ENDPOINT}?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&scope=${scopes.join("%20")}&response_type=token&show_dialog=true`}>Login to Spotify</a>
       TODO We should pretty up this page! */}
-
+ 
     </>) :
       (
         <div className="App" style={{backgroundColor: `${bgcolor}`}} >
-
-
+ 
+ 
        {/*   <div
       style={{
         backgroundColor: 'green !important',
       }}
     />
     */}
-
-    
+ 
+   
           {/*<div className="App" style={{background-color:  change ? ${bgColor}: "#90C0C0"}}>
 </div>
-
+ 
 style="background-color: black !important"
       */}
-        
+       
           <header className="App-header">
             <button onClick={logout}>Logout</button>
             <p></p >
             <ImageCard number={id} name={pokeName} src={theImage} height={270} width={270} description={text}></ImageCard>
-
+ 
             <div>
               Now Playing: {nowPlaying.name}
             </div>
@@ -325,22 +347,22 @@ style="background-color: black !important"
             <button onClick={zPlay}>ZPLAY</button>
             <button onClick={playground}>playground</button>
             <button onClick={playSearched}>PLAYSEARCHED</button>
-
-
+ 
+ 
             < p > Enter a pokemon!</p>
             <div>
               <PokemonSearch
                 onChange={(e) => inputGrabber(e)} //actively stores the val of the input
-                onSubmit={(e) => inputSubmitted(e)}  //prevents reloading and changes the real value 
+                onSubmit={(e) => inputSubmitted(e)}  //prevents reloading and changes the real value
               >
               </PokemonSearch>
             </div>
             {/*   <p>{inputText}</p> */}
-
+ 
             <div>
-
-
-
+ 
+ 
+ 
               <SpotifyPlayer
                 token={token}
                 uris={['spotify:artist:6HQYnRM4OzToCYPpVBInuU']}
@@ -354,19 +376,20 @@ style="background-color: black !important"
                   trackNameColor: '#fff',
                 }}
               />
-
-
+ 
+ 
               <Spotify wide link="https://open.spotify.com/track/5ihDGnhQgMA0F0tk9fNLlA?si=4472348a63dd4f83" />
-
+ 
               <p></p>
               <GenerateButton></GenerateButton>
               <p></p>
             </div>
-
+ 
             <Outlet />
-
+ 
           </header >
         </div >
       )
   )
 }
+
