@@ -22,11 +22,11 @@ export async function flavor(input) {
   const id = species.id;
   let pokeName = species.name;
   pokeName = pokeName.charAt(0).toUpperCase() + pokeName.slice(1);
-  const types = species.types;
   const color = species.color;
  
   //this is diff
-  const typeHolder = species;
+  const generalPokemon = await P.getPokemonByName(input);
+  const typeHolder = generalPokemon['types']
   return [description, id, pokeName, typeHolder, color];
 }
  

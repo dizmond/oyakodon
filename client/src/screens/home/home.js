@@ -176,8 +176,20 @@ export default function Home() {
         setId(pokemon.num);
         setPokeName(pokemon.name);
         setPkmColor(pokemon.color['name'])
-        setPkmtype(pokemon.types);
- 
+
+        //pokemon type
+        const tempTypes = pokemon.types;
+        if (tempTypes.length == 1) {  //single-typed pokemon
+          setTypeHolder(tempTypes[0]['type']['name'])
+          console.log(tempTypes[0]['type']['name'])
+        }
+        else {  //dual-typed pokemon
+          setTypeHolder(tempTypes[0]['type']['name']+","+tempTypes[1]['type']['name'])
+          console.log(tempTypes[0]['type']['name']+","+tempTypes[1]['type']['name'])
+      }
+
+        //console.log(pokemon.types);
+
       });
   }, [inputText]); //the brackets are the CONDITIONAL,
   //meaning that whenever the value of inputText is changed, then this function is
@@ -185,22 +197,22 @@ export default function Home() {
  
   //THIS IS INVOKED WHEN THE POKEMON IS CHANGED
   //THIS IS A SEPARATE API THAN THE POKEDEX ITS DUMB I STG MAN
-  React.useEffect(() => {
-    fetch("https://pokeapi.co/api/v2/pokemon/"+id+"/")
-    .then((res) => res.json())
-    .then((data) => {
-      const types = data['types']
+  // React.useEffect(() => {
+  //   fetch("https://pokeapi.co/api/v2/pokemon/"+id+"/")
+  //   .then((res) => res.json())
+  //   .then((data) => {
+  //     const types = data['types']
  
-      if (types.length == 1) {  //single-typed pokemon
-        setTypeHolder(types[0]['type']['name'])
-        console.log(types[0]['type']['name'])
-      } else {  //dual-typed pokemon
-        setTypeHolder(types[0]['type']['name']+","+types[1]['type']['name'])
-        console.log(types[0]['type']['name']+","+types[1]['type']['name'])
-      }
-    });
+  //     if (types.length == 1) {  //single-typed pokemon
+  //       setTypeHolder(types[0]['type']['name'])
+  //       console.log(types[0]['type']['name'])
+  //     } else {  //dual-typed pokemon
+  //       setTypeHolder(types[0]['type']['name']+","+types[1]['type']['name'])
+  //       console.log(types[0]['type']['name']+","+types[1]['type']['name'])
+  //     }
+  //   });
  
-  }, [id])
+  // }, [id])
  
   React.useEffect(() => {
  
@@ -243,7 +255,7 @@ export default function Home() {
         break;  
     }
     //setbgcolor(pkmColor);
-  }, [pkmColor])
+  }, [id])
  
  
   //THE IMAGE
