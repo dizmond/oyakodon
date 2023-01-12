@@ -46,6 +46,8 @@ export default function Home() {
   const [pkmColor, setPkmColor] = React.useState("purple")
   const [bgcolor, setbgcolor] = React.useState("purple")
   const [typeHolder, setTypeHolder] = React.useState(1);
+  const [webPlayerId, setWebPlayerId] = React.useState("")
+  const [transferActivator, setTransferActivator] = React.useState(0);
  
   //controller keywords for player:
  
@@ -288,7 +290,39 @@ export default function Home() {
     window.localStorage.removeItem("token");
   }
  
+  const getSpotifyDevices = async () => {
+    await spotifyApi.getMyDevices().then((response) => {
+      console.log(response);
+      //get the id of the spotify player
+      let whileEnder = true;
+      let iterator = 0;
+      while (whileEnder) {
+        //console.log(response['devices'][iterator]['name'])
+        if (response['devices'][iterator]['name'] == 'Spotify Web Player') {
+          setWebPlayerId(response['devices'][iterator]['id']);
+          setTransferActivator(transferActivator+1)
+          console.log(response['devices'][iterator]['id'])
+          //transfer playback
+          //await spotifyApi.transferMyPlayback
+
+          whileEnder = false;
+          break;
+        }
+        iterator = iterator + 1;
+      }
+
+    })
+  }
  
+  //change device based on new id
+  React.useEffect(() => {  
+    console.log('webplayerid changes')
+    console.log(webPlayerId)
+    //change the player
+    spotifyApi.transferMyPlayback({device_ids:[webPlayerId]}).then((response) => {
+      console.log(response)
+    })
+  }, [transferActivator]);
  
  
   return (
@@ -332,6 +366,7 @@ style="background-color: black !important"
             <button onClick={zPlay}>ZPLAY</button>
             <button onClick={playground}>playground</button>
             <button onClick={playSearched}>PLAYSEARCHED</button>
+            <button onClick={getSpotifyDevices}>GETSPOTIFYDEVICES</button>
  
  
             < p > Enter a pokemon!</p>
@@ -348,7 +383,7 @@ style="background-color: black !important"
  
  
  
-              <SpotifyPlayer
+              {/* <SpotifyPlayer
                 token={token}
                 uris={['spotify:artist:6HQYnRM4OzToCYPpVBInuU']}
                 styles={{
@@ -360,10 +395,10 @@ style="background-color: black !important"
                   trackArtistColor: '#ccc',
                   trackNameColor: '#fff',
                 }}
-              />
+              /> */}
  
  
-              <Spotify wide link="https://open.spotify.com/track/5ihDGnhQgMA0F0tk9fNLlA?si=4472348a63dd4f83" />
+              {/* <Spotify wide link="https://open.spotify.com/track/5ihDGnhQgMA0F0tk9fNLlA?si=4472348a63dd4f83" /> */}
  
               <p></p>
               <GenerateButton></GenerateButton>
