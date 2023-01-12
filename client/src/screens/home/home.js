@@ -169,13 +169,14 @@ export default function Home() {
   */
   //FLAVOR TEXT
   React.useEffect(() => {
-    fetch("/flavor/" + inputText) //api call which returns a promise that we handle with the .then
+    fetch("/comprehensiveapi/" + inputText) //api call which returns a promise that we handle with the .then
       .then((res) => res.json())
       .then((pokemon) => {
         setText(pokemon.message);
         setId(pokemon.num);
         setPokeName(pokemon.name);
         setPkmColor(pokemon.color['name'])
+        setTheImage(pokemon.imageurl)
 
         //pokemon type
         const tempTypes = pokemon.types;
@@ -188,31 +189,13 @@ export default function Home() {
           console.log(tempTypes[0]['type']['name']+","+tempTypes[1]['type']['name'])
       }
 
-        //console.log(pokemon.types);
 
       });
   }, [inputText]); //the brackets are the CONDITIONAL,
   //meaning that whenever the value of inputText is changed, then this function is
   //re-rendered with the new value!
  
-  //THIS IS INVOKED WHEN THE POKEMON IS CHANGED
-  //THIS IS A SEPARATE API THAN THE POKEDEX ITS DUMB I STG MAN
-  // React.useEffect(() => {
-  //   fetch("https://pokeapi.co/api/v2/pokemon/"+id+"/")
-  //   .then((res) => res.json())
-  //   .then((data) => {
-  //     const types = data['types']
- 
-  //     if (types.length == 1) {  //single-typed pokemon
-  //       setTypeHolder(types[0]['type']['name'])
-  //       console.log(types[0]['type']['name'])
-  //     } else {  //dual-typed pokemon
-  //       setTypeHolder(types[0]['type']['name']+","+types[1]['type']['name'])
-  //       console.log(types[0]['type']['name']+","+types[1]['type']['name'])
-  //     }
-  //   });
- 
-  // }, [id])
+
  
   React.useEffect(() => {
  
@@ -257,18 +240,8 @@ export default function Home() {
     //setbgcolor(pkmColor);
   }, [id])
  
- 
-  //THE IMAGE
-  React.useEffect(() => {
-    fetch("/tempimage/" + inputText)  //api call which returns a promise that we handle with the .then
-      .then((res) => res.json())
-      .then((theImage) => setTheImage(theImage.message));
-  }, [inputText]);//the brackets are the CONDITIONAL,
-  //meaning that whenever the value of inputText is changed, then this function is
-  //re-rendered with the new value!
- 
- 
- 
+
+
   //this changes the value of holderInputText to the value of the input whenever the user enters a new character
   //we can't call it directly bc it has incomplete input
   //but it was the only way I could find to store the input!!

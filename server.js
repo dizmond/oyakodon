@@ -1,6 +1,6 @@
 //arigato aniki
 import express from 'express'
-import { cheriberri, flavor, tempimagefunction } from './pkm.js';
+import { cheriberri, comprehensiveapi} from './pkm.js';
 
 const app = express();
 const port = process.env.PORT || 5000;
@@ -8,20 +8,7 @@ const port = process.env.PORT || 5000;
 
 const router = express.Router(); //prob navigates between pages?
 
-// const P = new Pokedex();
 
-//OLD STUFF
-// async function majikes() {
-//   await P.getBerryByName('cheri')
-//     .then(function (response) {
-//       const yuh = response['natural_gift_power'];
-//       console.log(yuh);
-//       return yuh;
-//     })
-//     .catch((error) => {
-//       console.log('There was an ERROR: ', error);
-//     });
-// };
 
 //gets berry data, mostly for debugging!
 //this is OUTDATED because we can filter the contents of the promise
@@ -45,42 +32,16 @@ app.get("/cheri", async (req, res) => {
 });
 
 //gets flavor text, important for proof-of-concept and reference!
-app.get("/flavor/:pkmname", async (req, res) => {
+app.get("/comprehensiveapi/:pkmname", async (req, res) => {
   try {
 
     res.header("Access-Control-Allow-Origin", "*"); //lowkey idk what this does lol
     const theName = req.params.pkmname;
-    const [flavtxt, id, species, types, color] = await flavor(theName).then(function (val) {
-      //console.log("color:" + color);
-      //console.log("type: " + type);
+    const [flavtxt, id, species, types, color, imageurl] = await comprehensiveapi(theName).then(function (val) {
       return val;
     });
 
-    //console.log(res.json({ message: flavtxt, num: id, name: species, type: type, color: color }))
-    return res.json({ message: flavtxt, num: id, name: species, types: types, color: color });
-
-
-  } catch (err) {
-    res.status(400).json(err);
-  }
-});
-
-
-//new stuff, gets sprite of a pokemon!
-//TODO make this the val of the entered pokemon
-app.get("/tempimage/:pkmname", async (req, res) => {
-  try {
-    res.header("Access-Control-Allow-Origin", "*");
-
-    const theName = req.params.pkmname; //gets the name of the pokemon from client-side input 
-
-    const pkmspritestring = await tempimagefunction(theName).then(function (val) { //invokes the function in pkm.js
-      //console.log(val);
-      return val;
-    });
-
-    return res.json({ message: pkmspritestring });
-
+    return res.json({ message: flavtxt, num: id, name: species, types: types, color: color, imageurl: imageurl });
 
   } catch (err) {
     res.status(400).json(err);

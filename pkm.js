@@ -14,7 +14,7 @@ export async function cheriberri() {
   return promise
 }
  
-export async function flavor(input) {
+export async function comprehensiveapi(input) {
   const P = new Pokedex();
  
   const species = await P.getPokemonSpeciesByName(input);
@@ -24,22 +24,17 @@ export async function flavor(input) {
   pokeName = pokeName.charAt(0).toUpperCase() + pokeName.slice(1);
   const color = species.color;
  
-  //this is diff
+  //this is diff FOR THE TYPE
   const generalPokemon = await P.getPokemonByName(input);
   const typeHolder = generalPokemon['types']
-  return [description, id, pokeName, typeHolder, color];
+
+  //image
+  const imageurl = generalPokemon.sprites['front_default']
+
+  return [description, id, pokeName, typeHolder, color, imageurl];
 }
  
  
- 
-export async function tempimagefunction(name) {
-  const P = new Pokedex();
- 
-  const thespecies = await P.getPokemonByName(name)  //gets all data abt a pokemon from its name
- 
-  const imageurl = thespecies.sprites['front_default'] //data is returned in a mixed dictionary, not sure how this interacts w multiple generations yet!
-  return imageurl;
-}
  
  
 
