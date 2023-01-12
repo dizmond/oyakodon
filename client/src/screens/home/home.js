@@ -298,9 +298,10 @@ export default function Home() {
       let iterator = 0;
       while (whileEnder) {
         //console.log(response['devices'][iterator]['name'])
-        if (response['devices'][iterator]['name'] == 'Spotify Web Player') {
+        if (response['devices'][iterator]['name'] === 'MARUCHAN') {
           setWebPlayerId(response['devices'][iterator]['id']);
           setTransferActivator(transferActivator+1)
+          tryTransfer();
           console.log(response['devices'][iterator]['id'])
           //transfer playback
           //await spotifyApi.transferMyPlayback
@@ -315,14 +316,26 @@ export default function Home() {
   }
  
   //change device based on new id
-  React.useEffect(() => {  
-    console.log('webplayerid changes')
+  // React.useEffect(() => {  
+  //   console.log('HEREEEE')
+  //   console.log(webPlayerId)
+  //   //change the player
+  //   spotifyApi.transferMyPlayback(webPlayerId).then((response) => {
+  //     console.log(response)
+  //   })
+  // }, [transferActivator]);
+
+
+  const tryTransfer = async () => {
+    console.log('const')
     console.log(webPlayerId)
-    //change the player
-    spotifyApi.transferMyPlayback({device_ids:[webPlayerId]}).then((response) => {
+    // await spotifyApi.transferMyPlayback({"device_ids": [webPlayerId]}).then((response) => {
+      await spotifyApi.transferMyPlayback([webPlayerId]).then((response) => {
       console.log(response)
     })
-  }, [transferActivator]);
+
+    //console.log("const222");
+  }
  
  
   return (
@@ -334,6 +347,8 @@ export default function Home() {
     </>) :
       (
         <div className="App" style={{backgroundColor: `${bgcolor}`}} >
+
+{/* <script src="https://sdk.scdn.co/spotify-player.js"></script> */}
  
  
        {/*   <div
@@ -383,20 +398,41 @@ style="background-color: black !important"
  
  
  
-              {/* <SpotifyPlayer
+              <SpotifyPlayer
                 token={token}
                 uris={['spotify:artist:6HQYnRM4OzToCYPpVBInuU']}
+                name={"MARUCHAN"}
                 styles={{
-                  activeColor: '#fff',
-                  bgColor: '#333',
-                  color: '#fff',
-                  loaderColor: '#fff',
-                  sliderColor: '#1cb954',
-                  trackArtistColor: '#ccc',
-                  trackNameColor: '#fff',
+                  //name: "bruh",
+                  volume: 0.1,
+                  height: 0,
+                  sliderHeight: 0,
+                  activeColor: `${bgcolor}`,
+                  bgColor: `${bgcolor}`,
+                  color: `${bgcolor}`,
+                  loaderColor: `${bgcolor}`,
+                  sliderColor: `${bgcolor}`,
+                  trackArtistColor: `${bgcolor}`,
+                  trackNameColor: `${bgcolor}`,
                 }}
-              /> */}
- 
+              />
+              {/* activeColor: string;
+  altColor: string;
+  bgColor: string;
+  color: string;
+  errorColor: string;
+  height: number | string;
+  loaderColor: string;
+  loaderSize: number | string;
+  sliderColor: string;
+  sliderHandleBorderRadius: number | string;
+  sliderHandleColor: string;
+  sliderHeight: number;
+  sliderTrackBorderRadius: number | string;
+  sliderTrackColor: string;
+  trackArtistColor: string;
+  trackNameColor: string;
+  */}
  
               {/* <Spotify wide link="https://open.spotify.com/track/5ihDGnhQgMA0F0tk9fNLlA?si=4472348a63dd4f83" /> */}
  
