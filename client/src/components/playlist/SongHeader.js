@@ -4,7 +4,7 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 
 const columns = [
-    { id: 'number', label: '#', maxWidth: 0 },
+    { id: 'number', label: '#', align: 'center', maxWidth: 0 },
     { id: 'art', label: 'TITLE', maxWidth: 100 },
     { id: 'title', align: 'left', label: '', minWidth: 160 },
     {

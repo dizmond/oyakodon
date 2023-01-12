@@ -4,15 +4,17 @@ import TableCell from '@mui/material/TableCell';
 import TableRow from '@mui/material/TableRow';
 import PlayButton from '../buttons/PlayButton';
 import PauseButton from '../buttons/PauseButton';
+import EmptyHeartButton from '../buttons/EmptyHeartButton';
+import FilledHeartButton from '../buttons/FilledHeartButton';
 
 const columns = [
     { id: 'number', label: '#', width: 40, align: 'center', maxWidth: 40 },
     { id: 'art', label: 'TITLE', width: 0 },
-    { id: 'title', align: 'left', label: '', width: 280 },
+    { id: 'title', align: 'left', label: '', width: 250 },
     {
         id: 'albumName',
         label: 'ALBUM',
-        width: 180,
+        width: 160,
         align: 'left',
 
     },
@@ -39,19 +41,20 @@ function createData(
     albumName,
     time
 ) {
-    const heart = '♡'; //♥♡
+    const heart = <EmptyHeartButton />; //♥♡
     return { number, art, title, albumName, heart, time };
 }
 
 export default function SongBody(props) {
     const [active, setActive] = useState(false);
     const [playing, setPlaying] = useState(false);
+
     const handleHover = () => {
         setActive(!active);
     };
-    const togglePlay = () => {
-        setPlaying(!playing);
-    };
+    // const togglePlay = () => {
+    //     setPlaying(!playing);
+    // };
 
     const data = createData(props.num, 'art', props.title, props.album, props.time)
 
@@ -70,7 +73,6 @@ export default function SongBody(props) {
                     // console.log(rows[row.number - 1])
                     handleHover()
                 }
-                onClick={() => togglePlay()}
             >
                 {
                     columns.map((column) => {
