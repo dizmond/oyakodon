@@ -155,18 +155,25 @@ export default function Home() {
  
   const createConsoleList = async () => {
     //await spotifyApi.getTracks() //WITH THE TRACK ID
-    await spotifyApi.searchTracks("%genre:Pop").then((response) => {
+    await spotifyApi.searchTracks("genre:Pop").then((response) => {
       console.log("CCL:");
       console.log(response);
       for (let i = 0; i < 4; i++) {
-        //setFinalList(finalList.concat(response['tracks']['items'][i]['uri']))
+        setFinalList(finalList.concat(response['tracks']['items'][i]['name']))
         console.log(response['tracks']['items'][i]['uri'])
+        console.log(response['tracks']['items'][i]['name'])
+        console.log(response['tracks']['items'][i]['id'])
       }
       //end for loop
       console.log("theList");
-      console.log(finalList);
+      //console.log(finalList);
     })
   }
+
+  //LIST THE LIST
+  React.useEffect(() => {
+    console.log(finalList);
+  },[finalList])
  
   /*-------------------------------------------------------------------------------------------------
   */
@@ -468,6 +475,8 @@ style="background-color: black !important"
               <div>
                 {webHider && <div hidden><SpotifyPlayer
                 token={token}
+                name={"MARUCHAN"}
+                volume={0.1}
                 /></div>}
               </div>
            
