@@ -40,7 +40,7 @@ export default function Home() {
  
   const [searchedSong, setSearchedSong] = React.useState("")
  
-  const [finalList, setFinalList] = React.useState(['1','2','3','4','5'])
+  const [finalList, setFinalList] = React.useState([])
  
   const [Pkmtype, setPkmtype] = React.useState("")
   const [pkmColor, setPkmColor] = React.useState("purple")
@@ -49,6 +49,7 @@ export default function Home() {
   const [webPlayerId, setWebPlayerId] = React.useState("")
   const [transferActivator, setTransferActivator] = React.useState(0);
   const [webHider, setWebHider] = React.useState(true);
+  const [bruh, setBruh] = React.useState(0);
  
   //controller keywords for player:
  
@@ -157,23 +158,37 @@ export default function Home() {
     //await spotifyApi.getTracks() //WITH THE TRACK ID
     await spotifyApi.searchTracks("genre:Pop").then((response) => {
       console.log("CCL:");
+      console.log(finalList);
       console.log(response);
+
+      let copyOfFinalList = finalList; //must create an instance to push onto it 
+
       for (let i = 0; i < 4; i++) {
-        setFinalList(finalList.concat(response['tracks']['items'][i]['name']))
-        console.log(response['tracks']['items'][i]['uri'])
+        //console.log(response['tracks']['items'][i]['uri'])
         console.log(response['tracks']['items'][i]['name'])
-        console.log(response['tracks']['items'][i]['id'])
+        //console.log(response['tracks']['items'][i]['id'])
+        //let tempHolder = response['tracks']['items'][i]['name'];
+        //let tempData = [...finalList, tempHolder]
+        //console.log(tempData)
+        /////setFinalList(finalList => [...finalList, response['tracks']['items'][i]['name']]);
+        copyOfFinalList.push(response['tracks']['items'][i]['name'])
+        
       }
+      console.log(copyOfFinalList);
+      setFinalList(copyOfFinalList);
+      setBruh(bruh+1);
       //end for loop
-      console.log("theList");
+      //console.log("theList");
       //console.log(finalList);
     })
   }
 
   //LIST THE LIST
   React.useEffect(() => {
+    console.log("FINAL")
     console.log(finalList);
-  },[finalList])
+    console.log(bruh)
+  }, [finalList]);
  
   /*-------------------------------------------------------------------------------------------------
   */
