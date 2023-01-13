@@ -39,24 +39,31 @@ function createData(
     art,
     title,
     albumName,
+    heart,
     time
 ) {
-    const heart = <EmptyHeartButton />; //♥♡
+
     return { number, art, title, albumName, heart, time };
 }
 
 export default function SongBody(props) {
     const [active, setActive] = useState(false);
-    const [playing, setPlaying] = useState(false);
-
+    const [isLiked, setLiked] = useState(false);
+    const [isPlaying, setPlaying] = useState(false);
     const handleHover = () => {
         setActive(!active);
     };
+    const likeSong = () => {
+        setLiked(true);
+    };
+    const playSong = () => {
+        setPlaying(!isPlaying);
+    }
     // const togglePlay = () => {
     //     setPlaying(!playing);
     // };
 
-    const data = createData(props.num, 'art', props.title, props.album, props.time)
+    const data = createData(props.num, 'art', props.title, props.album, <EmptyHeartButton />, props.time)
 
     return (
         < TableBody >
@@ -73,6 +80,7 @@ export default function SongBody(props) {
                     // console.log(rows[row.number - 1])
                     handleHover()
                 }
+                onClick={() => { playSong() }}
             >
                 {
                     columns.map((column) => {
@@ -82,9 +90,13 @@ export default function SongBody(props) {
                                 borderBottom: "1px solid black", color: "#e1e1e1",
                                 minWidth: column.minWidth, maxWidth: column.maxWidth, width: column.width, height: 45
                             }}>
-                                {active && column.id === "number"
-                                    ? <PlayButton />
-                                    : value}
+                                {column.id != "number" ? value : ''}
+                                {column.id === "number" && !active && !isPlaying ? value : ''}
+                                {isPlaying && column.id === "number" ? <PauseButton /> : ''}
+                                {active && column.id === "number" && !isPlaying ? <PlayButton /> : ''}
+
+                                {/* {column.id === "heart" && isLiked ? <FilledHeartButton /> : ''} */}
+
                             </TableCell>
                         );
                     })

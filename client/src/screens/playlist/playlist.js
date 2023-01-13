@@ -3,12 +3,15 @@ import SongBody from '../../components/playlist/SongBody';
 import TableContainer from '@mui/material/TableContainer';
 import Paper from '@mui/material/Paper';
 import Table from '@mui/material/Table';
+import React, { useState } from 'react';
 
 const songNum = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
 const songTitles = ['song1', 'tune2', 'bop3', 'reallyreallyextremelylongtitle', 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
 const songAlbum = ['album1', 'album', 'album', 'reallyreallyextremelylongtitle', 'album', 'album1', 'reallyreallyextremelylongtitle', 'album', 'album', 'album', 'album1', 'album', 'album', 'album', 'album'];
 
 export default function Playlist() {
+    const [isPlaying, setPlaying] = useState(false);
+
     return (
         <div >
             <Paper sx={{ width: '100%', overflow: 'hidden' }}>
