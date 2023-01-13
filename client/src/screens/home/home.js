@@ -48,6 +48,7 @@ export default function Home() {
   const [typeHolder, setTypeHolder] = React.useState(1);
   const [webPlayerId, setWebPlayerId] = React.useState("")
   const [transferActivator, setTransferActivator] = React.useState(0);
+  const [webHider, setWebHider] = React.useState(true);
  
   //controller keywords for player:
  
@@ -398,24 +399,7 @@ style="background-color: black !important"
  
  
  
-              <SpotifyPlayer
-                token={token}
-                uris={['spotify:artist:6HQYnRM4OzToCYPpVBInuU']}
-                name={"MARUCHAN"}
-                styles={{
-                  //name: "bruh",
-                  volume: 0.1,
-                  height: 0,
-                  sliderHeight: 0,
-                  activeColor: `${bgcolor}`,
-                  bgColor: `${bgcolor}`,
-                  color: `${bgcolor}`,
-                  loaderColor: `${bgcolor}`,
-                  sliderColor: `${bgcolor}`,
-                  trackArtistColor: `${bgcolor}`,
-                  trackNameColor: `${bgcolor}`,
-                }}
-              />
+              
               {/* activeColor: string;
   altColor: string;
   bgColor: string;
@@ -444,6 +428,50 @@ style="background-color: black !important"
             <Outlet />
  
           </header >
+          {/* <SpotifyPlayer
+                token={token}
+                //borderWidth
+                name={"MARUCHAN"}
+                volume={0.1}
+                //border-width='10px'
+                styles={{
+                  //name: "bruh",
+                  // activeColor: `${bgcolor}`,
+                  // altColor: `${bgcolor}`,
+                  // sliderHandleBorderRadius: 1,
+                  // sliderHandleColor: `${bgcolor}`,
+                  // sliderHandleBorderRadius: 1,
+                  // borderWidth: 30,
+                  // volume: 0.1,
+                  // height: 0,
+                  // sliderHeight: 0,
+                  // sliderColor: `${bgcolor}`,
+                  // activeColor: `${bgcolor}`,
+                  // bgColor: `${bgcolor}`,
+                  // color: `${bgcolor}`,
+                  // loaderColor: `${bgcolor}`,
+                  // sliderColor: `${bgcolor}`,
+                  // trackArtistColor: `${bgcolor}`,
+                  // trackNameColor: `${bgcolor}`,
+                  activeColor: `${bgcolor}`,
+                  bgColor: `${bgcolor}`,
+                  color: `${bgcolor}`,
+                  loaderColor: `${bgcolor}`,
+                  sliderColor: `${bgcolor}`,
+                  trackArtistColor: `${bgcolor}`,
+                  trackNameColor: `${bgcolor}`,
+                  visibility: 'hidden'
+                }}
+               visibility='hidden'
+              /> */}
+
+              <div>
+                {webHider && <div hidden><SpotifyPlayer
+                token={token}
+                /></div>}
+              </div>
+           
+
         </div >
       )
   )
