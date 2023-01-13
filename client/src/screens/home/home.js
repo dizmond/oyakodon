@@ -164,6 +164,7 @@ export default function Home() {
       let copyOfFinalList = finalList; //must create an instance to push onto it 
 
       for (let i = 0; i < 4; i++) {
+        copyOfFinalList = [...copyOfFinalList, response['tracks']['items'][i]['name']]
         //console.log(response['tracks']['items'][i]['uri'])
         console.log(response['tracks']['items'][i]['name'])
         //console.log(response['tracks']['items'][i]['id'])
@@ -171,12 +172,12 @@ export default function Home() {
         //let tempData = [...finalList, tempHolder]
         //console.log(tempData)
         /////setFinalList(finalList => [...finalList, response['tracks']['items'][i]['name']]);
-        copyOfFinalList.push(response['tracks']['items'][i]['name'])
+        //copyOfFinalList.push(response['tracks']['items'][i]['name'])
         
       }
       console.log(copyOfFinalList);
       setFinalList(copyOfFinalList);
-      setBruh(bruh+1);
+      //setBruh(bruh+1);
       //end for loop
       //console.log("theList");
       //console.log(finalList);
@@ -187,7 +188,7 @@ export default function Home() {
   React.useEffect(() => {
     console.log("FINAL")
     console.log(finalList);
-    console.log(bruh)
+    //console.log(bruh)
   }, [finalList]);
  
   /*-------------------------------------------------------------------------------------------------
