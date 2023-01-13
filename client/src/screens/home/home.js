@@ -163,7 +163,6 @@ export default function Home() {
       for (let i = 0; i < 4; i++) {
         copyOfFinalList = [...copyOfFinalList, response['tracks']['items'][i]['name']]
         //TODO HERE WE CAN GET THE URI AND ID AND STUFF
-
         
       }
       setFinalList(copyOfFinalList);
