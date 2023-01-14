@@ -157,38 +157,22 @@ export default function Home() {
   const createConsoleList = async () => {
     //await spotifyApi.getTracks() //WITH THE TRACK ID
     await spotifyApi.searchTracks("genre:Pop").then((response) => {
-      console.log("CCL:");
-      console.log(finalList);
-      console.log(response);
 
       let copyOfFinalList = finalList; //must create an instance to push onto it 
 
       for (let i = 0; i < 4; i++) {
         copyOfFinalList = [...copyOfFinalList, response['tracks']['items'][i]['name']]
-        //console.log(response['tracks']['items'][i]['uri'])
-        console.log(response['tracks']['items'][i]['name'])
-        //console.log(response['tracks']['items'][i]['id'])
-        //let tempHolder = response['tracks']['items'][i]['name'];
-        //let tempData = [...finalList, tempHolder]
-        //console.log(tempData)
-        /////setFinalList(finalList => [...finalList, response['tracks']['items'][i]['name']]);
-        //copyOfFinalList.push(response['tracks']['items'][i]['name'])
+        //TODO HERE WE CAN GET THE URI AND ID AND STUFF
         
       }
-      console.log(copyOfFinalList);
       setFinalList(copyOfFinalList);
-      //setBruh(bruh+1);
-      //end for loop
-      //console.log("theList");
-      //console.log(finalList);
     })
   }
 
-  //LIST THE LIST
+  //LIST THE LIST THIS IS FOR DEBUGGING
   React.useEffect(() => {
-    console.log("FINAL")
+    //console.log("FINAL")
     console.log(finalList);
-    //console.log(bruh)
   }, [finalList]);
  
   /*-------------------------------------------------------------------------------------------------
