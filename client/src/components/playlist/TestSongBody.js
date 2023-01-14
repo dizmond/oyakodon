@@ -90,11 +90,10 @@ export default function SongBody(props) {
                                 borderBottom: "1px solid black", color: "#e1e1e1",
                                 minWidth: column.minWidth, maxWidth: column.maxWidth, width: column.width, height: 45
                             }}>
-
-                                {active && column.id === "number" && !props.playStatus ? <PlayButton /> : ''}
-                                {column.id !== "number" ? value : ''}
+                                {column.id != "number" ? value : ''}
                                 {column.id === "number" && !active && !props.playStatus ? value : ''}
                                 {props.playStatus && column.id === "number" ? <PauseButton /> : ''}
+                                {active && column.id === "number" && !props.playStatus ? <PlayButton /> : ''}
 
                                 {/* {column.id === "heart" && isLiked ? <FilledHeartButton /> : ''} */}
 
