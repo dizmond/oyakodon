@@ -5,7 +5,6 @@ import TableRow from '@mui/material/TableRow';
 import PlayButton from '../buttons/PlayButton';
 import PauseButton from '../buttons/PauseButton';
 import EmptyHeartButton from '../buttons/EmptyHeartButton';
-import FilledHeartButton from '../buttons/FilledHeartButton';
 
 const columns = [
     { id: 'number', label: '#', width: 40, align: 'center', maxWidth: 40 },
@@ -48,39 +47,28 @@ function createData(
 
 export default function SongBody(props) {
     const [active, setActive] = useState(false);
-    const [isLiked, setLiked] = useState(false);
-    const [isPlaying, setPlaying] = useState(false);
+
     const handleHover = () => {
         setActive(!active);
     };
-    const likeSong = () => {
-        setLiked(true);
+    const callback = () => {
+        props.onClick();
+        handleHover();
     };
-    const playSong = () => {
-        setPlaying(!isPlaying);
-    }
-    // const togglePlay = () => {
-    //     setPlaying(!playing);
-    // };
+
 
     const data = createData(props.num, 'art', props.title, props.album, <EmptyHeartButton />, props.time)
 
     return (
         < TableBody >
             <TableRow sx={{
-                backgroundColor: "#222222", "&:hover": {
-                    backgroundColor: "#333333 !important"
-                }
-            }} tabIndex={-1} key={data.code}
-                onMouseEnter={() =>
-                    // rows[row.number - 1] = createData('blah', 'art', 'blah', 'blah', '3:28')
-                    handleHover()
-                }
-                onMouseLeave={() =>
-                    // console.log(rows[row.number - 1])
-                    handleHover()
-                }
-                onClick={() => { props.onClick() }}
+                // backgroundColor: "#222222",
+                backgroundColor: active ? "#333333" : "#222222"
+                // "&:hover": {
+                //         backgroundColor: "#333333 !important"
+                //     }
+            }} tabIndex={-1} key={data.code} onMouseEnter={() => handleHover()} onMouseLeave={() => handleHover()}
+            // onClick={() => { callback() }}
             >
                 {
                     columns.map((column) => {
@@ -91,13 +79,11 @@ export default function SongBody(props) {
                                 minWidth: column.minWidth, maxWidth: column.maxWidth, width: column.width, height: 45
                             }}>
 
-                                {active && column.id === "number" && !props.playStatus ? <PlayButton /> : ''}
+                                {active && column.id === "number" && !props.playStatus ? <PlayButton onClick={() => { callback() }} /> : ''}
                                 {column.id !== "number" ? value : ''}
                                 {column.id === "number" && !active && !props.playStatus ? value : ''}
-                                {props.playStatus && column.id === "number" ? <PauseButton /> : ''}
-
+                                {props.playStatus && column.id === "number" ? <PauseButton onClick={() => { callback() }} /> : ''}
                                 {/* {column.id === "heart" && isLiked ? <FilledHeartButton /> : ''} */}
-
                             </TableCell>
                         );
                     })
