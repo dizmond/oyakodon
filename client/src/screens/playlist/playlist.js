@@ -7,6 +7,7 @@ import React, { useState } from 'react';
 
 const songNum = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
 const songTitles = ['song1', 'tune2', 'bop3', 'reallyreallyextremelylongtitle', 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
+const songArtist = ['SZA', 'Day Tripper', 'odol', 'Tame Impala', "Choo Jackson", 'Megan Thee Stallion']
 const songAlbum = ['album1', 'album', 'album', 'reallyreallyextremelylongtitle', 'album', 'album1', 'reallyreallyextremelylongtitle', 'album', 'album', 'album', 'album1', 'album', 'album', 'album', 'album'];
 
 export default function Playlist() {
@@ -67,12 +68,12 @@ export default function Playlist() {
                 <TableContainer sx={{ maxHeight: 440 }}>
                     <Table stickyHeader aria-label="sticky table">
                         < SongHeader ></SongHeader >
-                        <SongBody onClick={() => { toggleSong(!one, 1) }} playStatus={one} num={songNum[0]} title={songTitles[0]} album={songAlbum[0]} time={'13:28'}></SongBody>
-                        <SongBody onClick={() => { toggleSong(!two, 2) }} playStatus={two} num={songNum[1]} title={songTitles[0]} album={songAlbum[0]} time={'3:28'}></SongBody>
-                        <SongBody onClick={() => { toggleSong(!three, 3) }} playStatus={three} num={songNum[2]} title={songTitles[0]} album={songAlbum[0]} time={'3:28'}></SongBody>
-                        <SongBody onClick={() => { toggleSong(!four, 4) }} playStatus={four} num={songNum[3]} title={songTitles[3]} album={songAlbum[3]} time={'13:28'}></SongBody>
-                        <SongBody onClick={() => { toggleSong(!five, 5) }} playStatus={five} num={songNum[4]} title={songTitles[0]} album={songAlbum[0]} time={'3:28'}></SongBody>
-                        <SongBody onClick={() => { toggleSong(!six, 6) }} playStatus={six} num={songNum[5]} title={songTitles[0]} album={songAlbum[0]} time={'3:28'}></SongBody>
+                        <SongBody onClick={() => { toggleSong(!one, 1) }} playStatus={one} num={songNum[0]} title={songTitles[0]} artist={songArtist[0]} album={songAlbum[0]} time={'13:28'}></SongBody>
+                        <SongBody onClick={() => { toggleSong(!two, 2) }} playStatus={two} num={songNum[1]} title={songTitles[0]} artist={songArtist[1]} album={songAlbum[0]} time={'3:28'}></SongBody>
+                        <SongBody onClick={() => { toggleSong(!three, 3) }} playStatus={three} num={songNum[2]} title={songTitles[0]} artist={songArtist[2]} album={songAlbum[0]} time={'3:28'}></SongBody>
+                        <SongBody onClick={() => { toggleSong(!four, 4) }} playStatus={four} num={songNum[3]} title={songTitles[3]} artist={songArtist[3]} album={songAlbum[3]} time={'13:28'}></SongBody>
+                        <SongBody onClick={() => { toggleSong(!five, 5) }} playStatus={five} num={songNum[4]} title={songTitles[0]} artist={songArtist[4]} album={songAlbum[0]} time={'3:28'}></SongBody>
+                        <SongBody onClick={() => { toggleSong(!six, 6) }} playStatus={six} num={songNum[5]} title={songTitles[0]} artist={songArtist[5]} album={songAlbum[0]} time={'3:28'}></SongBody>
                         {/* <SongBody onClick={() => { toggleSong(!two, 2) }} playStatus={two} num={songNum[6]} title={songTitles[0]} album={songAlbum[6]} time={'3:28'}></SongBody>
                         <SongBody onClick={() => { toggleSong(!two, 2) }} playStatus={two} num={songNum[7]} title={songTitles[0]} album={songAlbum[0]} time={'3:28'}></SongBody>
                         <SongBody onClick={() => { toggleSong(!two, 2) }} playStatus={two} num={songNum[8]} title={songTitles[0]} album={songAlbum[0]} time={'3:28'}></SongBody>

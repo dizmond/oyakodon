@@ -85,16 +85,23 @@ export default function SongBody(props) {
                         const value = data[column.id];
                         return (
                             <TableCell key={column.id} align={column.align} sx={{
-                                borderBottom: "1px solid black", color: "#e1e1e1",
+                                borderBottom: "1px solid black",
+                                color: "#cdcdcd",
                                 minWidth: column.minWidth, maxWidth: column.maxWidth, width: column.width, height: 45
                             }}>
 
                                 {active && column.id === "number" && !props.playStatus ? <PlayButton onClick={() => { playButtonClick() }} /> : ''}
-                                {column.id !== "number" && column.id !== "heart" ? value : ''}
+                                {column.id === "art" || column.id === "time" || column.id === "albumName" ? value : ''}
                                 {column.id === "number" && !active && !props.playStatus ? value : ''}
                                 {props.playStatus && column.id === "number" ? <PauseButton onClick={() => { playButtonClick() }} /> : ''}
                                 {column.id === "heart" && !isLiked ? <EmptyHeartButton onClick={() => { heartButtonClick() }} /> : ''}
                                 {column.id === "heart" && isLiked ? <FilledHeartButton onClick={() => { heartButtonClick() }} /> : ''}
+                                {column.id === "title" ?
+                                    <>
+                                        <div style={{ color: props.playStatus ? "green" : "white", fontSize: '1.2em' }}>{value}</div>
+                                        <div >{props.artist}</div>
+                                    </>
+                                    : ''}
                             </TableCell>
                         );
                     })
