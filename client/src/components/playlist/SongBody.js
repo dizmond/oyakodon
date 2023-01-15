@@ -5,6 +5,7 @@ import TableRow from '@mui/material/TableRow';
 import PlayButton from '../buttons/PlayButton';
 import PauseButton from '../buttons/PauseButton';
 import EmptyHeartButton from '../buttons/EmptyHeartButton';
+import FilledHeartButton from '../buttons/FilledHeartButton';
 
 const columns = [
     { id: 'number', label: '#', width: 40, align: 'center', maxWidth: 40 },
@@ -47,14 +48,19 @@ function createData(
 
 export default function SongBody(props) {
     const [active, setActive] = useState(false);
+    const [isLiked, setLiked] = useState(false);
 
     const handleHover = () => {
         setActive(!active);
     };
-    const buttonClick = () => {
+    const playButtonClick = () => {
         props.onClick();
         handleHover();
     };
+    const heartButtonClick = () => {
+        setLiked(!isLiked);
+        handleHover();
+    }
 
 
     const data = createData(props.num, 'art', props.title, props.album, <EmptyHeartButton />, props.time)
@@ -83,11 +89,12 @@ export default function SongBody(props) {
                                 minWidth: column.minWidth, maxWidth: column.maxWidth, width: column.width, height: 45
                             }}>
 
-                                {active && column.id === "number" && !props.playStatus ? <PlayButton onClick={() => { buttonClick() }} /> : ''}
-                                {column.id !== "number" ? value : ''}
+                                {active && column.id === "number" && !props.playStatus ? <PlayButton onClick={() => { playButtonClick() }} /> : ''}
+                                {column.id !== "number" && column.id !== "heart" ? value : ''}
                                 {column.id === "number" && !active && !props.playStatus ? value : ''}
-                                {props.playStatus && column.id === "number" ? <PauseButton onClick={() => { buttonClick() }} /> : ''}
-                                {/* {column.id === "heart" && isLiked ? <FilledHeartButton /> : ''} */}
+                                {props.playStatus && column.id === "number" ? <PauseButton onClick={() => { playButtonClick() }} /> : ''}
+                                {column.id === "heart" && !isLiked ? <EmptyHeartButton onClick={() => { heartButtonClick() }} /> : ''}
+                                {column.id === "heart" && isLiked ? <FilledHeartButton onClick={() => { heartButtonClick() }} /> : ''}
                             </TableCell>
                         );
                     })
