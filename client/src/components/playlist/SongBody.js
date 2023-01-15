@@ -68,11 +68,11 @@ export default function SongBody(props) {
     return (
         < TableBody >
             <TableRow sx={{
-                // backgroundColor: "#222222",
-                backgroundColor: active ? "#333333" : "#222222"
-                // "&:hover": {
-                //         backgroundColor: "#333333 !important"
-                //     }
+                backgroundColor: "#222222",
+                // backgroundColor: active ? "#333333" : "#222222"
+                "&:hover": {
+                    backgroundColor: "#333333 !important"
+                }
             }} tabIndex={-1} key={data.code} onMouseEnter={() => handleHover()} onMouseLeave={() => handleHover()}
                 onClick={(e) => {
                     if (e.detail === 2) {
