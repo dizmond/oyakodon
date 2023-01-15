@@ -51,7 +51,7 @@ export default function SongBody(props) {
     const handleHover = () => {
         setActive(!active);
     };
-    const callback = () => {
+    const buttonClick = () => {
         props.onClick();
         handleHover();
     };
@@ -68,7 +68,11 @@ export default function SongBody(props) {
                 //         backgroundColor: "#333333 !important"
                 //     }
             }} tabIndex={-1} key={data.code} onMouseEnter={() => handleHover()} onMouseLeave={() => handleHover()}
-            // onClick={() => { callback() }}
+                onClick={(e) => {
+                    if (e.detail === 2) {
+                        props.onClick()
+                    }
+                }}
             >
                 {
                     columns.map((column) => {
@@ -79,10 +83,10 @@ export default function SongBody(props) {
                                 minWidth: column.minWidth, maxWidth: column.maxWidth, width: column.width, height: 45
                             }}>
 
-                                {active && column.id === "number" && !props.playStatus ? <PlayButton onClick={() => { callback() }} /> : ''}
+                                {active && column.id === "number" && !props.playStatus ? <PlayButton onClick={() => { buttonClick() }} /> : ''}
                                 {column.id !== "number" ? value : ''}
                                 {column.id === "number" && !active && !props.playStatus ? value : ''}
-                                {props.playStatus && column.id === "number" ? <PauseButton onClick={() => { callback() }} /> : ''}
+                                {props.playStatus && column.id === "number" ? <PauseButton onClick={() => { buttonClick() }} /> : ''}
                                 {/* {column.id === "heart" && isLiked ? <FilledHeartButton /> : ''} */}
                             </TableCell>
                         );
