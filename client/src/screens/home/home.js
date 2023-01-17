@@ -48,7 +48,7 @@ export default function Home() {
   const [typeHolder, setTypeHolder] = React.useState(1);
   const [webPlayerId, setWebPlayerId] = React.useState("")
   const [transferActivator, setTransferActivator] = React.useState(0);
-  const [webHider, setWebHider] = React.useState(true);
+  const [webHider, setWebHider] = React.useState(true); //important to hide the object that creates the browser player!
   const [bruh, setBruh] = React.useState(0);
  
   //controller keywords for player:
@@ -114,15 +114,38 @@ export default function Home() {
  
   //this adds 'moonlight' to the spotify queue then skips to it (TODO what if they already have a queue??) then plays it
   const zPlay = async () => {
-    await spotifyApi.queue("spotify:track:4iV5W9uYEdYUVa79Axb7Rh").then((response) => {
-      console.log(response);
-    })
-    await spotifyApi.skipToNext().then((response) => {
-      console.log(response);
-    })
-    await spotifyApi.play().then((response) => {
-      console.log(response);
-    })
+    //  await spotifyApi.queue("spotify:track:4iV5W9uYEdYUVa79Axb7Rh").then((response) => {
+    //    console.log(response);
+    //  })
+    //  await spotifyApi.skipToNext().then((response) => {
+    //    console.log(response);
+    //  })
+    await spotifyApi.getMyDevices().then((response) => {
+      //console.log(response);
+      //get the id of the spotify player
+      let whileEnder = true;
+      let iterator = 0;
+      while (whileEnder) {
+        console.log("getting devices")
+        //console.log(iterator)
+        //console.log(response['devices'][iterator]['name'])
+        //MARUCHAN is created when we try to play something??
+        if (response['devices'][iterator]['name'] === 'MARUCHAN') {
+          setWebPlayerId(response['devices'][iterator]['id']);
+          setTransferActivator(transferActivator+1)
+
+          whileEnder = false;
+          break;
+        }
+        iterator = iterator + 1;
+      }
+
+    })//.catch(getSpotifyDevices())
+    // console.log("trying to play")
+    // await spotifyApi.play().then((response) => {
+    //   console.log(response);
+    // })
+    
   }
  
   //playground
@@ -315,15 +338,12 @@ export default function Home() {
       let whileEnder = true;
       let iterator = 0;
       while (whileEnder) {
-        console.log(iterator)
+        //console.log(iterator)
         //console.log(response['devices'][iterator]['name'])
+        //MARUCHAN is created when we try to play something??
         if (response['devices'][iterator]['name'] === 'MARUCHAN') {
           setWebPlayerId(response['devices'][iterator]['id']);
           setTransferActivator(transferActivator+1)
-          //tryTransfer();
-          //console.log(response['devices'][iterator]['id'])
-          //transfer playback
-          //await spotifyApi.transferMyPlayback
 
           whileEnder = false;
           break;
@@ -336,26 +356,31 @@ export default function Home() {
  
   //change device based on new id
   React.useEffect(() => {  
-    console.log('HEREEEE')
+    //optimus prime
+    console.log('webPlayerID:')
     console.log(webPlayerId)
-    console.log(transferActivator)
     //change the player
     spotifyApi.transferMyPlayback([webPlayerId]).then((response) => {
+      console.log("1x")
       console.log(response)
     })
+    
+    spotifyApi.queue("spotify:track:3OHfY25tqY28d16oZczHc8").then((response) => {
+      console.log("2x")
+      console.log(response);
+    })
+
+    spotifyApi.skipToNext().then((response) => {
+      console.log("2.5x")
+      console.log(response);
+    })
+
+    spotifyApi.play().then((response) => {
+      console.log("3x")
+      console.log(response);
+    })
+
   }, [transferActivator]);
-
-
-  const tryTransfer = async () => {
-    console.log('const')
-    console.log(webPlayerId)
-    // await spotifyApi.transferMyPlayback({"device_ids": [webPlayerId]}).then((response) => {
-      await spotifyApi.transferMyPlayback([webPlayerId]).then((response) => {
-      console.log(response)
-    })
-
-    //console.log("const222");
-  }
  
  
   return (
