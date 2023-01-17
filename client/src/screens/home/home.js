@@ -135,7 +135,8 @@ export default function Home() {
   //this yields the ID of a given QUERY
   //This plays "Ladders" by Mac Miller
   const playground = async () => {
-    await spotifyApi.searchTracks("swimming%20track:Self%20Care%20artist:Mac%20Miller").then((response) => {
+    //await spotifyApi.searchTracks("swimming%20track:Self%20Care%20artist:Mac%20Miller").then((response) => {
+    await spotifyApi.searchTracks("artist:SZA").then((response) => {
       console.log(response);
       console.log(response['tracks']['items'][0]['uri']);
       setSearchedSong(response['tracks']['items'][0]['uri'])
@@ -154,17 +155,26 @@ export default function Home() {
     })
   }
  
+  React.useEffect(() => {
+
+  },[id])
+
   const createConsoleList = async () => {
     //await spotifyApi.getTracks() //WITH THE TRACK ID
     await spotifyApi.searchTracks("genre:Pop").then((response) => {
+      //teenage angst if middle stage
+      //we could have a little blurb about how we picked the playlist so it makes a bit more sense.
 
       let copyOfFinalList = finalList; //must create an instance to push onto it 
 
       for (let i = 0; i < 4; i++) {
         copyOfFinalList = [...copyOfFinalList, response['tracks']['items'][i]['name']]
         //TODO HERE WE CAN GET THE URI AND ID AND STUFF
-        
       }
+
+
+
+      //add all to list!
       setFinalList(copyOfFinalList);
     })
   }
@@ -305,12 +315,13 @@ export default function Home() {
       let whileEnder = true;
       let iterator = 0;
       while (whileEnder) {
+        console.log(iterator)
         //console.log(response['devices'][iterator]['name'])
         if (response['devices'][iterator]['name'] === 'MARUCHAN') {
           setWebPlayerId(response['devices'][iterator]['id']);
           setTransferActivator(transferActivator+1)
-          tryTransfer();
-          console.log(response['devices'][iterator]['id'])
+          //tryTransfer();
+          //console.log(response['devices'][iterator]['id'])
           //transfer playback
           //await spotifyApi.transferMyPlayback
 
@@ -320,18 +331,19 @@ export default function Home() {
         iterator = iterator + 1;
       }
 
-    })
+    })//.catch(getSpotifyDevices())
   }
  
   //change device based on new id
-  // React.useEffect(() => {  
-  //   console.log('HEREEEE')
-  //   console.log(webPlayerId)
-  //   //change the player
-  //   spotifyApi.transferMyPlayback(webPlayerId).then((response) => {
-  //     console.log(response)
-  //   })
-  // }, [transferActivator]);
+  React.useEffect(() => {  
+    console.log('HEREEEE')
+    console.log(webPlayerId)
+    console.log(transferActivator)
+    //change the player
+    spotifyApi.transferMyPlayback([webPlayerId]).then((response) => {
+      console.log(response)
+    })
+  }, [transferActivator]);
 
 
   const tryTransfer = async () => {
